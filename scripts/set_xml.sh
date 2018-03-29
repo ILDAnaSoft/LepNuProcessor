@@ -47,7 +47,7 @@ if [[ ! -z ${pol_weight_aux} ]] ; then
 	echo "true"
 else
 	for file in "${files[@]}"; do
-		i=$((${i} + 1))
+		i=$((i + 1))
 		tmp_xml_dir=${xml_directory}/tmp_${class_name}_${final_state}_${pol_in}_${i}
 		if [[ -d ${tmp_xml_dir} ]] ; then
 			rm -r ${tmp_xml_dir}
