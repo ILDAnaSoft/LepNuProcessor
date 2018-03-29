@@ -3,7 +3,6 @@
 void LepNuProcessor::SplitWeight(
                 FloatVec &combined_weights, FloatVec &single_weights,
                 std::string weight_name ) {
-
         for (int i=0; i<combined_weights.size(); i++) {
                 if ( weight_name == "trck" ) {
                         single_weights.push_back(double((int(combined_weights[i])%10000)/1000.));
@@ -15,7 +14,6 @@ void LepNuProcessor::SplitWeight(
 }
 
 bool LepNuProcessor::IsNeutrinoID( int pdgID ) {
-
   if( fabs(pdgID) == 12 ||
       fabs(pdgID) == 14 ||
       fabs(pdgID) == 16 ||
@@ -24,12 +22,10 @@ bool LepNuProcessor::IsNeutrinoID( int pdgID ) {
   } else {
     return false;
   }
-
 }
 
 
 void LepNuProcessor::findNeutrinosToLepton( MCParticle* lep, std::set<MCParticle*> &nus ) {
-
     MCParticleVec parents = lep->getParents();
     for ( int i=0; i<parents.size(); i++ ){
       int parent_ID = parents[i]->getPDG();
@@ -53,7 +49,6 @@ void LepNuProcessor::findNeutrinosToLepton( MCParticle* lep, std::set<MCParticle
 
       // If parent has more than one charged particle daughter ignore (likely neutral->l+l-)
       if ( N_lep_daughters == 1 ) {
-
         streamlog_out(DEBUG) << "Parent ID: " << parent_ID << std::endl;
         if ( IsChargedLeptonID(parent_ID) ) {
           streamlog_out(DEBUG) << "Second iteration!" << std::endl;
@@ -63,13 +58,10 @@ void LepNuProcessor::findNeutrinosToLepton( MCParticle* lep, std::set<MCParticle
         nus.insert( current_parent_nus.begin(), current_parent_nus.end() );
       }
     }
-
 }
 
 
-void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth,
-  std::set<MCPMap> &mc_lep_nu_pairs) {
-
+void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, std::set<MCPMap> &mc_lep_nu_pairs) {
   std::set<MCParticle*> mc_leps_set;
 
   // Find all mc leptons associated with the reconstructed charged leptons
@@ -109,7 +101,6 @@ void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &
     if ( nus.size() > 0 ) {
       mc_lep_nu_pairs.insert( std::make_pair( *mc_lep, nus ) );
     }
-
   }
 }
 
