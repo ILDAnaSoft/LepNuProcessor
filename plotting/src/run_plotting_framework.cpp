@@ -65,7 +65,6 @@ void fill_info_storage (std::string _luminosity, std::string _e_beam_polarizatio
 
 		info_storage.add_file_info(filename, class_name, final_state, polarization, xsection);
 	}
-
 }
 
 
@@ -91,7 +90,6 @@ void run_plotting_framework(std::string luminosity, std::string e_beam_polarizat
 		plotters[i]->init(info_storage);
 		plotters[i]->run();
 	}
-
 }
 
 

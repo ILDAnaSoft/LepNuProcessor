@@ -13,11 +13,8 @@
 
 
 class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
-
  public:
-
   virtual Processor*  newProcessor() { return new LepNuProcessor ; }
-
 
   LepNuProcessor() ;
 
@@ -74,7 +71,6 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
   */
 
  protected:
-
   /** Input collection name.
    */
   std::string _colAllPFOs{};

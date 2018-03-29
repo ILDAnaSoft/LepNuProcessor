@@ -7,7 +7,6 @@
 #include "TObjArray.h"
 
 struct Nu : public TObject {
-
 	int nu_ID {};
 
 	TLorentzVector tlv_nu {};
@@ -18,7 +17,6 @@ struct Nu : public TObject {
 };
 
 struct LepNuPair : public TObject {
-
 	int lep_ID {};
 
 	TLorentzVector tlv_lep {};
