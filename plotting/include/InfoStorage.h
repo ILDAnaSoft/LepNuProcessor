@@ -64,7 +64,6 @@ class InfoStorage {
 	}
 
 	public:
-
 		void set_environment(std::string _input_directory, std::string _output_directory, std::string _tree_name) {
 			/* Set the computing environment */
 			input_directory = _input_directory;
@@ -157,10 +156,6 @@ class InfoStorage {
 				return 0;
 			}
 		}
-
-
-
-
 } ;
 
 #endif
