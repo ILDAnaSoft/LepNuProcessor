@@ -72,7 +72,7 @@ if [ -d ${home_folder}/include  ] ; then
 else
 	echo "no header filter"
 	mkdir include
-	if [ -a ${home_folder}/*.h  ] ; then
+	if [ -e ${home_folder}/*.h  ] ; then
 		echo "Already have header file, move to head filter"
 		mv ${home_folder}/*.h ${home_folder}/include
 	else
@@ -90,7 +90,7 @@ echo
 
 cd ${home_folder}/build
 
-if [ -a "make.output"  ] ; then
+if [ -e "make.output"  ] ; then
 	rm make.output
 fi
 
