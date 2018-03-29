@@ -39,6 +39,40 @@ void LepNuPairPlotter::define_plots(){
 		new TH2D(	"lep_nu_phi_bjets", "lep-#nu-pair phis, b jets; #phi_{l} [GeV]; #phi_{#nu} [GeV]; Pairs",
 					100, 0, 3.2, 100, 0, 3.2 ) );
 
+
+
+	add_new_TH2D("lep_nu_E_electrons",
+		new TH2D(	"lep_nu_E_electrons", "lep-#nu-pair energies, electrons; E_{l} [GeV]; E_{#nu} [GeV]; Pairs",
+					40, 0, 20, 40, 0, 20 ) );
+
+	add_new_TH2D("lep_nu_p_electrons",
+		new TH2D(	"lep_nu_p_electrons", "lep-#nu-pair momenta, electrons; p_{l} [GeV]; p_{#nu} [GeV]; Pairs",
+					40, 0, 20, 40, 0, 20 ) );
+
+	add_new_TH2D("lep_nu_theta_electrons",
+		new TH2D(	"lep_nu_theta_electrons", "lep-#nu-pair thetas, electrons; #theta_{l} [GeV]; #theta_{#nu} [GeV]; Pairs",
+					100, 0, 3.2, 100, 0, 3.2 ) );
+
+	add_new_TH2D("lep_nu_phi_electrons",
+		new TH2D(	"lep_nu_phi_electrons", "lep-#nu-pair phis, electrons; #phi_{l} [GeV]; #phi_{#nu} [GeV]; Pairs",
+					100, 0, 3.2, 100, 0, 3.2 ) );
+
+	add_new_TH2D("lep_nu_E_muons",
+		new TH2D(	"lep_nu_E_muons", "lep-#nu-pair energies, muons; E_{l} [GeV]; E_{#nu} [GeV]; Pairs",
+					40, 0, 20, 40, 0, 20 ) );
+
+	add_new_TH2D("lep_nu_p_muons",
+		new TH2D(	"lep_nu_p_muons", "lep-#nu-pair momenta, muons; p_{l} [GeV]; p_{#nu} [GeV]; Pairs",
+					40, 0, 20, 40, 0, 20 ) );
+
+	add_new_TH2D("lep_nu_theta_muons",
+		new TH2D(	"lep_nu_theta_muons", "lep-#nu-pair thetas, muons; #theta_{l} [GeV]; #theta_{#nu} [GeV]; Pairs",
+					100, 0, 3.2, 100, 0, 3.2 ) );
+
+	add_new_TH2D("lep_nu_phi_muons",
+		new TH2D(	"lep_nu_phi_muons", "lep-#nu-pair phis, muons; #phi_{l} [GeV]; #phi_{#nu} [GeV]; Pairs",
+					100, 0, 3.2, 100, 0, 3.2 ) );
+
 }
 
 void LepNuPairPlotter::fill_plots(){
@@ -69,6 +103,22 @@ void LepNuPairPlotter::fill_plots(){
 					get_TH2D("lep_nu_p_bjets")->Fill(tlv_l.P(), tlv_n.P(), weight);
 					get_TH2D("lep_nu_theta_bjets")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
 					get_TH2D("lep_nu_phi_bjets")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
+				}
+
+
+				if ( fabs(pair->lep_ID) == 11 ) {
+					get_TH2D("lep_nu_E_electrons")->Fill(tlv_l.E(), tlv_n.E(), weight);
+					get_TH2D("lep_nu_p_electrons")->Fill(tlv_l.P(), tlv_n.P(), weight);
+					get_TH2D("lep_nu_theta_electrons")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
+					get_TH2D("lep_nu_phi_electrons")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
+				}
+
+
+				if ( fabs(pair->lep_ID) == 13 ) {
+					get_TH2D("lep_nu_E_muons")->Fill(tlv_l.E(), tlv_n.E(), weight);
+					get_TH2D("lep_nu_p_muons")->Fill(tlv_l.P(), tlv_n.P(), weight);
+					get_TH2D("lep_nu_theta_muons")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
+					get_TH2D("lep_nu_phi_muons")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
 				}
 			}
 		}
