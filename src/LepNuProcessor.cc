@@ -4,7 +4,6 @@ LepNuProcessor aLepNuProcessor ;
 
 
 LepNuProcessor::LepNuProcessor() : Processor("LepNuProcessor") {
-
     _description = "LepNuProcessor: Search for VBS at the ILD detector" ;
 
 
@@ -97,14 +96,11 @@ LepNuProcessor::LepNuProcessor() : Processor("LepNuProcessor") {
             _rootfilename,
             std::string("/nfs/dust/ilc/group/ild/beyerjac/VBS/nunu_hadrons/output/root_files/output.root")
     );
-
-
 }
 
 
 
 void LepNuProcessor::init() {
-
     streamlog_out(DEBUG) << "   init called  " << std::endl ;
 
     // usually a good idea to
@@ -114,7 +110,6 @@ void LepNuProcessor::init() {
 
     _nRun = 0 ;
     _nEvt = 0 ;
-
 }
 
 
@@ -128,7 +123,6 @@ void LepNuProcessor::makeNTuple() {
 
 
 void LepNuProcessor::processRunHeader( LCRunHeader* run) {
-
     _nRun++ ;
 }
 
@@ -136,7 +130,6 @@ void LepNuProcessor::processRunHeader( LCRunHeader* run) {
 
 
 void LepNuProcessor::processEvent( LCEvent * evt ) {
-
     // this gets called for every event
     // usually the working horse ...
 
@@ -185,7 +178,6 @@ void LepNuProcessor::check( LCEvent * evt ) {
 
 
 void LepNuProcessor::end(){
-
     _otfile->cd();
     _datatrain->Write();
     _otfile->Close();

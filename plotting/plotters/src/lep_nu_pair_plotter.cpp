@@ -56,7 +56,6 @@ void LepNuPairPlotter::define_plots(){
 	add_new_TH2D("lep_nu_phi_muons",
 		new TH2D(	"lep_nu_phi_muons", "lep-#nu-pair phis, muons; #phi_{l} [GeV]; #phi_{#nu} [GeV]; Pairs",
 					100, 0, 3.2, 100, 0, 3.2 ) );
-
 }
 
 void LepNuPairPlotter::fill_plots(){
@@ -102,7 +101,6 @@ void LepNuPairPlotter::fill_plots(){
 				}
 			}
 		}
-
 	}
 }
 
