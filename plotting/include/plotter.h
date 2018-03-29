@@ -254,7 +254,6 @@ struct Plotter {
 			fill_plots();
 			file->Close();
 		}
-
 	}
 
 
