@@ -1,0 +1,133 @@
+########################################################
+# cmake file for building Marlin example Package
+# @author Jan Engels, Desy IT
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6 FATAL_ERROR)
+########################################################
+
+
+# project name
+PROJECT( LepNuProcessor )
+
+
+# project version
+SET( ${PROJECT_NAME}_VERSION_MAJOR 0 )
+SET( ${PROJECT_NAME}_VERSION_MINOR 1 )
+SET( ${PROJECT_NAME}_VERSION_PATCH 0 )
+
+
+# Create compliation database to allow autocomplete
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
+### DEPENDENCIES ############################################################
+
+FIND_PACKAGE( ILCUTIL REQUIRED COMPONENTS ILCSOFT_CMAKE_MODULES )
+
+# load default settings from ILCSOFT_CMAKE_MODULES
+INCLUDE( ilcsoft_default_settings )
+
+option(USE_CXX11 "Use cxx11" True)
+option(Boost_NO_BOOST_CMAKE "dont use cmake find module for boost" ON)
+
+FIND_PACKAGE( Marlin 1.0 REQUIRED ) # minimum required Marlin version
+INCLUDE_DIRECTORIES( ${Marlin_INCLUDE_DIRS} )
+LINK_LIBRARIES( ${Marlin_LIBRARIES} )
+ADD_DEFINITIONS( ${Marlin_DEFINITIONS} )
+
+FIND_PACKAGE( ROOT REQUIRED )
+INCLUDE_DIRECTORIES( ${ROOT_INCLUDE_DIRS} )
+LINK_LIBRARIES( ${ROOT_LIBRARIES} )
+
+FIND_PACKAGE( LCIO REQUIRED )
+INCLUDE_DIRECTORIES( ${LCIO_INCLUDE_DIRS} )
+LINK_LIBRARIES( ${LCIO_LIBRARIES} )
+
+### DOCUMENTATION ###########################################################
+
+OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" OFF )
+
+IF( INSTALL_DOC AND EXISTS "${PROJECT_SOURCE_DIR}/doc/CMakeLists.txt" )
+    ADD_SUBDIRECTORY( ./doc )
+ENDIF()
+
+
+### EventInformation ###########################################################
+
+INCLUDE_DIRECTORIES( ./InformationStorages/include )
+
+ set(
+	${PROJECT_NAME}DictHeaders
+	${CMAKE_CURRENT_SOURCE_DIR}/InformationStorages/include/EventInformation.h
+ )
+
+ set( DICT_INCLUDE_DIRS "" )
+
+ get_directory_property( IncludeDirs INCLUDE_DIRECTORIES )
+
+ foreach( dir ${IncludeDirs} )
+    set( DICT_INCLUDE_DIRS ${DICT_INCLUDE_DIRS}\t-I${dir} )
+ endforeach(dir)
+
+ set( LIB_HEADERS_PKG ${${PROJECT_NAME}DictHeaders} )
+ set( LINK_DEF_FILE ${CMAKE_CURRENT_SOURCE_DIR}/InformationStorages/include/LinkDef.h )
+ set( ROOT_DICT_OUTPUT_DIR "${PROJECT_BINARY_DIR}/dict" )
+ set( ROOT_PCM_FILE_NAME "${ROOT_DICT_OUTPUT_DIR}/LepNuEventInformationDict_rdict.pcm" )
+
+ add_custom_command(
+   OUTPUT ${ROOT_DICT_OUTPUT_DIR}/LepNuEventInformationDict.cc ${ROOT_DICT_OUTPUT_DIR}/LepNuEventInformationDict_rdict.pcm
+   COMMAND mkdir -p ${ROOT_DICT_OUTPUT_DIR}
+   COMMAND ${ROOT_CINT_EXECUTABLE} -f ${ROOT_DICT_OUTPUT_DIR}/LepNuEventInformationDict.cc -c ${DICT_INCLUDE_DIRS} -p ${LIB_HEADERS_PKG} ${LINK_DEF_FILE}
+   COMMENT "Generating ROOT dictionary for EventInformation library ..."
+   DEPENDS ${LIB_HEADERS_PKG}
+ )
+
+
+### LIBRARY #################################################################
+
+
+# add library
+AUX_SOURCE_DIRECTORY( ./InformationStorages/src library_source )
+ADD_SHARED_LIBRARY( LepNuEventInformation ${library_source} ${ROOT_DICT_OUTPUT_DIR}/LepNuEventInformationDict.cc )
+install( TARGETS LepNuEventInformation LIBRARY DESTINATION lib )
+install( FILES ${ROOT_PCM_FILE_NAME} DESTINATION lib )
+
+
+# definitions to pass to the compiler
+ ADD_DEFINITIONS( "-w -ansi -pedantic -std=gnu++11" )
+
+# include directories
+INCLUDE_DIRECTORIES( ./include )
+
+# add library
+AUX_SOURCE_DIRECTORY( ./src project_library_source )
+ADD_SHARED_LIBRARY( ${PROJECT_NAME} ${project_library_source} )
+target_link_libraries( ${PROJECT_NAME} LepNuEventInformation )
+install( TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib )
+
+
+# display some variables and write them to cache
+DISPLAY_STD_VARIABLES()
+
+
+### PLOTTER ################################################################
+
+INCLUDE_DIRECTORIES( ./plotting/include ./plotting/plotters/include )
+AUX_SOURCE_DIRECTORY( ./plotting/plotters/src plotters_source )
+AUX_SOURCE_DIRECTORY( ./plotting/src plotting_source )
+ADD_SHARED_LIBRARY( Plotting ${plotters_source} ${plotting_source} )
+TARGET_LINK_LIBRARIES( Plotting LepNuEventInformation )
+INSTALL( TARGETS Plotting LIBRARY DESTINATION lib )
+
+
+SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/plotting/bin )
+
+ADD_EXECUTABLE( run_plotting ./plotting/src/run_plotting_framework.cpp )
+TARGET_LINK_LIBRARIES( run_plotting Plotting )
+TARGET_LINK_LIBRARIES( run_plotting LepNuEventInformation )
+
+
+### CREATE CUSTOM hadd ABLE TO MERGE CUSTOM CLASS ###########################
+
+SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/scripts )
+
+ADD_EXECUTABLE( custom_hadd ./macros/custom_hadd.cxx )
+TARGET_LINK_LIBRARIES( custom_hadd LepNuEventInformation )
