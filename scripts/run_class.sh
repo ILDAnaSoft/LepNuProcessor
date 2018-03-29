@@ -71,7 +71,7 @@ do
 				files=($(${DIR}/get_database_entry.sh  ${current_class_name} ${current_final_state} ${pol} file ${E_COM} ${SW_version} ${detector_model}))
 				nfiles=${#files[@]}
 				echo "generate samples for:" ${current_class_name} ${current_final_state} ${pol}
-				for n in `seq 1 ${nfiles}`; do
+				for n in $(seq 1 ${nfiles}); do
 
 					tmp_xml_dir=tmp_${current_class_name}_${current_final_state}_${pol}_${n}
 					xml_file=My_${current_class_name}_${current_final_state}_${pol}_${n}.xml

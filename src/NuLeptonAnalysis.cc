@@ -4,8 +4,6 @@ void LepNuProcessor::analyseEvent(
 		LCCollection* colMC, LCCollection* colPFOs,
 		LCRelationNavigator* relation_recoMCtruth,
 		EventInfo &info) {
-
-
 		for (int i=0; i<njets(); i++) {
 			if ( ! ( type_jet(i) == 1 || type_jet(i) == 3 )  ) { continue; }
 
@@ -19,7 +17,6 @@ void LepNuProcessor::analyseEvent(
 
 			// Search for all (lowest level) reco-particles in the jet
 			if (  seen_partics(i).size() > 0 ) {
-
 				// seen_partics(...) is function of TrueJet_Parser, see header
 				ReconstructedParticleVec ijet_PFOs = seen_partics(i);
 
