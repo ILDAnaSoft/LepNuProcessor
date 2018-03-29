@@ -22,7 +22,7 @@ fileinfo_array=()
 comma_string=","
 
 # First element in list is for whatever reason just an empty string -> in loop index+1
-for (( i=0; i<$(( $nfiles )); i++ )) do
+for (( i=0; i<$(( nfiles )); i++ )) do
 	filename=${filenames[i]}
 
 	# Read in class, final state, polarization and xsection to file according to name correspondence with database
@@ -32,7 +32,7 @@ for (( i=0; i<$(( $nfiles )); i++ )) do
 	fileinfo_string="${filename}|${db_output}" 
 	fileinfo_array+=$fileinfo_string
 	# After all but last info put comma as delimiter
-	if [ $i != $(( $nfiles - 1 )) ]; then
+	if [ $i != $(( nfiles - 1 )) ]; then
 		fileinfo_array+=$comma_string
 	fi
 done

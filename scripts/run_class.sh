@@ -42,14 +42,14 @@ echo "begin to looping over initial and final states!"
 echo ""
 
 # Loop over all inital states belonging to this event class
-for (( k=0; k<$(( $class_name_length)); k++ ))
+for (( k=0; k<$(( class_name_length )); k++ ))
 do
 	{ # Sections marked like this can be run parallel (in background) without influencing each other (they are contained)
 
 	current_class_name=${class_name_array[k]}
 
 	# Loop over all final states
-	for (( i=0; i<$(( $final_state_length )); i++ ))
+	for (( i=0; i<$(( final_state_length )); i++ ))
 	do
 		{
 		current_final_state=${final_state[i]}
@@ -61,7 +61,7 @@ do
 		if [[ $info == "marlin" ]] ; then
 
 			# Loop over all initial polarization states
-			for (( j=0; j<$(( $pol_length )); j++ ))
+			for (( j=0; j<$(( pol_length )); j++ ))
 			do
 				pol=${pol_profile[j]}
 				${DIR}/set_xml.sh ${current_class_name} ${current_final_state} ${pol} ${E_COM} ${SW_version} ${detector_model}

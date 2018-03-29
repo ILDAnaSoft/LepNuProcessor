@@ -28,7 +28,7 @@ if [[ ! -z ${pol_weight_aux} ]] ; then
 	files=($(${DIR}/get_database_entry.sh  ${class_name} ${final_state} ${polarization} file ${E_COM} ${SW_version} ${detector_model}))
 	# Do every slcio file seperately (harder to understand, but really need to speed up)
 	for file in "${files[@]}"; do
-		i=$((${i} + 1))
+		i=$((i + 1))
 		tmp_xml_dir=${xml_directory}/tmp_${class_name}_${final_state}_${polarization}_${i}
 		xml_file=${tmp_xml_dir}/My_${class_name}_${final_state}_${polarization}_${i}.xml
 

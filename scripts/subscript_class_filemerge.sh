@@ -36,7 +36,7 @@ if [[ $info == "marlin" ]] ; then
 	pol_length=${#pol_profile[@]}
 
 	# First add all lctuples together, then add all others including lctuple
-	for (( j=0; j<$(( $pol_length )); j++ ))
+	for (( j=0; j<$(( pol_length )); j++ ))
 	do
 		polarization=${pol_profile[j]}
 		if [[ -a ${split_data_directory}/${class_name}_${final_state}_${polarization}_1.root ]] ; then
