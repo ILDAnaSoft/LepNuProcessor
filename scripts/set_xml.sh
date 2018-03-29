@@ -21,14 +21,14 @@ xml_directory=${DIR}/../xml
 
 template_file=${xml_directory}/template.xml
 
-pol_weight_aux=( ` eval " ${DIR}/get_database_entry.sh  ${class_name} ${final_state} ${polarization} file ${E_COM} ${SW_version} ${detector_model}" ` )
+pol_weight_aux=( $( eval " ${DIR}/get_database_entry.sh  ${class_name} ${final_state} ${polarization} file ${E_COM} ${SW_version} ${detector_model}" ) )
 
 i=0
 if [[ ! -z ${pol_weight_aux} ]] ; then
 	files=($(${DIR}/get_database_entry.sh  ${class_name} ${final_state} ${polarization} file ${E_COM} ${SW_version} ${detector_model}))
 	# Do every slcio file seperately (harder to understand, but really need to speed up)
 	for file in "${files[@]}"; do
-		i=`expr ${i} + 1`
+		i=$((${i} + 1))
 		tmp_xml_dir=${xml_directory}/tmp_${class_name}_${final_state}_${polarization}_${i}
 		xml_file=${tmp_xml_dir}/My_${class_name}_${final_state}_${polarization}_${i}.xml
 
@@ -38,7 +38,7 @@ if [[ ! -z ${pol_weight_aux} ]] ; then
 		cp ${template_file} ${xml_file}
 		base_name=${data_directory}/${class_name}_${final_state}_${polarization}_${i}
 		root_name=${base_name}.root
-		single_file=` echo -e ${file/'\n'} `
+		single_file=$( echo -e ${file/'\n'} )
 		# Set the input and output file names in the steering file
        	# CAREFUL: Line numbers should be decreasing!
 		sed -i "33s\.*\ ${root_name} \  " ${xml_file}
@@ -46,8 +46,8 @@ if [[ ! -z ${pol_weight_aux} ]] ; then
 	done
 	echo "true"
 else
-	for file in files; do
-		i=`expr ${i} + 1`
+	for file in "${files[@]}"; do
+		i=$((${i} + 1))
 		tmp_xml_dir=${xml_directory}/tmp_${class_name}_${final_state}_${pol_in}_${i}
 		if [[ -d ${tmp_xml_dir} ]] ; then
 			rm -r ${tmp_xml_dir}
