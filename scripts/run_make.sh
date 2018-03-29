@@ -56,13 +56,8 @@ if [ -d ${home_folder}/src  ] ; then
 else
 	echo "no source filter, mkdir new src filter"
 	mkdir ${home_folder}/src
-	if [ -a ${home_folder}/*.cc  ] ; then
-		echo "Already have source file, move to src filter"
-		mv ${home_folder}/*.cc ${home_folder}/src
-	else
-		echo "no source file, stop"
-		exit
-	fi
+	echo "no source file, stop"
+	exit
 fi
 
 echo
@@ -72,13 +67,8 @@ if [ -d ${home_folder}/include  ] ; then
 else
 	echo "no header filter"
 	mkdir include
-	if [ -e ${home_folder}/*.h  ] ; then
-		echo "Already have header file, move to head filter"
-		mv ${home_folder}/*.h ${home_folder}/include
-	else
-		echo "no head file, stop"
-		exit
-	fi
+	echo "no head file, stop"
+	exit
 fi
 
 echo
@@ -90,7 +80,7 @@ echo
 
 cd ${home_folder}/build
 
-if [ -e "make.output"  ] ; then
+if [ -f "make.output"  ] ; then
 	rm make.output
 fi
 
