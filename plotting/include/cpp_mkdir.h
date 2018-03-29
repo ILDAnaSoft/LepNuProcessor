@@ -4,6 +4,6 @@
 #include <sys/stat.h>
 #include <string>
 
-void cpp_mkdir( std::string dir_name ); 
+void cpp_mkdir( std::string dir_name );
 
 #endif

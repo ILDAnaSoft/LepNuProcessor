@@ -32,7 +32,7 @@ for (( i=0; i<$(( $nfiles )); i++ )) do
 	fileinfo_string="${filename}|${db_output}" 
 	fileinfo_array+=$fileinfo_string
 	# After all but last info put comma as delimiter
-	if [ $i != `expr $nfiles - 1` ]; then
+	if [ $i != $(( $nfiles - 1 )) ]; then
 		fileinfo_array+=$comma_string
 	fi
 done

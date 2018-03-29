@@ -6,7 +6,7 @@ final_state=${2,,}
 info=${3,,}
 
 shift 3
-condor_job_IDs=$@
+condor_job_IDs=( "$@" )
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
@@ -14,7 +14,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 if [[ $info == "marlin" ]] ; then
 
 	# Test if at least one of the jobs is still running = has status
-	for condor_job_ID in ${condor_job_IDs[@]}; do
+	for condor_job_ID in "${condor_job_IDs[@]}"; do
 
 		# Does the output of all my running jobs contain the job number?
 		# If so: wait a bit.

@@ -16,7 +16,6 @@ void TestPlotter::fill_plots(){
 	// This is the loop over all events
 	while ( get_next_event() ) {
 		get_TH1D("test")->Fill(evt_info->evtN, weight);
-
 	}
 }
 
