@@ -1,7 +1,6 @@
 #include "LepNuProcessor.h"
 
 bool LepNuProcessor::IsChargedLeptonID( int pdgID ) {
-
   if( fabs(pdgID) == 11 ||
       fabs(pdgID) == 13 ||
       fabs(pdgID) == 15 ||
@@ -10,11 +9,9 @@ bool LepNuProcessor::IsChargedLeptonID( int pdgID ) {
   } else {
     return false;
   }
-
 }
 
 bool LepNuProcessor::IdentifiedAsChargedLepton( ReconstructedParticle* PFO ) {
-
   int pdgID;
   if ( PFO->getParticleIDs().size() > 0 ) {
     pdgID = PFO->getParticleIDs()[0]->getPDG();
@@ -29,7 +26,6 @@ bool LepNuProcessor::IdentifiedAsChargedLepton( ReconstructedParticle* PFO ) {
 
 void LepNuProcessor::FindChargedLeptons(
   std::set<ReconstructedParticle*> &jet_recos_set, std::set<ReconstructedParticle*> &jet_leptons_set) {
-
     for ( std::set<ReconstructedParticle*>::iterator it=jet_recos_set.begin(); it!=jet_recos_set.end(); ++it) {
         if ( IdentifiedAsChargedLepton(*it) ) {
           jet_leptons_set.insert(*it);

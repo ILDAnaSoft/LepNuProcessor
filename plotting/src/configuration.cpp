@@ -3,7 +3,6 @@
 #include "plotters.h"
 
 void set_plotters(std::vector<Plotter*> &plotters) {
-
 	/* ---------------------------------------------------------------------*/
 	// INSERT THE PLOTTER MODULES HERE
 

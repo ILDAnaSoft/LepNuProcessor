@@ -15,5 +15,4 @@ int LepNuProcessor::FindLeptonGeneration( int pdgID ) {
     streamlog_out(DEBUG) << " WARNING: weird pdgID: " <<  pdgID << std::endl;
     return 0;
   }
-
 }
