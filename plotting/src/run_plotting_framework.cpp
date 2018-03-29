@@ -32,8 +32,8 @@ std::vector<std::vector<std::string>> fileinfo_input_splitting (std::string file
 	return result;
 }
 
-void fill_info_storage (std::string _luminosity, std::string _e_beam_polarization, std::string _p_beam_polarization,
-						std::string fileinfo_input, std::string input_directory, std::string output_directory, std::string tree_name,
+void fill_info_storage (std::string &_luminosity, std::string &_e_beam_polarization, std::string &_p_beam_polarization,
+						std::string &fileinfo_input, std::string &input_directory, std::string &output_directory, std::string tree_name,
 						InfoStorage &info_storage) {
 	/* Fill the InfoStorage with the file information encoded in the long
  	string fileinfo_input */
@@ -68,9 +68,9 @@ void fill_info_storage (std::string _luminosity, std::string _e_beam_polarizatio
 }
 
 
-void run_plotting_framework(std::string luminosity, std::string e_beam_polarization, std::string p_beam_polarization,
-							std::string fileinfo_input, std::string input_directory, std::string output_directory,
-							std::string tree_name) {
+void run_plotting_framework(std::string &luminosity, std::string &e_beam_polarization, std::string &p_beam_polarization,
+							std::string &fileinfo_input, std::string &input_directory, std::string &output_directory,
+							std::string &tree_name) {
 	/* Creates central info_storage and passes it to the individual plotters to run */
 
 	// Create central info_storage object storing infos for all plotters
@@ -96,7 +96,7 @@ void run_plotting_framework(std::string luminosity, std::string e_beam_polarizat
 int main( int argc, char *argv[] ) {
 	/* This function gets called when using the executable in the build directory.*/
 
-	if ( ! argc == 8 ) {
+	if ( ! (argc == 8) ) {
 		std::cout << "ERROR in run_plotting_framework: Number of input arguments not correct! " << std::endl;
 		std::cout << "Exiting." << std::endl;
 		return 0;

@@ -105,9 +105,9 @@ void LepNuPairPlotter::fill_plots(){
 }
 
 void LepNuPairPlotter::draw_plots(){
-	std::string output_dir = get_output_directory();
+	//std::string output_dir = get_output_directory();
 
-	TCanvas* c1 = new TCanvas("c1", "", 0, 0, 800, 800);
+	//TCanvas* c1 = new TCanvas("c1", "", 0, 0, 800, 800);
 	//get_TH1D("test")->Draw();
 	//c1->Print((output_dir + "/test.pdf").c_str());
 }

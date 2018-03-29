@@ -85,8 +85,6 @@ void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &
 
   // Go through all parents and see if a neutrino is contained in their daughters
   for ( std::set<MCParticle*>::iterator mc_lep=mc_leps_set.begin(); mc_lep!=mc_leps_set.end(); ++mc_lep) {
-    int lep_ID = (*mc_lep)->getPDG();
-
     // First check that lepton doesn't further decay into other charged lepton, if so ignore because correction will only applied to lowest level leptons
     MCParticleVec lep_daughters = (*mc_lep)->getDaughters();
     bool has_lep_daughters = false;
@@ -107,6 +105,7 @@ void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &
 
 
 		/*
+    int lep_ID = (*mc_lep)->getPDG();
     MCParticleVec parents = (*mc_lep)->getParents();
     std::set<MCParticle*> nus;
     for ( int i=0; i<parents.size(); i++ ){
