@@ -13,6 +13,7 @@
 #pragma link C++ class Nu + ;
 #pragma link C++ class LepNuPair + ;
 #pragma link C++ class TJJet + ;
+#pragma link C++ class TotalEvent + ;
 #pragma link C++ class EventInfo + ;
 
 #endif

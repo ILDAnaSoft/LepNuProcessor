@@ -40,6 +40,21 @@ void TJJet::Clear( Option_t *option ) {
 }
 
 
+TotalEvent::TotalEvent() : TObject() {
+	lep_nu_pairs.SetOwner(kTRUE);
+}
+
+LepNuPair* TotalEvent::add_lep_nu_pair(){
+	LepNuPair *new_pair = new LepNuPair();
+	lep_nu_pairs.Add( new_pair );
+	return new_pair;
+}
+
+void TotalEvent::Clear( Option_t *option ) {
+  lep_nu_pairs.Clear(option);
+}
+
+
 EventInfo::EventInfo() : TObject() {
 	evtN = -1;
 
@@ -61,5 +76,6 @@ void EventInfo::Clear( Option_t *option ) {
 	ClassImp(Nu)
 	ClassImp(LepNuPair)
 	ClassImp(TJJet)
+	ClassImp(TotalEvent)
 	ClassImp(EventInfo)
 #endif

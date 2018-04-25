@@ -18,4 +18,12 @@ class LepNuPairPlotter : public Plotter {
 	virtual void draw_plots();
 };
 
+class CheatedCorrectionPlotter : public Plotter {
+	virtual void set_plotter_settings();
+	virtual void define_plots();
+	virtual void fill_plots();
+	virtual void get_resolution_projection( TProfile* plot, TH1D* error_clone );
+	virtual void draw_plots();
+};
+
 #endif
