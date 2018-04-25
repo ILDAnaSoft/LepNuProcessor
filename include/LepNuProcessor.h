@@ -40,6 +40,8 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
     /** Subroutines
      */
     virtual void analyseEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
+    virtual void analyseTJJets(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
+    virtual void analyseCompleteEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
 
 	  virtual void SplitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
     virtual bool IsNeutrinoID( int pdgID );

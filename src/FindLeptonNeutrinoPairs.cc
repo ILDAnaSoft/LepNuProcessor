@@ -61,11 +61,11 @@ void LepNuProcessor::findNeutrinosToLepton( MCParticle* lep, std::set<MCParticle
 }
 
 
-void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, std::set<MCPMap> &mc_lep_nu_pairs) {
+void LepNuProcessor::findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &reco_leptons_set, LCRelationNavigator* relation_recoMCtruth, std::set<MCPMap> &mc_lep_nu_pairs) {
   std::set<MCParticle*> mc_leps_set;
 
   // Find all mc leptons associated with the reconstructed charged leptons
-  for ( std::set<ReconstructedParticle*>::iterator reco_lep=jet_leptons_set.begin(); reco_lep!=jet_leptons_set.end(); ++reco_lep) {
+  for ( std::set<ReconstructedParticle*>::iterator reco_lep=reco_leptons_set.begin(); reco_lep!=reco_leptons_set.end(); ++reco_lep) {
     LCObjectVec mcs_to_reco_lep = relation_recoMCtruth->getRelatedToObjects( *reco_lep );
     FloatVec mc_weights_to_reco_lep = relation_recoMCtruth->getRelatedToWeights( *reco_lep );
 
