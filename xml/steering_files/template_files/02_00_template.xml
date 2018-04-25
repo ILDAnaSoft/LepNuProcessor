@@ -1,0 +1,38 @@
+<marlin>
+	<execute>
+		<processor name="MyAdd4MomCovMatrixCharged"/>
+		<processor name="MyThrustReconstruction"/>
+		<processor name="MyLepNuProcessor"/>
+	</execute>
+
+	<global>
+		<parameter name="LCIOInputFiles">
+		<!-- Line replaced by set_xml.sh, becomes input file -->
+		</parameter>
+		<parameter name="MaxRecordNumber" value="0" />
+		<parameter name="SkipNEvents" value="0" />
+		<parameter name="SupressCheck" value="false" />
+		<parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT">WARNING</parameter>
+		<parameter name="AllowToModifyEvent" value="true" />
+	</global>
+
+	<processor name="MyAdd4MomCovMatrixCharged" type="Add4MomCovMatrixCharged">
+		<parameter name="InputPandoraPFOsCollection" type="string"> PandoraPFOs </parameter>
+		<parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> MESSAGE </parameter>
+	</processor>
+
+	<processor name="MyThrustReconstruction" type="ThrustReconstruction">
+		<parameter name="Verbosity"> SILENT </parameter>
+		<parameter name="inputCollectionName" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="typeOfThrustFinder" type="int">2 </parameter>
+	</processor>
+
+	<processor name="MyLepNuProcessor" type="LepNuProcessor">
+		<parameter name="InputAllPFOsCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+        <parameter name="RootFileName">
+		<!-- Line replaced by set_xml.sh, becomes output file -->
+		</parameter>
+	</processor>
+
+
+</marlin>
