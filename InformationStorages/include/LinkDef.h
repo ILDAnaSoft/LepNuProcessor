@@ -10,6 +10,8 @@
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;
 
+#pragma link C++ class VertexDaughter + ;
+#pragma link C++ class ParentVertex + ;
 #pragma link C++ class Nu + ;
 #pragma link C++ class LepNuPair + ;
 #pragma link C++ class TJJet + ;

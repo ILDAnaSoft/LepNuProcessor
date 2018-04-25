@@ -1,5 +1,24 @@
 #include "EventInformation.h"
 
+VertexDaughter::VertexDaughter() : TObject() {}
+
+ParentVertex::ParentVertex() : TObject() {
+	v_daughters.SetOwner(kTRUE);
+}
+
+void ParentVertex::Clear( Option_t *option ){
+	v_daughters.Clear(option);
+}
+
+TLorentzVector ParentVertex::get_total_v_daughter_tlv() {
+	TLorentzVector total_v_daughter_tlv {};
+	for ( int i=0; i<v_daughters.GetEntries(); i++ ) {
+		total_v_daughter_tlv += ((VertexDaughter*)v_daughters[i])->tlv_v_daughter;
+	}
+	return total_v_daughter_tlv;
+}
+
+
 Nu::Nu() : TObject() {
 }
 
@@ -73,6 +92,8 @@ void EventInfo::Clear( Option_t *option ) {
 
 // Make classes known to ROOT
 #if !defined(__CINT__)
+	ClassImp(VertexDaughter)
+	ClassImp(ParentVertex)
 	ClassImp(Nu)
 	ClassImp(LepNuPair)
 	ClassImp(TJJet)
