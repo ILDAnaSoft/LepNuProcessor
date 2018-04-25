@@ -23,7 +23,7 @@ void LepNuProcessor::analyseCompleteEvent(
 	// 	streamlog_out(DEBUG) << "Jet " <<  i << ": found " << mc_lep_nu_pairs.size() << " lep-nu pairs." << std::endl;
 
 	 	for ( std::set<MCPMap>::iterator lep_nu_pair_it=mc_lep_nu_pairs.begin(); lep_nu_pair_it!=mc_lep_nu_pairs.end(); ++lep_nu_pair_it) {
-	 		LepNuPair *lep_nu_pair_info = (info->total_event).add_lep_nu_pair();
+	 		LepNuPair *lep_nu_pair_info = info.total_event.add_lep_nu_pair();
 
 			MCPMap lep_nu_pair = (*lep_nu_pair_it);
 
