@@ -96,6 +96,7 @@ struct EventInfo : public TObject {
 	/* General class that holds all information about the event
  	on all the levels of the generation */
 	int evtN{};
+	TotalEvent total_event {};
 	TObjArray tj_jets {};
 
 	EventInfo();
