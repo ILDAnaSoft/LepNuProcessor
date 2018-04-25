@@ -53,6 +53,18 @@ struct TJJet : public TObject {
 	ClassDef( TJJet, 1 ); // Make class known to root
 };
 
+struct TotalEvent: public TObject {
+	/* Class to hold non-jet-specific information */
+
+	TObjArray lep_nu_pairs {};
+	LepNuPair* add_lep_nu_pair();
+	
+	TotalEvent();
+
+	void Clear( Option_t *option="" );
+
+	ClassDef( TotalEvent, 1 );
+};
 
 struct EventInfo : public TObject {
 	/* General class that holds all information about the event
