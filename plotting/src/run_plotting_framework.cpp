@@ -2,6 +2,7 @@
 #include <boost/algorithm/string/split.hpp> // Include for boost::split
 
 // Own header and source files
+#include "ILDStyle.h"
 #include "plotter.h"
 #include "configuration.h"
 
@@ -109,6 +110,8 @@ int main( int argc, char *argv[] ) {
 	std::string input_directory 		= argv[5];
 	std::string output_directory 	= argv[6];
 	std::string tree_name 			= argv[7];
+
+	set_ILD_style();
 
 	run_plotting_framework( luminosity, e_beam_polarization, p_beam_polarization,
 							fileinfo_input, input_directory, output_directory,

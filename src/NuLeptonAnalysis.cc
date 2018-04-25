@@ -5,7 +5,7 @@ void LepNuProcessor::analyseEvent(
 		LCRelationNavigator* relation_recoMCtruth,
 		EventInfo &info) {
 	for (int i=0; i<njets(); i++) {
-		if ( ! ( type_jet(i) == 1 || type_jet(i) == 3 )  ) { continue; }
+		if ( ! ( type_jet(i) == 1 || type_jet(i) == 3 || int(type_jet(i)%100) == 1 || int(type_jet(i)%100) == 3 )  ) { continue; }
 
 		TJJet* jet_info = info.add_tj_jet();
 
