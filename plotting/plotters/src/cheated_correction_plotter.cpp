@@ -15,43 +15,43 @@ void CheatedCorrectionPlotter::define_plots(){
 }
 
 void CheatedCorrectionPlotter::fill_plots(){
-	float weight = get_current_weight();
-
-	// This is the loop over all events
-	while ( get_next_event() ) {
-
-
-		int N_tj_jets = (evt_info->tj_jets).GetEntries();
-		for (int i_jet = 0; i_jet<N_tj_jets; i_jet++ ) {
-			TJJet *jet = (TJJet*)evt_info->tj_jets[i_jet];
-
-			std::string particle_name;
-			int abs_final_elementon_pdgID = fabs( jet->fe_pdgID );
-		  if ( (abs_final_elementon_pdgID == 1) ||  (abs_final_elementon_pdgID == 2) || (abs_final_elementon_pdgID == 3) ) {
-		          particle_name = "light_quarks";
-		  }
-		  else if ( abs_final_elementon_pdgID == 4 ) { particle_name = "charm"; }
-		  else if ( abs_final_elementon_pdgID == 5 ) { particle_name = "bottom"; }
-      else { particle_name = "other"; continue; }
-
-			TLorentzVector tlv_jet_true = jet->tlv_true;
-			TLorentzVector tlv_jet_seen_corrected = jet->tlv_seen;
-
-			int N_pairs = (jet->lep_nu_pairs).GetEntries();
-
-			// Cheated correction loop
-			for (int i_pair = 0; i_pair<N_pairs; i_pair++ ) {
-				LepNuPair *pair = (LepNuPair*)jet->lep_nu_pairs[i_pair];
-
-				TLorentzVector tlv_nu = pair->get_total_nu_tlv();
-				tlv_jet_seen_corrected += tlv_nu;
-			}
-
-			get_TProfile(("profile_s_t_E_"+particle_name).c_str())->Fill( tlv_jet_true.E(), tlv_jet_seen_corrected.E(), weight );
-			get_TProfile(("profile_s_t_JER_"+particle_name).c_str())->Fill( tlv_jet_true.E(), tlv_jet_seen_corrected.E(), weight );
-
-		}
-	}
+	// float weight = get_current_weight();
+	//
+	// // This is the loop over all events
+	// while ( get_next_event() ) {
+	//
+	//
+	// 	int N_tj_jets = (evt_info->tj_jets).GetEntries();
+	// 	for (int i_jet = 0; i_jet<N_tj_jets; i_jet++ ) {
+	// 		TJJet *jet = (TJJet*)evt_info->tj_jets[i_jet];
+	//
+	// 		std::string particle_name;
+	// 		int abs_final_elementon_pdgID = fabs( jet->fe_pdgID );
+	// 	  if ( (abs_final_elementon_pdgID == 1) ||  (abs_final_elementon_pdgID == 2) || (abs_final_elementon_pdgID == 3) ) {
+	// 	          particle_name = "light_quarks";
+	// 	  }
+	// 	  else if ( abs_final_elementon_pdgID == 4 ) { particle_name = "charm"; }
+	// 	  else if ( abs_final_elementon_pdgID == 5 ) { particle_name = "bottom"; }
+  //     else { particle_name = "other"; continue; }
+	//
+	// 		TLorentzVector tlv_jet_true = jet->tlv_true;
+	// 		TLorentzVector tlv_jet_seen_corrected = jet->tlv_seen;
+	//
+	// 		int N_pairs = (jet->lep_nu_pairs).GetEntries();
+	//
+	// 		// Cheated correction loop
+	// 		for (int i_pair = 0; i_pair<N_pairs; i_pair++ ) {
+	// 			LepNuPair *pair = (LepNuPair*)jet->lep_nu_pairs[i_pair];
+	//
+	// 			TLorentzVector tlv_nu = pair->get_total_nu_tlv();
+	// 			tlv_jet_seen_corrected += tlv_nu;
+	// 		}
+	//
+	// 		get_TProfile(("profile_s_t_E_"+particle_name).c_str())->Fill( tlv_jet_true.E(), tlv_jet_seen_corrected.E(), weight );
+	// 		get_TProfile(("profile_s_t_JER_"+particle_name).c_str())->Fill( tlv_jet_true.E(), tlv_jet_seen_corrected.E(), weight );
+	//
+	// 	}
+	// }
 }
 
 void CheatedCorrectionPlotter::get_resolution_projection( TProfile* plot, TH1D* error_clone ){

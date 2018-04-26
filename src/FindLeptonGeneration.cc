@@ -1,6 +1,6 @@
 #include "LepNuProcessor.h"
 
-int LepNuProcessor::FindLeptonGeneration( int pdgID ) {
+int LepNuProcessor::findLeptonGeneration( int pdgID ) {
   int abs_pdgID = fabs(pdgID);
   if (abs_pdgID > 10 && abs_pdgID < 13) {
     return 1;

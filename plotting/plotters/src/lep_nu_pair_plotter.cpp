@@ -59,49 +59,49 @@ void LepNuPairPlotter::define_plots(){
 }
 
 void LepNuPairPlotter::fill_plots(){
-	float weight = get_current_weight();
-
-	// This is the loop over all events
-	while ( get_next_event() ) {
-		//get_TH1D("test")->Fill(evt_info->evtN, weight);
-
-
-		int N_tj_jets = (evt_info->tj_jets).GetEntries();
-		for (int i_jet = 0; i_jet<N_tj_jets; i_jet++ ) {
-			TJJet *jet = (TJJet*)evt_info->tj_jets[i_jet];
-			int N_pairs = (jet->lep_nu_pairs).GetEntries();
-
-			for (int i_pair = 0; i_pair<N_pairs; i_pair++ ) {
-				LepNuPair *pair = (LepNuPair*)jet->lep_nu_pairs[i_pair];
-				TLorentzVector tlv_l = pair->tlv_lep;
-				TLorentzVector tlv_n = pair->get_total_nu_tlv();
-
-				get_TH2D("lep_nu_E")->Fill(tlv_l.E(), tlv_n.E(), weight);
-				get_TH2D("lep_nu_theta")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
-				get_TH2D("lep_nu_phi")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
-
-				if ( fabs(jet->fe_pdgID) == 5 ) {
-					get_TH2D("lep_nu_E_bjets")->Fill(tlv_l.E(), tlv_n.E(), weight);
-					get_TH2D("lep_nu_theta_bjets")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
-					get_TH2D("lep_nu_phi_bjets")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
-				}
-
-
-				if ( fabs(pair->lep_ID) == 11 ) {
-					get_TH2D("lep_nu_E_electrons")->Fill(tlv_l.E(), tlv_n.E(), weight);
-					get_TH2D("lep_nu_theta_electrons")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
-					get_TH2D("lep_nu_phi_electrons")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
-				}
-
-
-				if ( fabs(pair->lep_ID) == 13 ) {
-					get_TH2D("lep_nu_E_muons")->Fill(tlv_l.E(), tlv_n.E(), weight);
-					get_TH2D("lep_nu_theta_muons")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
-					get_TH2D("lep_nu_phi_muons")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
-				}
-			}
-		}
-	}
+	// float weight = get_current_weight();
+	//
+	// // This is the loop over all events
+	// while ( get_next_event() ) {
+	// 	//get_TH1D("test")->Fill(evt_info->evtN, weight);
+	//
+	//
+	// 	int N_tj_jets = (evt_info->tj_jets).GetEntries();
+	// 	for (int i_jet = 0; i_jet<N_tj_jets; i_jet++ ) {
+	// 		TJJet *jet = (TJJet*)evt_info->tj_jets[i_jet];
+	// 		int N_pairs = (jet->lep_nu_pairs).GetEntries();
+	//
+	// 		for (int i_pair = 0; i_pair<N_pairs; i_pair++ ) {
+	// 			LepNuPair *pair = (LepNuPair*)jet->lep_nu_pairs[i_pair];
+	// 			TLorentzVector tlv_l = pair->tlv_lep;
+	// 			TLorentzVector tlv_n = pair->get_total_nu_tlv();
+	//
+	// 			get_TH2D("lep_nu_E")->Fill(tlv_l.E(), tlv_n.E(), weight);
+	// 			get_TH2D("lep_nu_theta")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
+	// 			get_TH2D("lep_nu_phi")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
+	//
+	// 			if ( fabs(jet->fe_pdgID) == 5 ) {
+	// 				get_TH2D("lep_nu_E_bjets")->Fill(tlv_l.E(), tlv_n.E(), weight);
+	// 				get_TH2D("lep_nu_theta_bjets")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
+	// 				get_TH2D("lep_nu_phi_bjets")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
+	// 			}
+	//
+	//
+	// 			if ( fabs(pair->lep_ID) == 11 ) {
+	// 				get_TH2D("lep_nu_E_electrons")->Fill(tlv_l.E(), tlv_n.E(), weight);
+	// 				get_TH2D("lep_nu_theta_electrons")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
+	// 				get_TH2D("lep_nu_phi_electrons")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
+	// 			}
+	//
+	//
+	// 			if ( fabs(pair->lep_ID) == 13 ) {
+	// 				get_TH2D("lep_nu_E_muons")->Fill(tlv_l.E(), tlv_n.E(), weight);
+	// 				get_TH2D("lep_nu_theta_muons")->Fill(tlv_l.Theta(), tlv_n.Theta(), weight);
+	// 				get_TH2D("lep_nu_phi_muons")->Fill(tlv_l.Phi(), tlv_n.Phi(), weight);
+	// 			}
+	// 		}
+	// 	}
+	// }
 }
 
 void LepNuPairPlotter::draw_plots(){
