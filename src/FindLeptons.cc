@@ -1,6 +1,19 @@
 #include "LepNuProcessor.h"
 
-bool LepNuProcessor::IsChargedLeptonID( int pdgID ) {
+
+bool LepNuProcessor::isNeutrinoID( int pdgID ) {
+  if( fabs(pdgID) == 12 ||
+      fabs(pdgID) == 14 ||
+      fabs(pdgID) == 16 ||
+      fabs(pdgID) == 18 ){
+      return true;
+  } else {
+    return false;
+  }
+}
+
+
+bool LepNuProcessor::isChargedLeptonID( int pdgID ) {
   if( fabs(pdgID) == 11 ||
       fabs(pdgID) == 13 ||
       fabs(pdgID) == 15 ||
@@ -11,7 +24,7 @@ bool LepNuProcessor::IsChargedLeptonID( int pdgID ) {
   }
 }
 
-bool LepNuProcessor::IdentifiedAsChargedLepton( ReconstructedParticle* PFO ) {
+bool LepNuProcessor::identifiedAsChargedLepton( ReconstructedParticle* PFO ) {
   int pdgID;
   if ( PFO->getParticleIDs().size() > 0 ) {
     pdgID = PFO->getParticleIDs()[0]->getPDG();
@@ -21,14 +34,13 @@ bool LepNuProcessor::IdentifiedAsChargedLepton( ReconstructedParticle* PFO ) {
     pdgID = PFO->getType();
   }
 
-  return IsChargedLeptonID( pdgID );
+  return isChargedLeptonID( pdgID );
 }
 
-void LepNuProcessor::FindChargedLeptons(
-  std::set<ReconstructedParticle*> &jet_recos_set, std::set<ReconstructedParticle*> &jet_leptons_set) {
-    for ( std::set<ReconstructedParticle*>::iterator it=jet_recos_set.begin(); it!=jet_recos_set.end(); ++it) {
-        if ( IdentifiedAsChargedLepton(*it) ) {
-          jet_leptons_set.insert(*it);
+void LepNuProcessor::findChargedLeptons( RecoSet &recos_set, RecoSet &leptons_set) {
+    for ( RecoSet::iterator it=recos_set.begin(); it!=recos_set.end(); ++it) {
+        if ( identifiedAsChargedLepton(*it) ) {
+          leptons_set.insert(*it);
         }
     }
 }

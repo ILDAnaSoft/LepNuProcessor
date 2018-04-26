@@ -33,9 +33,9 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
    */
   virtual void processEvent( LCEvent * evt ) ;
 
-  // Map one MCParticle to bunch of others
-  // Here: Map one charged lepton to all its neutrinos
-  typedef std::pair<MCParticle*, std::set<MCParticle*> > MCPMap;
+  // Shortcuts using typedef
+  typedef std::set<MCParticle*> MCSet; // Set: each value can only be included once
+  typedef std::set<ReconstructedParticle*> RecoSet;
 
     /** Subroutines
      */
@@ -43,18 +43,19 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
     virtual void analyseTJJets(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
     virtual void analyseCompleteEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
 
-	  virtual void SplitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
-    virtual bool IsNeutrinoID( int pdgID );
-    virtual void findNeutrinosToLepton( MCParticle* lep, std::set<MCParticle*> &nus );
-    virtual void findLeptonNeutrinoPairs( std::set<ReconstructedParticle*> &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, std::set<MCPMap> &mc_lep_nu_pairs);
+    virtual void findLowestLevelRecoParticles( ReconstructedParticle* reco, RecoSet &jet_recos_set );
 
-    virtual bool IsChargedLeptonID( int pdgID );
-    virtual bool IdentifiedAsChargedLepton( ReconstructedParticle* PFO );
-    virtual void FindChargedLeptons( std::set<ReconstructedParticle*> &jet_recos_set, std::set<ReconstructedParticle*> &jet_leptons_set );
+    virtual bool isNeutrinoID( int pdgID );
+    virtual bool isChargedLeptonID( int pdgID );
+    virtual bool identifiedAsChargedLepton( ReconstructedParticle* PFO );
+    virtual void findChargedLeptons( RecoSet &jet_recos_set, RecoSet &jet_leptons_set );
 
-    virtual void FindLowestLevelRecoParticles( ReconstructedParticle* reco, std::set<ReconstructedParticle*> &jet_recos_set );
+    virtual void splitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
+    virtual void findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_leps_set, LCRelationNavigator* relation_recoMCtruth );
+    virtual void findLeptonNeutrinoVertices( RecoSet &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, EventInfo &info );
 
-    virtual int FindLeptonGeneration( int pdgID );
+
+    virtual int findLeptonGeneration( int pdgID );
 
   /** For TrueJet_Parser -> see its documentation
   */
@@ -66,11 +67,6 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
   /** Called after data processing for clean up.
    */
   virtual void end() ;
-
-
-  /**
-  General Helper Functions
-  */
 
  protected:
   /** Input collection name.
