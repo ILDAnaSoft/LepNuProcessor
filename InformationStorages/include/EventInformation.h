@@ -44,34 +44,26 @@ struct LepNuVertex : public TObject {
 
 ///////////////////// Objects containing several l-nu vertices /////////////////
 
+struct VerticesContainer : public TObject {
+	TObjArray lep_nu_vertices {};
+	LepNuVertex* add_lep_nu_vertex();
 
-struct TJJet : public TObject {
+	VerticesContainer();
+	void Clear( Option_t *option="" );
+
+	ClassDef( VerticesContainer, 1 );
+};
+
+struct TJJet : public VerticesContainer {
 	// Information about one of the jets
 	int fe_pdgID {};
 	TLorentzVector tlv_true {};
 	TLorentzVector tlv_seen {};
-	TObjArray lep_nu_vertices {};
 
 	TJJet();
 
-	LepNuVertex* add_lep_nu_vertex();
-	void Clear( Option_t *option="" );
-
 	ClassDef( TJJet, 1 ); // Make class known to root
 };
-
-struct TotalEvent: public TObject {
-	/* Class to hold non-jet-specific information */
-	TObjArray lep_nu_vertices {};
-
-	TotalEvent();
-
-	LepNuVertex* add_lep_nu_vertex();
-	void Clear( Option_t *option="" );
-
-	ClassDef( TotalEvent, 1 );
-};
-
 
 ///////////////////// All info about this event ////////////////////////////////
 
@@ -79,7 +71,7 @@ struct EventInfo : public TObject {
 	/* General class that holds all information about the event
  	on all the levels of the generation */
 	int evtN{};
-	TotalEvent total_event {};
+	VerticesContainer total_event {};
 	TObjArray tj_jets {};
 
 	EventInfo();

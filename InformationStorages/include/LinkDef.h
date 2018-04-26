@@ -13,8 +13,8 @@
 #pragma link C++ class ParticleProperties + ;
 #pragma link C++ class Particle + ;
 #pragma link C++ class LepNuVertex + ;
+#pragma link C++ class VerticesContainer + ;
 #pragma link C++ class TJJet + ;
-#pragma link C++ class TotalEvent + ;
 #pragma link C++ class EventInfo + ;
 
 #endif

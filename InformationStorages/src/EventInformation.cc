@@ -32,37 +32,24 @@ void LepNuVertex::Clear( Option_t *option ){
 	vertex_daughters.Clear(option);
 }
 
+////////////////////////////////// VerticesContainer
+VerticesContainer::VerticesContainer() : TObject() {
+	lep_nu_vertices.SetOwner(kTRUE);
+}
+
+LepNuVertex* VerticesContainer::add_lep_nu_vertex(){
+	LepNuVertex *new_vertex = new LepNuVertex();
+	lep_nu_vertices.Add( new_vertex );
+	return new_vertex;
+}
+
+void VerticesContainer::Clear( Option_t *option ) {
+	lep_nu_vertices.Clear(option);
+}
+
 ////////////////////////////////// TJJet
 
-TJJet::TJJet() : TObject() {
-	lep_nu_vertices.SetOwner(kTRUE);
-}
-
-LepNuVertex* TJJet::add_lep_nu_vertex(){
-	LepNuVertex *new_vertex = new LepNuVertex();
-	lep_nu_vertices.Add( new_vertex );
-	return new_vertex;
-}
-
-void TJJet::Clear( Option_t *option ) {
-  lep_nu_vertices.Clear(option);
-}
-
-////////////////////////////////// TotalEvent
-
-TotalEvent::TotalEvent() : TObject() {
-	lep_nu_vertices.SetOwner(kTRUE);
-}
-
-LepNuVertex* TotalEvent::add_lep_nu_vertex(){
-	LepNuVertex *new_vertex = new LepNuVertex();
-	lep_nu_vertices.Add( new_vertex );
-	return new_vertex;
-}
-
-void TotalEvent::Clear( Option_t *option ) {
-  lep_nu_vertices.Clear(option);
-}
+TJJet::TJJet() : VerticesContainer() {}
 
 ////////////////////////////////// EventInfo
 
@@ -87,7 +74,7 @@ void EventInfo::Clear( Option_t *option ) {
 	ClassImp(ParticleProperties)
 	ClassImp(Particle)
 	ClassImp(LepNuVertex)
+	ClassImp(VerticesContainer)
 	ClassImp(TJJet)
-	ClassImp(TotalEvent)
 	ClassImp(EventInfo)
 #endif
