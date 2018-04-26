@@ -50,10 +50,11 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
     virtual bool identifiedAsChargedLepton( ReconstructedParticle* PFO );
     virtual void findChargedLeptons( RecoSet &jet_recos_set, RecoSet &jet_leptons_set );
 
+    virtual void fillLepNuVertex( MCParticleVec vertex_parents, MCSet vertex_daughters, LepNuVertex* vertex );
+
     virtual void splitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
     virtual void findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_leps_set, LCRelationNavigator* relation_recoMCtruth );
-    virtual void findLeptonNeutrinoVertices( RecoSet &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, EventInfo &info );
-
+    virtual void findLeptonNeutrinoVertices( RecoSet &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info );
 
     virtual int findLeptonGeneration( int pdgID );
 

@@ -32,31 +32,7 @@ void LepNuProcessor::analyseTJJets(
 		std::set<ReconstructedParticle*> jet_leptons_set;
 		findChargedLeptons( jet_recos_set, jet_leptons_set );
 
-		findLeptonNeutrinoVertices( jet_leptons_set, relation_recoMCtruth, info );
+		findLeptonNeutrinoVertices( jet_leptons_set, relation_recoMCtruth, jet_info );
 
-		// std::set<MCPMap> mc_lep_nu_pairs;
-		// findLeptonNeutrinoPairs( jet_leptons_set, relation_recoMCtruth, mc_lep_nu_pairs);
-		// streamlog_out(DEBUG) << "Jet " <<  i << ": found " << mc_lep_nu_pairs.size() << " lep-nu pairs." << std::endl;
-		//
-		//
-		// for ( std::set<MCPMap>::iterator lep_nu_pair_it=mc_lep_nu_pairs.begin(); lep_nu_pair_it!=mc_lep_nu_pairs.end(); ++lep_nu_pair_it) {
-		// 	LepNuPair *lep_nu_pair_info = jet_info->add_lep_nu_pair();
-		//
-		// 	MCPMap lep_nu_pair = (*lep_nu_pair_it);
-		//
-		// 	MCParticle* lep = lep_nu_pair.first;
-		// 	std::set<MCParticle*> nus = lep_nu_pair.second;
-		//
-		// 	lep_nu_pair_info->lep_ID = lep->getPDG();
-		// 	lep_nu_pair_info->tlv_lep = TLorentzVector( lep->getMomentum(), lep->getEnergy() );
-		//
-		// 	for ( std::set<MCParticle*>::iterator nu_it=nus.begin(); nu_it!=nus.end(); ++nu_it) {
-		// 		Nu *nu_info = lep_nu_pair_info->add_nu();
-		// 		MCParticle* nu = (*nu_it);
-		//
-		// 		nu_info->nu_ID = nu->getPDG();
-		// 		nu_info->tlv_nu = TLorentzVector( nu->getMomentum(), nu->getEnergy() );
-		// 	}
-		// }
 	}
 }

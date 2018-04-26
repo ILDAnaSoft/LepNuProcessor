@@ -33,7 +33,7 @@ void LepNuProcessor::findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_lep
 }
 
 
-void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelationNavigator* relation_recoMCtruth, EventInfo &info ) {
+void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info ) {
 
   MCSet mc_leps_set;
   findMCLepsToRecoLeps( reco_leps_set, mc_leps_set, relation_recoMCtruth );
@@ -63,8 +63,8 @@ void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelat
     }
 
     if ( has_nu_sibling ) {
-      //LepNuVertex* new_vertex = 
-      // TODO Fill Vertex here
+      LepNuVertex* new_vertex = vertices_info->add_lep_nu_vertex();
+      fillLepNuVertex( vertex_parents, vertex_daughters, new_vertex );
     }
   }
 }
