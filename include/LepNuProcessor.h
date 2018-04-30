@@ -43,6 +43,9 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
     virtual void analyseTJJets(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
     virtual void analyseCompleteEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
 
+    virtual MCParticleVec readMCColToVector(LCCollection* mcs);
+    virtual ReconstructedParticleVec readRecoColToVector(LCCollection* recos);
+    
     virtual void findLowestLevelRecoParticles( ReconstructedParticle* reco, RecoSet &jet_recos_set );
 
     virtual bool isNeutrinoID( int pdgID );

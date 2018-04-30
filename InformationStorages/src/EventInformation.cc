@@ -67,6 +67,7 @@ TJJet* EventInfo::add_tj_jet() {
 
 void EventInfo::Clear( Option_t *option ) {
   tj_jets.Clear(option);
+	total_event.Clear(option);
 }
 
 // Make classes known to ROOT

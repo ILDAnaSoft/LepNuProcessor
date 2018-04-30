@@ -8,6 +8,8 @@ void set_plotters(std::vector<Plotter*> &plotters) {
 
 	//plotters.push_back( new TestPlotter );
 	//plotters.push_back( new LepNuPairPlotter);
-	plotters.push_back( new CheatedCorrectionPlotter );
+	//plotters.push_back( new CheatedCorrectionPlotter );
+	plotters.push_back( new NuCalculationPOPPlotter );
+
 	/* ---------------------------------------------------------------------*/
 }
