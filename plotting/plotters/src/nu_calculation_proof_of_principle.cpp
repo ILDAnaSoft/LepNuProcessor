@@ -7,7 +7,20 @@ void NuCalculationPOPPlotter::set_plotter_settings() {
 void NuCalculationPOPPlotter::define_plots(){
 	add_new_TH1D("N_vertices", new TH1D("N_vertices", "Number of ch. lep. + #nu vertices in event; N_{l-#nu vertices}; Event", 7, -0.5, 6.5));
 
-	add_new_TH2D("nu_E", new TH2D("nu_E", "#nu calculation from MC info; E_{#nu}^{MC}; E_{#nu}^{calc from MC vertex}; #nu's", 200, 0, 200, 200, 0, 200) );
+	add_new_TH2D("nu_E", new TH2D("nu_E", "#nu calculation from MC info; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_p", new TH2D("nu_p", "#nu calculation from MC info; p_{#nu}^{MC} [GeV]; p_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_theta", new TH2D("nu_theta", "#nu calculation from MC info; #theta_{#nu}^{MC}; #theta_{#nu}^{calc from MC vertex}; #nu's", 32, 0, 3.2, 32, 0, 3.2) );
+	add_new_TH2D("nu_phi", new TH2D("nu_phi", "#nu calculation from MC info; #phi_{#nu}^{MC}; #phi_{#nu}^{calc from MC vertex}; #nu's", 32, -3.2, 3.2, 32, -3.2, 3.2) );
+
+	add_new_TH1D("non-reconstructed_nu_parent_init_vertex", new TH1D("non-reconstructed_nu_parent_init_vertex", "Init. vertex radius of first parent of non-reconstructed #nu's; r_{parent}^{MC} [mm]; #nu's", 100, 0, 3000));
+	add_new_TH1D("non-reconstructed_nu_E", new TH1D("non-reconstructed_nu_E", "E of non-reconstructed #nu's; E_{#nu}^{MC} [GeV]; #nu's", 30, 0, 30));
+	add_new_TH1D("non-reconstructed_nu_theta", new TH1D("non-reconstructed_nu_theta", "#theta of non-reconstructed #nu's; #theta_{#nu}^{MC}; #nu's", 32, 0, 3.2) );
+	add_new_TH1D("non-reconstructed_nu_phi", new TH1D("non-reconstructed_nu_phi", "#phi of non-reconstructed #nu's; #phi_{#nu}^{MC}; #nu's", 32, -3.2, 3.2) );
+
+	add_new_TH1D("reconstructed_nu_parent_init_vertex", new TH1D("reconstructed_nu_parent_init_vertex", "Init. vertex radius of first parent of reconstructed #nu's; r_{parent}^{MC} [mm]; #nu's", 100, 0, 3000));
+	add_new_TH2D("reconstructed_nu_E", new TH2D("reconstructed_nu_E", "#nu calculation from MC info, only reconstructed #nu's; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("reconstructed_nu_theta", new TH2D("reconstructed_nu_theta", "#nu calculation from MC info, only reconstructed #nu's; #theta_{#nu}^{MC}; #theta_{#nu}^{calc from MC vertex}; #nu's", 32, 0, 3.2, 32, 0, 3.2) );
+	add_new_TH2D("reconstructed_nu_phi", new TH2D("reconstructed_nu_phi", "#nu calculation from MC info, only reconstructed #nu's; #phi_{#nu}^{MC}; #phi_{#nu}^{calc from MC vertex}; #nu's", 32, -3.2, 3.2, 32, -3.2, 3.2) );
 }
 
 bool NuCalculationPOPPlotter::isNeutrinoID( int pdgID ) {
@@ -72,24 +85,16 @@ TLorentzVector NuCalculationPOPPlotter::calculate_nus_from_MC( LepNuVertex* vert
 	// Momentum and energy conservation -> Calculation of nu 4vector
 	long double _D = std::pow( vis_E, 2 ) - std::pow( vis_p_parallel, 2 );
 	long double _A = vis_p_parallel * ( 2.* std::pow(vis_p_perp, 2) + std::pow(vis_m, 2) - std::pow(parents_m, 2) );
-	//long double _B = 4* std::pow(vis_p_perp, 2) * std::pow(vis_E, 2) - std::pow( ( 2*std::pow(vis_p_perp, 2) + std::pow(vis_m, 2) - std::pow(parents_m, 2) ), 2 );
 	long double _C = std::pow( 2.*std::pow(vis_p_perp, 2) + std::pow(vis_m, 2) - std::pow(parents_m, 2), 2);
 	long double _F = ( std::pow( vis_p_parallel, 2 ) * _C - 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) + _D * _C;
-	std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
-	std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
-
-	std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
-	// std::cout << "nu_p_parallel " << nu_p_parallel<< " nu_p_perp " << nu_p_perp<<"\n";
-
-
-	std::cout << " o1: " <<   ( std::pow( vis_p_parallel, 2 ) * _C - 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) + _D * _C<< "\n";
-	std::cout << " o2: " <<   ( std::pow( vis_p_parallel, 2 ) * _C + 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) + _D * _C<< "\n";
-	std::cout << " o3: " <<   ( std::pow( vis_p_parallel, 2 ) * _C - 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) - _D * _C<< "\n";
-	std::cout << " o4: " <<   ( std::pow( vis_p_parallel, 2 ) * _C + 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) - _D * _C<< "\n";
 
 	if ( _D < 0.000001 )  { std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; }
-	else if ( _F < 0 ) { std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n"; }
-	else {
+	else if ( _F < 0 ) {
+		std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
+		// std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
+		// std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
+		// std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
+	}	else {
 		long double nu_p_perp = - vis_p_perp;
 
 		// Quadratic equation has two solutions:
@@ -119,37 +124,91 @@ TLorentzVector NuCalculationPOPPlotter::calculate_nus_from_MC( LepNuVertex* vert
 
 	}
 
-// TLorentzVector nu_tlv_true = get_nu_daughters_tlv( vertex );
-// TVector3 true_nu_3vec = TVector3( nu_tlv_true[0],nu_tlv_true[1],nu_tlv_true[2]);//nu_tlv_true.Vect();
-//  std::cout << " True: p_par: " << true_nu_3vec.Dot(init_direction) << " p_perp: " << true_nu_3vec.Dot(perp_to_init)<< "\n";
-
-
-
 	return nu_tlv;
 }
 
 void NuCalculationPOPPlotter::fill_plots(){
 	float weight = get_current_weight();
 
-	int i=0;
+	// int i=1;
 	// This is the loop over all events
 	while ( get_next_event() ) {
 		int N_vertices = (evt_info->total_event.lep_nu_vertices).GetEntries();
+		// std::cout << i++ << "\n";
 		get_TH1D("N_vertices")->Fill(N_vertices, weight);
-		std::cout << i++ << "\n"; 
 		for (int i_vertex = 0; i_vertex<N_vertices; i_vertex++ ) {
 			LepNuVertex* vertex = (LepNuVertex*)evt_info->total_event.lep_nu_vertices[i_vertex];
 			TLorentzVector nu_tlv_calculated = calculate_nus_from_MC( vertex );
 			TLorentzVector nu_tlv_true = get_nu_daughters_tlv( vertex );
-			std::cout << "nu: true: " << nu_tlv_true.E() << " calc: " << nu_tlv_calculated.E() << " Init_vertex position:" << ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag() << " \n\n";
+			//std::cout << "nu: true: " << nu_tlv_true.E() << " calc: " << nu_tlv_calculated.E() << " Init_vertex position:" << ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag() << " \n\n";
+			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), weight);
+			get_TH2D("nu_p")->Fill(nu_tlv_true.P(), nu_tlv_calculated.P(), weight);
+			get_TH2D("nu_theta")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated.Theta(), weight);
+			get_TH2D("nu_phi")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated.Phi(), weight);
+
+			if ( nu_tlv_calculated.E() == 0 ) {
+				get_TH1D("non-reconstructed_nu_parent_init_vertex")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), weight);
+				get_TH1D("non-reconstructed_nu_E")->Fill(nu_tlv_true.E(), weight);
+				get_TH1D("non-reconstructed_nu_theta")->Fill(nu_tlv_true.Theta(), weight);
+				get_TH1D("non-reconstructed_nu_phi")->Fill(nu_tlv_true.Phi(), weight);
+			} else {
+				get_TH1D("reconstructed_nu_parent_init_vertex")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), weight);
+				get_TH2D("reconstructed_nu_E")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), weight);
+				get_TH2D("reconstructed_nu_theta")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated.Theta(), weight);
+				get_TH2D("reconstructed_nu_phi")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated.Phi(), weight);
+			}
 		}
 	}
 }
 
 void NuCalculationPOPPlotter::draw_plots(){
-	//std::string output_dir = get_output_directory();
+	std::string output_dir = get_output_directory();
 
-	//TCanvas* c1 = new TCanvas("c1", "", 0, 0, 800, 800);
-	//get_TH1D("test")->Draw();
-	//c1->Print((output_dir + "/test.pdf").c_str());
+	TCanvas* c_parent_init_vertices = new TCanvas("parent_init_vertices", "", 0, 0, 800, 900);
+	TLegend* vertices_leg = new TLegend(0.35, 0.7, 0.9, 0.9);
+	TH1D* non_reco_nu_parent_vertices = get_TH1D("non-reconstructed_nu_parent_init_vertex");
+	TH1D* reco_nu_parent_vertices = get_TH1D("reconstructed_nu_parent_init_vertex");
+	non_reco_nu_parent_vertices->SetLineColor(kRed);
+	reco_nu_parent_vertices->SetLineColor(kBlue);
+	vertices_leg->AddEntry(non_reco_nu_parent_vertices, "non-reconstructed #nu's", "l");
+	vertices_leg->AddEntry(reco_nu_parent_vertices, "reconstructed #nu's", "l");
+	reco_nu_parent_vertices->GetYaxis()->SetTitleOffset(1.4);
+	reco_nu_parent_vertices->Draw("hist");
+	non_reco_nu_parent_vertices->Draw("hist same");
+	c_parent_init_vertices->SetLeftMargin(0.2);
+	vertices_leg->Draw();
+	c_parent_init_vertices->Print((output_dir + "/parent_vertices.pdf").c_str());
+	delete c_parent_init_vertices;
+
+	for (int i=0; i<get_number_TH2Ds(); i++) {
+		TH2D* current_h2 = get_TH2D_i(i);
+		TCanvas* current_canvas = new TCanvas(( std::string() + current_h2->GetName() + "_can").c_str(), "", 0, 0, 800, 800);
+		current_h2->Draw("colz");
+		current_canvas->SetRightMargin(0.2);
+		current_canvas->Print(( output_dir + "/h2_" + current_h2->GetName() + ".pdf").c_str());
+		delete current_canvas;
+	}
+	reco_nu_parent_vertices->GetYaxis()->SetTitleOffset(1.4);
+	c_parent_init_vertices->SetLeftMargin(0.2);
+
+	TCanvas* c_nonreco_nu_E = new TCanvas("can_nonreco_nu_E", "", 0, 0, 800, 900);
+	TH1D* nonreco_nu_E = get_TH1D("non-reconstructed_nu_E");
+	nonreco_nu_E->Draw("hist");
+	nonreco_nu_E->GetYaxis()->SetTitleOffset(1.4);
+	c_nonreco_nu_E->SetLeftMargin(0.2);
+	c_nonreco_nu_E->Print((output_dir + "/h1_nonreco_nu_E.pdf").c_str());
+	delete c_nonreco_nu_E;
+
+	TCanvas* c_nonreco_nu_theta = new TCanvas("can_nonreco_nu_theta", "", 0, 0, 800, 900);
+	TH1D* nonreco_nu_theta = get_TH1D("non-reconstructed_nu_theta");
+	nonreco_nu_theta->Draw("hist");
+	c_nonreco_nu_theta->Print((output_dir + "/h1_nonreco_nu_theta.pdf").c_str());
+	delete c_nonreco_nu_theta;
+
+	TCanvas* c_nonreco_nu_phi = new TCanvas("can_nonreco_nu_phi", "", 0, 0, 800, 900);
+	TH1D* nonreco_nu_phi = get_TH1D("non-reconstructed_nu_phi");
+	nonreco_nu_phi->Draw("hist");
+	c_nonreco_nu_phi->Print((output_dir + "/h1_nonreco_nu_phi.pdf").c_str());
+	delete c_nonreco_nu_phi;
+
 }
