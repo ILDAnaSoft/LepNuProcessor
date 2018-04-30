@@ -19,7 +19,7 @@ LepNuProcessor::LepNuProcessor() : Processor("LepNuProcessor") {
             "MCParticleCollection",
             "Name of the MC particle collection",
             _colMC,
-            std::string("MCParticlesSkimmed2")
+            std::string("MCParticle")
     );
 
 
@@ -30,7 +30,7 @@ LepNuProcessor::LepNuProcessor() : Processor("LepNuProcessor") {
     		"RecoMCTruthLink",
     		"Name of the RecoMCTruthLink input collection"  ,
 			_recoMCTruthLink,
-			std::string("RecoMCTruthLink2") ) ;
+			std::string("RecoMCTruthLink") ) ;
 
 	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
 			"TrueJets" ,

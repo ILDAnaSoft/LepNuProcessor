@@ -26,4 +26,14 @@ class CheatedCorrectionPlotter : public Plotter {
 	virtual void draw_plots();
 };
 
+class NuCalculationPOPPlotter : public Plotter {
+	virtual void set_plotter_settings();
+	virtual void define_plots();
+	virtual void fill_plots();
+	virtual void draw_plots();
+	virtual TLorentzVector get_nu_daughters_tlv( LepNuVertex* vertex );
+	virtual TLorentzVector calculate_nus_from_MC( LepNuVertex* vertex );
+	virtual bool isNeutrinoID( int pdgID );
+};
+
 #endif

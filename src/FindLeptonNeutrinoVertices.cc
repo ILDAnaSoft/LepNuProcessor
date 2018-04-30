@@ -48,8 +48,14 @@ void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelat
     MCParticleVec vertex_parents = (*mc_lep)->getParents();
     MCSet vertex_daughters;
     bool has_nu_sibling = false;
+    bool is_detector_effect = false; // If any parent is stable (gen_status=1) then neutrino must have come form detector effect
 
     for ( int i=0; i<vertex_parents.size(); i++ ){
+      if ( vertex_parents[i]->getGeneratorStatus() == 1 ){
+        is_detector_effect = true;
+        break;
+      }
+
       MCParticleVec daughters = vertex_parents[i]->getDaughters();
 
       // Can I find a neutrino sibling to the lepton?
@@ -62,7 +68,7 @@ void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelat
       vertex_daughters.insert( daughters.begin(), daughters.end() );
     }
 
-    if ( has_nu_sibling ) {
+    if ( has_nu_sibling && ! is_detector_effect ) {
       LepNuVertex* new_vertex = vertices_info->add_lep_nu_vertex();
       fillLepNuVertex( vertex_parents, vertex_daughters, new_vertex );
     }
