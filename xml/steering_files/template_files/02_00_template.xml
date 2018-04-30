@@ -2,6 +2,7 @@
 	<execute>
 		<processor name="MyAdd4MomCovMatrixCharged"/>
 		<processor name="MyThrustReconstruction"/>
+		<processor name="MyTrueJet"/>
 		<processor name="MyLepNuProcessor"/>
 	</execute>
 
@@ -12,7 +13,7 @@
 		<parameter name="MaxRecordNumber" value="0" />
 		<parameter name="SkipNEvents" value="0" />
 		<parameter name="SupressCheck" value="false" />
-		<parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT">WARNING</parameter>
+		<parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> WARNING </parameter>
 		<parameter name="AllowToModifyEvent" value="true" />
 	</global>
 
@@ -25,6 +26,12 @@
 		<parameter name="Verbosity"> SILENT </parameter>
 		<parameter name="inputCollectionName" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="typeOfThrustFinder" type="int">2 </parameter>
+	</processor>
+
+	<!-- Processor that constructs correct jets from PFO links to generator level particles -->
+	<processor name="MyTrueJet" type="TrueJet">
+		<parameter name="MCParticleCollection" type="string" lcioInType="MCParticle"> MCParticle </parameter>
+		<parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> ERROR </parameter>
 	</processor>
 
 	<processor name="MyLepNuProcessor" type="LepNuProcessor">

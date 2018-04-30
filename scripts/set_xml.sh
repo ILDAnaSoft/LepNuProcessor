@@ -41,8 +41,8 @@ if [[ ! -z ${pol_weight_aux} ]] ; then
 		single_file=$( echo -e ${file/'\n'} )
 		# Set the input and output file names in the steering file
        	# CAREFUL: Line numbers should be decreasing!
-		sed -i "33s\.*\ ${root_name} \  " ${xml_file}
-		sed -i "10s\.*\ ${single_file}\ " ${xml_file}
+		sed -i "40s\.*\ ${root_name} \  " ${xml_file}
+		sed -i "11s\.*\ ${single_file}\ " ${xml_file}
 	done
 	echo "true"
 else
