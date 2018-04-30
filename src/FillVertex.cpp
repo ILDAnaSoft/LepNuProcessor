@@ -21,11 +21,11 @@ void LepNuProcessor::fillRecoToMCParticle( MCParticle* mc, Particle* particle_in
     particle_info->was_reconstructed = true;
     ReconstructedParticle* reco = findHighestWeightRecoToMCParticle( mc, relation_recoMCtruth );
 
-    (particle_info->MC).tlv = TLorentzVector( reco->getMomentum(), reco->getEnergy() );
+    (particle_info->Reco).tlv = TLorentzVector( reco->getMomentum(), reco->getEnergy() );
     if ( reco->getStartVertex() != 0 ){
-      (particle_info->MC).vertex = TVector3( reco->getStartVertex()->getPosition() );
+      (particle_info->Reco).vertex = TVector3( reco->getStartVertex()->getPosition() );
     }
-    (particle_info->MC).pdg_ID = findHighestLikelihoodPIDOfReco( reco );
+    (particle_info->Reco).pdg_ID = findHighestLikelihoodPIDOfReco( reco );
   } else {
     particle_info->was_reconstructed = false;
   }
