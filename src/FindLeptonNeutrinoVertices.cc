@@ -1,15 +1,5 @@
 #include "LepNuProcessor.h"
 
-void LepNuProcessor::splitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name ) {
-  for (int i=0; i<combined_weights.size(); i++) {
-    if ( weight_name == "trck" ) {
-      single_weights.push_back(double((int(combined_weights[i])%10000)/1000.));
-    }
-    else if ( weight_name == "calo" ) {
-      single_weights.push_back(double((int(combined_weights[i])/10000)/1000.));
-    }
-  }
-}
 
 void LepNuProcessor::findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_leps_set, LCRelationNavigator* relation_recoMCtruth) {
   // Find all mc leptons associated with the reconstructed charged leptons
@@ -31,7 +21,6 @@ void LepNuProcessor::findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_lep
     }
   }
 }
-
 
 void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info ) {
 
@@ -70,7 +59,7 @@ void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelat
 
     if ( has_nu_sibling && ! is_detector_effect ) {
       LepNuVertex* new_vertex = vertices_info->add_lep_nu_vertex();
-      fillLepNuVertex( vertex_parents, vertex_daughters, new_vertex );
+      fillLepNuVertex( vertex_parents, vertex_daughters, new_vertex, relation_recoMCtruth );
     }
   }
 }

@@ -21,6 +21,7 @@
 #include <EVENT/LCCollection.h>
 #include <EVENT/MCParticle.h>
 #include <EVENT/ReconstructedParticle.h>
+#include <EVENT/Vertex.h>
 
 //----- include for verbosity dependend logging ---------
 #include "marlin/VerbosityLevels.h"
