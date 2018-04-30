@@ -45,7 +45,7 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
 
     virtual MCParticleVec readMCColToVector(LCCollection* mcs);
     virtual ReconstructedParticleVec readRecoColToVector(LCCollection* recos);
-    
+
     virtual void findLowestLevelRecoParticles( ReconstructedParticle* reco, RecoSet &jet_recos_set );
 
     virtual bool isNeutrinoID( int pdgID );
@@ -53,9 +53,13 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
     virtual bool identifiedAsChargedLepton( ReconstructedParticle* PFO );
     virtual void findChargedLeptons( RecoSet &jet_recos_set, RecoSet &jet_leptons_set );
 
-    virtual void fillLepNuVertex( MCParticleVec vertex_parents, MCSet vertex_daughters, LepNuVertex* vertex );
+    virtual int findHighestLikelihoodPIDOfReco( ReconstructedParticle* reco );
+    virtual void fillRecoToMCParticle( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth );
+    virtual void fillLepNuVertex( MCParticleVec vertex_parents, MCSet vertex_daughters, LepNuVertex* vertex, LCRelationNavigator* relation_recoMCtruth );
 
     virtual void splitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
+    virtual ReconstructedParticle* findHighestWeightRecoToMCParticle( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth );
+
     virtual void findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_leps_set, LCRelationNavigator* relation_recoMCtruth );
     virtual void findLeptonNeutrinoVertices( RecoSet &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info );
 
