@@ -27,7 +27,11 @@ void LepNuProcessor::fillRecoToMCParticle( MCParticle* mc, Particle* particle_in
     }
     (particle_info->Reco).pdg_ID = findHighestLikelihoodPIDOfReco( reco );
   } else {
-    particle_info->was_reconstructed = false;
+    if ( findRecoOfMCDaughters(mc, particle_info, relation_recoMCtruth) ) {
+      particle_info->was_reconstructed = true;
+    } else {
+      particle_info->was_reconstructed = false;
+    }
   }
 }
 

@@ -45,6 +45,7 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
 
     virtual MCParticleVec readMCColToVector(LCCollection* mcs);
     virtual ReconstructedParticleVec readRecoColToVector(LCCollection* recos);
+    virtual bool hasNonTrivialPartner( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth );
 
     virtual void findLowestLevelRecoParticles( ReconstructedParticle* reco, RecoSet &jet_recos_set );
 
@@ -54,6 +55,7 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
     virtual void findChargedLeptons( RecoSet &jet_recos_set, RecoSet &jet_leptons_set );
 
     virtual int findHighestLikelihoodPIDOfReco( ReconstructedParticle* reco );
+    virtual bool findRecoOfMCDaughters( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth);
     virtual void fillRecoToMCParticle( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth );
     virtual void fillLepNuVertex( MCParticleVec vertex_parents, MCSet vertex_daughters, LepNuVertex* vertex, LCRelationNavigator* relation_recoMCtruth );
 

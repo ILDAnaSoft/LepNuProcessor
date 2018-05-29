@@ -1,10 +1,10 @@
 #include "plotters.h"
 
-void NuCalculationPOPPlotter::set_plotter_settings() {
-	set_output_folder_name("nu_calculation_pop");
+void NuCalculationPOPGuessedGammaPlotter::set_plotter_settings() {
+	set_output_folder_name("nu_calculation_pop_guessed_gamma");
 }
 
-void NuCalculationPOPPlotter::define_plots(){
+void NuCalculationPOPGuessedGammaPlotter::define_plots(){
 	add_new_TH1D("N_vertices", new TH1D("N_vertices", "Number of ch. lep. + #nu vertices in event; N_{l-#nu vertices}; Event", 7, -0.5, 6.5));
 
 	add_new_TH2D("nu_E", new TH2D("nu_E", "#nu calculation from MC info; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
@@ -40,33 +40,29 @@ void NuCalculationPOPPlotter::define_plots(){
 	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr50", new TH2D("nu_E_Bparents_only_0vertex_lepEgr50", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>50; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 
 
-	add_new_TH2D("E_deviations", new TH2D("E_deviations", "Mis-calculation VS difference of calc. E from vis. E (B only, 0 vertex); (E_{#nu}^{calc} - E_{vis})/E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 150, -1.50, 1.50, 220, -20, 200) );
-	add_new_TH2D("E_deviations_lepE5cut", new TH2D("E_deviations_lepE5cut", "Mis-calculation VS difference of calc. E from vis. E (B only, 0 vertex, E_{lep}>5); (E_{#nu}^{calc} - E_{vis})/E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 150, -1.50, 1.50, 220, -20, 200) );
-	add_new_TH2D("E_deviations_visE", new TH2D("E_deviations_visE", "Mis-calculation VS vis. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 110, 0, 110, 220, -20, 200) );
-	add_new_TH2D("E_deviations_lepE", new TH2D("E_deviations_lepE", "Mis-calculation VS ch. lep. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 110, 0, 110, 220, -20, 200) );
-	add_new_TH2D("E_deviations_lepEpercentage", new TH2D("E_deviations_lepEpercentage", "Mis-calculation VS ch. lep. E percentage (B only, 0 vertex); E_{lep} / E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 100, 0, 1.0, 220, -20, 200) );
-	add_new_TH2D("E_deviations_lepPDG", new TH2D("E_deviations_lepPDG", "Mis-calculation VS ch. lep. PDG (abs) (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 8, 10.5, 18.5, 220, -20, 200) );
-	add_new_TH2D("E_deviations_nuTheta", new TH2D("E_deviations_nuTheta", "Mis-calculation VS #theta_{#nu}^{calc} (B only, 0 vertex); #theta_{#nu}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 32, 0, 3.2, 220, -20, 200) );
-	add_new_TH2D("E_deviations_correctedE", new TH2D("E_deviations_correctedE", "Mis-calculation VS E_{corrected} (B only, 0 vertex); E_{corrected}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 250, 0, 250, 220, -20, 200) );
-	add_new_TH2D("E_deviations_Ndaughters", new TH2D("E_deviations_Ndaughters", "Mis-calculation VS N_{daughters} (B only, 0 vertex); N_{daughters}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 5, 0.5, 5.5, 220, -20, 200) );
-	add_new_TH2D("E_deviations_Bboost", new TH2D("E_deviations_Bboost", "Mis-calculation VS B boost (B only, 0 vertex); #gamma_{B}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 64, 1, 65, 220, -20, 200) );
-	add_new_TH2D("E_deviations_Bmagnitude", new TH2D("E_deviations_Bmagnitude", "Mis-calculation VS B magnitude (B only, 0 vertex); |l_{B}^{MC}| [mm]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 20, 0, 20, 220, -20, 200) );
+	add_new_TH2D("E_deviations", new TH2D("E_deviations", "Mis-calculation VS difference of calc. E from vis. E (B only, 0 vertex); (E_{#nu}^{calc} - E_{vis})/E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 150, -1.50, 1.50, 200, -150, 50) );
+	add_new_TH2D("E_deviations_lepE5cut", new TH2D("E_deviations_lepE5cut", "Mis-calculation VS difference of calc. E from vis. E (B only, 0 vertex, E_{lep}>5); (E_{#nu}^{calc} - E_{vis})/E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 150, -1.50, 1.50, 200, -150, 50) );
+	add_new_TH2D("E_deviations_visE", new TH2D("E_deviations_visE", "Mis-calculation VS vis. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 110, 0, 110, 200, -150, 50) );
+	add_new_TH2D("E_deviations_lepE", new TH2D("E_deviations_lepE", "Mis-calculation VS ch. lep. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 110, 0, 110, 200, -150, 50) );
+	add_new_TH2D("E_deviations_lepEpercentage", new TH2D("E_deviations_lepEpercentage", "Mis-calculation VS ch. lep. E percentage (B only, 0 vertex); E_{lep} / E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 100, 0, 1.0, 200, -150, 50) );
+	add_new_TH2D("E_deviations_lepPDG", new TH2D("E_deviations_lepPDG", "Mis-calculation VS ch. lep. PDG (abs) (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 8, 10.5, 18.5, 200, -150, 50) );
+	add_new_TH2D("E_deviations_nuTheta", new TH2D("E_deviations_nuTheta", "Mis-calculation VS #theta_{#nu}^{calc} (B only, 0 vertex); #theta_{#nu}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 32, 0, 3.2, 200, -150, 50) );
+	add_new_TH2D("E_deviations_correctedE", new TH2D("E_deviations_correctedE", "Mis-calculation VS E_{corrected} (B only, 0 vertex); E_{corrected}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 250, 0, 250, 200, -150, 50) );
+	add_new_TH2D("E_deviations_Ndaughters", new TH2D("E_deviations_Ndaughters", "Mis-calculation VS N_{daughters} (B only, 0 vertex); N_{daughters}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 5, 0.5, 5.5, 200, -150, 50) );
+	add_new_TH2D("E_deviations_Bboost", new TH2D("E_deviations_Bboost", "Mis-calculation VS B boost (B only, 0 vertex); #gamma_{B}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 64, 1, 65, 200, -150, 50) );
+	add_new_TH2D("E_deviations_Bmagnitude", new TH2D("E_deviations_Bmagnitude", "Mis-calculation VS B magnitude (B only, 0 vertex); |l_{B}^{MC}| [mm]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 20, 0, 20, 200, -150, 50) );
 
 	add_new_TH2D("p_nu_parallel_vs_Bboost", new TH2D("p_nu_parallel_vs_Bboost", "#nu mom. parallel B VS B boost, (B only, 0 vertex); #gamma_{B}; p_{#nu}^{parallel} [GeV]; #nu's", 30, 1, 60, 150,-50, 250) );
 
 	add_new_TH1D("B_magnitude", new TH1D("B_magnitude", "magnitude of B endpoint; |l_{B}| [mm]; Event", 100, 0, 10));
 	add_new_TH2D("B_E_vs_B_magnitude", new TH2D("B_E_vs_B_magnitude", "B energy VS magnitude of B endpoint; |l_{B}^{MC}| [mm]; E_{B}^{MC}; Event", 40, 0, 4, 200, 0, 200));
 
-	add_new_TH2D("E_deviations_visPperp", new TH2D("E_deviations_visPperp", "Mis-calculation VS ch. visible perp. mom. (B only, 0 vertex); p_{vis}^{perp} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 30, 0, 3, 220, -20, 200) );
-	add_new_TH2D("E_deviations_visPratio", new TH2D("E_deviations_visPratio", "Mis-calculation VS ch. visible mom. perp./par. ratio (B only, 0 vertex); p_{vis}^{perp}/ p_{vis}^{par}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 50, 0, 0.5, 220, -20, 200) );
+	add_new_TH2D("E_deviations_visPperp", new TH2D("E_deviations_visPperp", "Mis-calculation VS ch. visible perp. mom. (B only, 0 vertex); p_{vis}^{perp} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 30, 0, 3, 200, -150, 50) );
+	add_new_TH2D("E_deviations_visPratio", new TH2D("E_deviations_visPratio", "Mis-calculation VS ch. visible mom. perp./par. ratio (B only, 0 vertex); p_{vis}^{perp}/ p_{vis}^{par}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 50, 0, 0.5, 200, -150, 50) );
 	add_new_TH2D("Bboost_visPratio", new TH2D("Bboost_visPratio", "B boost VS ch. visible mom. perp./par. ratio (B only, 0 vertex); p_{vis}^{perp}/ p_{vis}^{par}; #gamma_{B}; #nu's", 50, 0, 0.5, 20, 0, 20) );
-
-	add_new_TH2D("Bbeta_visPparOVERvisE", new TH2D("Bbeta_visPparOVERvisE", "B boost VS ch. visible mom. perp./par. ratio (B only, 0 vertex); 1-p_{vis}^{par}/E_{vis}; 1-#beta_{B}; #nu's", 40, 0, 0.2, 40, 0, 0.2) );
-
-	
 }
 
-bool NuCalculationPOPPlotter::isNeutrinoID( int pdgID ) {
+bool NuCalculationPOPGuessedGammaPlotter::isNeutrinoID( int pdgID ) {
   if( fabs(pdgID) == 12 || fabs(pdgID) == 14 || fabs(pdgID) == 16 || fabs(pdgID) == 18 ){
       return true;
   } else {
@@ -74,7 +70,7 @@ bool NuCalculationPOPPlotter::isNeutrinoID( int pdgID ) {
   }
 }
 
-TLorentzVector NuCalculationPOPPlotter::get_nu_daughters_tlv( LepNuVertex* vertex ){
+TLorentzVector NuCalculationPOPGuessedGammaPlotter::get_nu_daughters_tlv( LepNuVertex* vertex ){
 	TLorentzVector nu_tlv {};
 
 	int N_daughters = (vertex->vertex_daughters).GetEntries();
@@ -86,7 +82,7 @@ TLorentzVector NuCalculationPOPPlotter::get_nu_daughters_tlv( LepNuVertex* verte
 	return nu_tlv;
 }
 
-TLorentzVector NuCalculationPOPPlotter::get_vis_tlv( LepNuVertex* vertex ){
+TLorentzVector NuCalculationPOPGuessedGammaPlotter::get_vis_tlv( LepNuVertex* vertex ){
 	// Get non-nu daughter tlvs ( = "visible part of vertex")
 	TLorentzVector vis_tlv {};
 	int N_daughters = (vertex->vertex_daughters).GetEntries();
@@ -97,7 +93,7 @@ TLorentzVector NuCalculationPOPPlotter::get_vis_tlv( LepNuVertex* vertex ){
 	return vis_tlv;
 }
 
-TLorentzVector NuCalculationPOPPlotter::get_charged_leptons_tlv( LepNuVertex* vertex ){
+TLorentzVector NuCalculationPOPGuessedGammaPlotter::get_charged_leptons_tlv( LepNuVertex* vertex ){
 	TLorentzVector charged_lep_tlv {};
 	int N_daughters = (vertex->vertex_daughters).GetEntries();
 	for (int i_daughter = 0; i_daughter<N_daughters; i_daughter++) {
@@ -107,7 +103,7 @@ TLorentzVector NuCalculationPOPPlotter::get_charged_leptons_tlv( LepNuVertex* ve
 	return charged_lep_tlv;
 }
 
-int NuCalculationPOPPlotter::get_first_charged_lepton_pdg( LepNuVertex* vertex ){
+int NuCalculationPOPGuessedGammaPlotter::get_first_charged_lepton_pdg( LepNuVertex* vertex ){
 	int N_daughters = (vertex->vertex_daughters).GetEntries();
 	for (int i_daughter = 0; i_daughter<N_daughters; i_daughter++) {
 		Particle* daughter = (Particle*)(vertex->vertex_daughters)[i_daughter];
@@ -115,7 +111,7 @@ int NuCalculationPOPPlotter::get_first_charged_lepton_pdg( LepNuVertex* vertex )
 	}
 }
 
-TLorentzVector NuCalculationPOPPlotter::calculate_nus_from_MC( LepNuVertex* vertex ){
+TLorentzVector NuCalculationPOPGuessedGammaPlotter::calculate_nus_from_MC( LepNuVertex* vertex ){
 	/* Take:
 			- direction from initial vertex
 			- initial mass from parent MC info
@@ -183,6 +179,19 @@ TLorentzVector NuCalculationPOPPlotter::calculate_nus_from_MC( LepNuVertex* vert
 		long double m_total_minus = tlv_total_minus.M();
 
 
+		long double a = 0.0956;
+		long double b = 1.0;
+		long double x = vis_p_parallel/vis_E;
+		long double guess_beta_B = ( a - b*x ) / ( a*b*x -1 );
+
+		long double guess_gamma_B = 1.0 / std::sqrt(1-std::pow(guess_beta_B,2));
+
+		if ( fabs(guess_gamma_B - tlv_total_plus.Gamma()) < fabs(guess_gamma_B - tlv_total_minus.Gamma()) ) {
+			nu_tlv = nu_tlv_plus;
+		} else {
+			nu_tlv = nu_tlv_minus;
+		}
+
 		// long double guess_gamma_B = 946 / std::pow(vis_p_perp/vis_p_parallel, 0.00293) - 948;
 		// if (guess_gamma_B < 0) { guess_gamma_B = 0; }
 		//
@@ -191,9 +200,12 @@ TLorentzVector NuCalculationPOPPlotter::calculate_nus_from_MC( LepNuVertex* vert
 		// } else {
 		// 	nu_tlv = nu_tlv_minus;
 		// }
-
-		nu_tlv = nu_tlv_plus;
-
+		//
+		// long double nu_E_relative_contribution = (nu_tlv.E()-vis_E)/vis_E;
+		// if (nu_E_relative_contribution < -0.7) {
+		// 	std::cout << nu_E_relative_contribution << "\n";
+		// 	nu_tlv = nu_tlv_plus;
+		// }
 
 
 	}
@@ -201,7 +213,7 @@ TLorentzVector NuCalculationPOPPlotter::calculate_nus_from_MC( LepNuVertex* vert
 	return nu_tlv;
 }
 
-void NuCalculationPOPPlotter::fill_plots(){
+void NuCalculationPOPGuessedGammaPlotter::fill_plots(){
 	float weight = get_current_weight();
 
 	// int i=1;
@@ -309,8 +321,6 @@ void NuCalculationPOPPlotter::fill_plots(){
 						get_TH2D("E_deviations_visPperp")->Fill( vis_p_perp, nu_tlv_calculated.E()-nu_tlv_true.E(), weight );
 						get_TH2D("E_deviations_visPratio")->Fill( vis_p_perp/vis_p_parallel, nu_tlv_calculated.E()-nu_tlv_true.E(), weight );
 						get_TH2D("Bboost_visPratio")->Fill( vis_p_perp/vis_p_parallel, ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), weight );
-
-						get_TH2D("Bbeta_visPparOVERvisE")->Fill(1.0-vis_p_parallel/vis_vertex_E, 1.0-((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Beta(), weight);
 					}
 				}
 			}
@@ -319,7 +329,7 @@ void NuCalculationPOPPlotter::fill_plots(){
 	}
 }
 
-void NuCalculationPOPPlotter::draw_plots(){
+void NuCalculationPOPGuessedGammaPlotter::draw_plots(){
 	std::string output_dir = get_output_directory();
 
 	TCanvas* c_parent_init_vertices = new TCanvas("parent_init_vertices", "", 0, 0, 800, 900);

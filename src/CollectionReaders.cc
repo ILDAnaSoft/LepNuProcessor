@@ -31,3 +31,19 @@ ReconstructedParticleVec LepNuProcessor::readRecoColToVector(LCCollection* recos
 	}
 	return(revo_vec);
 }
+
+bool LepNuProcessor::hasNonTrivialPartner( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth ) {
+	FloatVec mc_weights_to_recos = relation_recoMCtruth->getRelatedFromWeights( mc );
+
+  FloatVec mc_trck_weights_to_recos, mc_calo_weights_to_recos;
+  splitWeight( mc_weights_to_recos, mc_trck_weights_to_recos, "trck");
+  splitWeight( mc_weights_to_recos, mc_calo_weights_to_recos, "calo");
+
+	for ( int i=0; i<mc_trck_weights_to_recos.size(); i++) {
+		if ( mc_trck_weights_to_recos[i] > 0 ) {return true;}
+	}
+	for ( int i=0; i<mc_calo_weights_to_recos.size(); i++) {
+		if ( mc_calo_weights_to_recos[i] > 0 ) {return true;}
+	}
+	return false;
+}

@@ -11,6 +11,25 @@ void LepNuProcessor::splitWeight( FloatVec &combined_weights, FloatVec &single_w
   }
 }
 
+bool LepNuProcessor::findRecoOfMCDaughters( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth) {
+  MCParticleVec daughters = mc->getDaughters();
+  bool daughters_have_reco = false;
+  streamlog_out(DEBUG) << "\nMC is: " << mc->getPDG() << "\n";
+  for ( int i_daughter = 0; i_daughter<daughters.size(); i_daughter++ ) {
+    MCParticle* daughter = daughters[i_daughter];
+
+    if ( hasNonTrivialPartner(daughter, relation_recoMCtruth) ) {
+      LCObjectVec recos_to_daughter = relation_recoMCtruth->getRelatedFromObjects( daughter );
+      streamlog_out(DEBUG) << "\nDaughter is: " << daughter->getPDG() << " E " << daughter->getEnergy() << "\n";
+      ReconstructedParticle* reco = findHighestWeightRecoToMCParticle( daughter, relation_recoMCtruth );
+      (particle_info->Reco).tlv += TLorentzVector( reco->getMomentum(), reco->getEnergy() );
+      daughters_have_reco = true;
+    } else {
+      daughters_have_reco |= findRecoOfMCDaughters( daughter, particle_info, relation_recoMCtruth );
+    }
+  }
+  return daughters_have_reco;
+}
 
 ReconstructedParticle* LepNuProcessor::findHighestWeightRecoToMCParticle( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth ) {
   LCObjectVec recos_to_mc = relation_recoMCtruth->getRelatedFromObjects( mc );
@@ -24,6 +43,7 @@ ReconstructedParticle* LepNuProcessor::findHighestWeightRecoToMCParticle( MCPart
   int highest_weight_index = -999;
   for ( int i=0; i<recos_to_mc.size(); i++ ) {
     ReconstructedParticle* reco = dynamic_cast<ReconstructedParticle*>(recos_to_mc[i]);
+    streamlog_out(DEBUG) << " weight trck: " << mc_trck_weights_to_recos[i] << " weight calo: " << mc_calo_weights_to_recos[i] <<"\n";
     if ( mc_trck_weights_to_recos[i] > highest_weight ) {
       highest_weight = mc_trck_weights_to_recos[i];
       highest_weight_index = i;
@@ -33,6 +53,7 @@ ReconstructedParticle* LepNuProcessor::findHighestWeightRecoToMCParticle( MCPart
       highest_weight_index = i;
     }
   }
+  streamlog_out(DEBUG) << " highest i: " << highest_weight_index <<"\n";
   ReconstructedParticle* highest_weight_reco = dynamic_cast<ReconstructedParticle*>(recos_to_mc[highest_weight_index]);
   return highest_weight_reco;
 }
