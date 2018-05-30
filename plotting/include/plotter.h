@@ -324,8 +324,8 @@ struct Plotter {
 		set_plotter_settings();
 		define_plots();
 		loop_over_files();
-		save_all_histograms_in_rootfiles();
 		draw_plots();
+		save_all_histograms_in_rootfiles();
 	}
 	/* --------------------------------------------------------*/
 };
