@@ -82,4 +82,17 @@ class CheatedNuCalculationReco4MomentaPlotter : public Plotter {
 	virtual bool isNeutrinoID( int pdgID );
 };
 
+class RoughNuCorrectionFitPlotter : public Plotter {
+	virtual void set_plotter_settings();
+	virtual void define_plots();
+	virtual void fill_plots();
+	virtual void draw_plots();
+	virtual bool is_neutrino_ID( int pdgID );
+	virtual bool is_Bmeson_ID( int pdgID );
+	virtual bool is_Cmeson_ID( int pdgID );
+	virtual TLorentzVector get_charged_lepton_daughters_tlv( LepNuVertex *vertex );
+	virtual TLorentzVector get_nu_daughters_tlv( LepNuVertex *vertex );
+	virtual void get_resolution_projection ( TProfile* plot, TH1D* error_clone );
+};
+
 #endif

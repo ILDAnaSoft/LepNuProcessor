@@ -86,4 +86,9 @@ void set_ILD_style(){
   gROOT->ForceStyle();
   gStyle->ls();
 
+  std::vector<std::array<float, 3>> colors {{27,158,119}, {217,95,2}, {117,112,179}, {231,41,138}, {102,166,30}, {230,171,2}};
+  for (int j=0; j<colors.size(); j++) {
+    TColor *h2_color = new TColor(9100+j, colors[j][0]/256.0, colors[j][1]/256.0, colors[j][2]/256.0);
+  }
+
 }
