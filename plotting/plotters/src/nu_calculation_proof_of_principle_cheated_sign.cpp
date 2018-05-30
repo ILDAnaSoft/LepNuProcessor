@@ -54,6 +54,12 @@ void NuCalculationCheatedSignPOPPlotter::define_plots(){
 	);
 
 
+	add_new_TH1D("with_wrongcalc_deboosted_lep_rightsign_nu_angle",
+		new TH1D("with_wrongcalc_deboosted_lep_rightsign_nu_angle", "Angle(lep, right #nu) in system boosted with total wrong calculated; Angle(lep,#nu); vertices", 64, 0, 3.2)
+	);
+	add_new_TH1D("with_rightcalc_deboosted_lep_wrongsign_nu_angle",
+		new TH1D("with_rightcalc_deboosted_lep_wrongsign_nu_angle", "Angle(lep, wrong #nu) in system boosted with total right calculated; Angle(lep,#nu); vertices",  64, 0, 3.2)
+	);
 
 }
 
@@ -202,6 +208,10 @@ TLorentzVector NuCalculationCheatedSignPOPPlotter::calculate_nus_from_MC( LepNuV
 		get_TH1D("with_vis_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , weight);
 		get_TH1D("with_calc_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , weight);
 		get_TH1D("with_calc_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , weight);
+
+
+		get_TH1D("with_wrongcalc_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , weight);
+		get_TH1D("with_rightcalc_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , weight);
 	}
 
 	return nu_tlv;
@@ -269,7 +279,16 @@ void NuCalculationCheatedSignPOPPlotter::draw_plots(){
 	leg_2->Draw();
 	can_2->Print((get_output_directory() + "/with_calc_deboosted_lep_nu_angle.pdf").c_str());
 
+	std::string output_dir = get_output_directory();
 
+	for (int i=0; i<get_number_TH2Ds(); i++) {
+		TH2D* current_h2 = get_TH2D_i(i);
+		TCanvas* current_canvas = new TCanvas(( std::string() + current_h2->GetName() + "_can").c_str(), "", 0, 0, 800, 800);
+		current_h2->Draw("colz");
+		current_canvas->SetRightMargin(0.2);
+		current_canvas->Print(( output_dir + "/h2_" + current_h2->GetName() + ".pdf").c_str());
+		// delete current_canvas;
+	}
 
 //
 }

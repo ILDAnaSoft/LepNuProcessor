@@ -40,7 +40,7 @@ class NuCalculationPOPPlotter : public Plotter {
 	virtual TLorentzVector get_vis_tlv( LepNuVertex* vertex );
 	virtual TLorentzVector get_charged_leptons_tlv( LepNuVertex* vertex );
 	virtual int get_first_charged_lepton_pdg( LepNuVertex* vertex );
-	virtual TLorentzVector calculate_nus_from_MC( LepNuVertex* vertex );
+	virtual TLorentzVector calculate_nus_from_MC( LepNuVertex* vertex, std::string solution_mode );
 	virtual bool isNeutrinoID( int pdgID );
 };
 
@@ -76,8 +76,9 @@ class CheatedNuCalculationReco4MomentaPlotter : public Plotter {
 	virtual void define_plots();
 	virtual void fill_plots();
 	virtual void draw_plots();
+	virtual int get_nu_solution_sign_from_MC( LepNuVertex* vertex );
 	virtual TLorentzVector get_nu_daughters_tlv( LepNuVertex* vertex );
-	virtual TLorentzVector calculate_nus( LepNuVertex* vertex );
+	virtual TLorentzVector calculate_nus( LepNuVertex* vertex, std::string solution_mode );
 	virtual bool isNeutrinoID( int pdgID );
 };
 
