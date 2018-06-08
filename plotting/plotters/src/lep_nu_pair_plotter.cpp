@@ -7,9 +7,9 @@ void LepNuPairPlotter::set_plotter_settings() {
 }
 
 void LepNuPairPlotter::define_plots(){
-	// add_new_TH2D("lep_nu_E",
-	// 	new TH2D(	"lep_nu_E", "lep-#nu-pair energies; E_{l} [GeV]; E_{#nu} [GeV]; Pairs",
-	// 				40, 0, 20, 40, 0, 20 ) );
+	add_new_TH2D("lep_nu_E",
+		new TH2D(	"lep_nu_E", "lep-#nu-pair energies; E_{l} [GeV]; E_{#nu} [GeV]; Pairs", 20, 0, 100, 20, 0, 100 )
+	);
 	//
 	// add_new_TH2D("lep_nu_theta",
 	// 	new TH2D(	"lep_nu_theta", "lep-#nu-pair thetas; #theta_{l} [GeV]; #theta_{#nu} [GeV]; Pairs",
@@ -150,8 +150,9 @@ void LepNuPairPlotter::fill_plots(){
 
 			TLorentzVector parents_tlv = get_parents_tlv( vertex );
 			TLorentzVector deboosted_charged_leps_tlv = get_charged_lepton_daughters_tlv( vertex );
-			deboosted_charged_leps_tlv.Boost(-1.0*parents_tlv.BoostVector());
 			TLorentzVector deboosted_nus_tlv = get_nu_daughters_tlv( vertex );
+			get_TH2D("lep_nu_E")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), weight);
+			deboosted_charged_leps_tlv.Boost(-1.0*parents_tlv.BoostVector());
 			deboosted_nus_tlv.Boost(-1.0*parents_tlv.BoostVector());
 
 			get_TH2D("deboosted_lep_nu_E")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), weight);

@@ -11,6 +11,7 @@
 #include "TH3D.h"
 #include "TF2.h"
 #include "TF3.h"
+#include "TGraph.h"
 #include "TTree.h"
 #include "TCanvas.h"
 #include "TFrame.h"

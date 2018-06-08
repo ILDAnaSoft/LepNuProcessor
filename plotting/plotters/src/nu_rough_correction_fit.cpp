@@ -12,7 +12,7 @@ void RoughNuCorrectionFitPlotter::define_plots(){
 	add_new_TH1D("x_parameter_Cparents", new TH1D("x_parameter_Cparents", "x parameter distribution, C parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Bparents", new TH1D("x_parameter_Bparents", "x parameter distribution, B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_CandBparents", new TH1D("x_parameter_CandBparents", "x parameter distribution, C and B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
-	add_new_TProfile("x_parameter_VS_Elep_CandBparents", new TProfile("x_parameter_VS_Elep_CandBparents", "x parameter : E_{lep} (Profile), C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", 5, 0, 100));
+	add_new_TProfile("x_parameter_VS_Elep_CandBparents", new TProfile("x_parameter_VS_Elep_CandBparents", "x parameter : E_{lep} (Profile), C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", 7, 0, 140));
 
 
 	add_new_TH1D("x_parameter_all_Elepmin1", new TH1D("x_parameter_all_Elepmin1", "x parameter distribution, E_{lep} > 1GeV, all parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
@@ -211,8 +211,7 @@ void RoughNuCorrectionFitPlotter::fill_plots(){
 void RoughNuCorrectionFitPlotter::get_resolution_projection ( TProfile* plot, TH1D* error_clone ){
 	for (int i=1; i<plot->GetNbinsX()+2; i++) {
 		if (plot->GetBinContent(i) != 0){
-			std::cout << "\n" << plot->GetBinError(i)/plot->GetBinContent(i)*100.0;
-			error_clone->SetBinContent( i, plot->GetBinError(i)/plot->GetBinContent(i)*100.0 );
+			error_clone->SetBinContent( i, plot->GetBinError(i) );
 		} else {
 			error_clone->SetBinContent(i, 0);
 		}
@@ -284,7 +283,7 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 
 	TF1 *fit_x = new TF1("fit_x", " [0]*x / ([1] + x) ", 0, 100 );
 	TCanvas* c_x_profile = new TCanvas("c_x_profile", "", 0, 0, 800, 800);
-	TLegend* leg_x_profile = new TLegend(0.5, 0.3, 0.87, 0.5);
+	TLegend* leg_x_profile = new TLegend(0.5, 0.3, 0.87, 0.45);
 	get_TProfile("x_parameter_VS_Elep_CandBparents")->Draw();
 	get_TProfile("x_parameter_VS_Elep_CandBparents")->Fit("fit_x");
 	leg_x_profile->AddEntry(fit_x, "a E_{lep} / (b + E_{lep})", "l");
