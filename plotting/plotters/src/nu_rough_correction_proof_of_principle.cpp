@@ -120,21 +120,21 @@ void RoughNuCorrectionPOPPlotter::fill_plots(){
 			float E_lep = (get_charged_leptons_tlv(vertex)).E();
 			double nu_E = nu_energy_correction( E_lep );
 
-			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_E, weight);
+			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_E, 1);
 
 			if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
-				get_TH2D("nu_E_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, weight);
-				get_TProfile("nu_E_profile_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, weight);
-				get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->Fill(E_lep, (nu_E - nu_tlv_true.E()), weight);
+				get_TH2D("nu_E_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, 1);
+				get_TProfile("nu_E_profile_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, 1);
+				get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->Fill(E_lep, (nu_E - nu_tlv_true.E()), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos == 0.0 ) {
-					get_TH2D("nu_E_CandBparents_only_0vertex")->Fill(nu_tlv_true.E(), nu_E, weight);
+					get_TH2D("nu_E_CandBparents_only_0vertex")->Fill(nu_tlv_true.E(), nu_E, 1);
 					if ( vis_E > 5.0) {
-						get_TH2D("nu_E_CandBparents_only_0vertex_visEgr5")->Fill(nu_tlv_true.E(), nu_E, weight);
+						get_TH2D("nu_E_CandBparents_only_0vertex_visEgr5")->Fill(nu_tlv_true.E(), nu_E, 1);
 					}
 
 					if ( E_lep > 5.0) {
-						get_TH2D("nu_E_CandBparents_only_0vertex_lepEgr5")->Fill(nu_tlv_true.E(), nu_E, weight);
+						get_TH2D("nu_E_CandBparents_only_0vertex_lepEgr5")->Fill(nu_tlv_true.E(), nu_E, 1);
 					}
 				}
 			}

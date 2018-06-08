@@ -254,12 +254,12 @@ void CheatedNuCalculationReco4MomentaPlotter::fill_plots(){
 			TLorentzVector nu_tlv_calculated_minus = calculate_nus( vertex, "minus" );
 			TLorentzVector nu_tlv_calculated_cheated = calculate_nus( vertex, "cheat" );
 
-			get_TH2D("nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
-			get_TH2D("nu_E_sign_cheated")->Fill(nu_tlv_true.E(), nu_tlv_calculated_cheated.E(), weight);
+			get_TH2D("nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
+			get_TH2D("nu_E_sign_cheated")->Fill(nu_tlv_true.E(), nu_tlv_calculated_cheated.E(), 1);
 
 			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
-				get_TH2D("nu_E_Bparents_only_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
-				get_TH2D("nu_E_Bparents_only_sign_cheated")->Fill(nu_tlv_true.E(), nu_tlv_calculated_cheated.E(), weight);
+				get_TH2D("nu_E_Bparents_only_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
+				get_TH2D("nu_E_Bparents_only_sign_cheated")->Fill(nu_tlv_true.E(), nu_tlv_calculated_cheated.E(), 1);
 
 				// std::cout << "B parent case: nu: true: " << nu_tlv_true.E() << " calc: " << nu_tlv_calculated.E() << " Init_vertex position:" << ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag() << " \n\n";
 			}

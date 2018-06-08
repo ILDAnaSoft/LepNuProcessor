@@ -128,79 +128,79 @@ void RoughNuCorrectionFitPlotter::fill_plots(){
 
 			int first_parent_pdg = ((Particle*)((vertex->vertex_parents)[0]))->MC.pdg_ID;
 
-			get_TH1D("x_parameter_all")->Fill(x, weight);
+			get_TH1D("x_parameter_all")->Fill(x, 1);
 			if ( is_Cmeson_ID(first_parent_pdg) ) {
-				get_TH1D("x_parameter_Cparents")->Fill(x, weight);
+				get_TH1D("x_parameter_Cparents")->Fill(x, 1);
 			}
 			else if ( is_Bmeson_ID(first_parent_pdg) ) {
-				get_TH1D("x_parameter_Bparents")->Fill(x, weight);
+				get_TH1D("x_parameter_Bparents")->Fill(x, 1);
 			}
 
 			if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
-				get_TH1D("x_parameter_CandBparents")->Fill(x, weight);
-				get_TProfile("x_parameter_VS_Elep_CandBparents")->Fill(charged_leps_tlv.E(), x, weight);
+				get_TH1D("x_parameter_CandBparents")->Fill(x, 1);
+				get_TProfile("x_parameter_VS_Elep_CandBparents")->Fill(charged_leps_tlv.E(), x, 1);
 			}
 
 			if ( charged_leps_tlv.E() > 1 ) {
-				get_TH1D("x_parameter_all_Elepmin1")->Fill(x, weight);
+				get_TH1D("x_parameter_all_Elepmin1")->Fill(x, 1);
 				if ( is_Cmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_Cparents_Elepmin1")->Fill(x, weight);
+					get_TH1D("x_parameter_Cparents_Elepmin1")->Fill(x, 1);
 				}
 				else if ( is_Bmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_Bparents_Elepmin1")->Fill(x, weight);
+					get_TH1D("x_parameter_Bparents_Elepmin1")->Fill(x, 1);
 				}
 
 				if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_CandBparents_Elepmin1")->Fill(x, weight);
-					get_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin1")->Fill(charged_leps_tlv.E(), x, weight);
+					get_TH1D("x_parameter_CandBparents_Elepmin1")->Fill(x, 1);
+					get_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin1")->Fill(charged_leps_tlv.E(), x, 1);
 				}
 			}
 
 			if ( charged_leps_tlv.E() > 3 ) {
-				get_TH1D("x_parameter_all_Elepmin3")->Fill(x, weight);
+				get_TH1D("x_parameter_all_Elepmin3")->Fill(x, 1);
 				if ( is_Cmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_Cparents_Elepmin3")->Fill(x, weight);
+					get_TH1D("x_parameter_Cparents_Elepmin3")->Fill(x, 1);
 				}
 				else if ( is_Bmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_Bparents_Elepmin3")->Fill(x, weight);
+					get_TH1D("x_parameter_Bparents_Elepmin3")->Fill(x, 1);
 				}
 
 				if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_CandBparents_Elepmin3")->Fill(x, weight);
-					get_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin3")->Fill(charged_leps_tlv.E(), x, weight);
+					get_TH1D("x_parameter_CandBparents_Elepmin3")->Fill(x, 1);
+					get_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin3")->Fill(charged_leps_tlv.E(), x, 1);
 				}
 			}
 
 			if ( charged_leps_tlv.E() > 5 ) {
-				get_TH1D("x_parameter_all_Elepmin5")->Fill(x, weight);
+				get_TH1D("x_parameter_all_Elepmin5")->Fill(x, 1);
 				if ( is_Cmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_Cparents_Elepmin5")->Fill(x, weight);
+					get_TH1D("x_parameter_Cparents_Elepmin5")->Fill(x, 1);
 				}
 				else if ( is_Bmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_Bparents_Elepmin5")->Fill(x, weight);
+					get_TH1D("x_parameter_Bparents_Elepmin5")->Fill(x, 1);
 				}
 
 				if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
-					get_TH1D("x_parameter_CandBparents_Elepmin5")->Fill(x, weight);
-					get_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin5")->Fill(charged_leps_tlv.E(), x, weight);
+					get_TH1D("x_parameter_CandBparents_Elepmin5")->Fill(x, 1);
+					get_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin5")->Fill(charged_leps_tlv.E(), x, 1);
 				}
 			}
 
 			if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
 				if ( charged_leps_tlv.E() > 0 && charged_leps_tlv.E() < 20) {
-					get_TH1D("x_parameter_CandBparents_Elep0to20")->Fill(x, weight);
+					get_TH1D("x_parameter_CandBparents_Elep0to20")->Fill(x, 1);
 				}
 				if ( charged_leps_tlv.E() > 20 && charged_leps_tlv.E() < 40) {
-					get_TH1D("x_parameter_CandBparents_Elep20to40")->Fill(x, weight);
+					get_TH1D("x_parameter_CandBparents_Elep20to40")->Fill(x, 1);
 				}
 				if ( charged_leps_tlv.E() > 40 && charged_leps_tlv.E() < 60) {
-					get_TH1D("x_parameter_CandBparents_Elep40to60")->Fill(x, weight);
+					get_TH1D("x_parameter_CandBparents_Elep40to60")->Fill(x, 1);
 				}
 				if ( charged_leps_tlv.E() > 60 && charged_leps_tlv.E() < 80) {
-					get_TH1D("x_parameter_CandBparents_Elep60to80")->Fill(x, weight);
+					get_TH1D("x_parameter_CandBparents_Elep60to80")->Fill(x, 1);
 				}
 				if ( charged_leps_tlv.E() > 80 && charged_leps_tlv.E() < 100) {
-					get_TH1D("x_parameter_CandBparents_Elep80to100")->Fill(x, weight);
+					get_TH1D("x_parameter_CandBparents_Elep80to100")->Fill(x, 1);
 				}
 			}
 
