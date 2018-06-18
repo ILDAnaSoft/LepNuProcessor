@@ -195,23 +195,23 @@ TLorentzVector NuCalculationCheatedSignPOPPlotter::calculate_nus_from_MC( LepNuV
 		nu_tlv = right_sign_nu_tlv;
 
 		float weight = get_current_weight();
-		get_TH1D("deboosted_lep_rightsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , weight);
-		get_TH1D("deboosted_lep_wrongsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , weight);
-		get_TH1D("with_vis_deboosted_lep_rightsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , weight);
-		get_TH1D("with_vis_deboosted_lep_wrongsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , weight);
-		get_TH1D("with_calc_deboosted_lep_rightsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , weight);
-		get_TH1D("with_calc_deboosted_lep_wrongsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , weight);
+		get_TH1D("deboosted_lep_rightsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , 1);
+		get_TH1D("deboosted_lep_wrongsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , 1);
+		get_TH1D("with_vis_deboosted_lep_rightsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , 1);
+		get_TH1D("with_vis_deboosted_lep_wrongsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , 1);
+		get_TH1D("with_calc_deboosted_lep_rightsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , 1);
+		get_TH1D("with_calc_deboosted_lep_wrongsign_nu_DeltaR")->Fill( get_deboosted_DeltaR(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , 1);
 
-		get_TH1D("deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , weight);
-		get_TH1D("deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , weight);
-		get_TH1D("with_vis_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , weight);
-		get_TH1D("with_vis_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , weight);
-		get_TH1D("with_calc_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , weight);
-		get_TH1D("with_calc_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , weight);
+		get_TH1D("deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , 1);
+		get_TH1D("deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), parents_tlv) , 1);
+		get_TH1D("with_vis_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , 1);
+		get_TH1D("with_vis_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv) , 1);
+		get_TH1D("with_calc_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , 1);
+		get_TH1D("with_calc_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , 1);
 
 
-		get_TH1D("with_wrongcalc_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , weight);
-		get_TH1D("with_rightcalc_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , weight);
+		get_TH1D("with_wrongcalc_deboosted_lep_rightsign_nu_angle")->Fill( get_deboosted_angle(right_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+wrong_sign_nu_tlv) , 1);
+		get_TH1D("with_rightcalc_deboosted_lep_wrongsign_nu_angle")->Fill( get_deboosted_angle(wrong_sign_nu_tlv, get_charged_lepton_daughters_tlv(vertex), vis_tlv+right_sign_nu_tlv) , 1);
 	}
 
 	return nu_tlv;
@@ -230,14 +230,14 @@ void NuCalculationCheatedSignPOPPlotter::fill_plots(){
 			TLorentzVector nu_tlv_calculated = calculate_nus_from_MC( vertex );
 			TLorentzVector nu_tlv_true = get_nu_daughters_tlv( vertex );
 			//std::cout << "nu: true: " << nu_tlv_true.E() << " calc: " << nu_tlv_calculated.E() << " Init_vertex position:" << ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag() << " \n\n";
-			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), weight);
+			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), 1);
 
 			int first_parent_pdg = ((Particle*)((vertex->vertex_parents)[0]))->MC.pdg_ID;
 			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos < 1.0 ) {
-					get_TH2D("nu_E_Bparents_only_0vertex")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), weight);
-					get_TH2D("p_nu_parallel_vs_Bboost")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), (nu_tlv_calculated.Vect()).Dot(((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit()), weight);
+					get_TH2D("nu_E_Bparents_only_0vertex")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), 1);
+					get_TH2D("p_nu_parallel_vs_Bboost")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), (nu_tlv_calculated.Vect()).Dot(((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit()), 1);
 				}
 			}
 			if ( fabs((nu_tlv_calculated - nu_tlv_true).E()) > 40 ) {

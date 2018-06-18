@@ -17,6 +17,8 @@ class LepNuPairPlotter : public Plotter {
 	virtual void fill_plots();
 	virtual void draw_plots();
 	virtual bool isNeutrinoID( int pdgID );
+	bool is_Bmeson_ID( int pdgID );
+	bool is_Cmeson_ID( int pdgID );
 	virtual TLorentzVector get_vis_tlv( LepNuVertex* vertex );
 	virtual TLorentzVector get_parents_tlv( LepNuVertex *vertex );
 	virtual TLorentzVector get_charged_lepton_daughters_tlv( LepNuVertex *vertex );

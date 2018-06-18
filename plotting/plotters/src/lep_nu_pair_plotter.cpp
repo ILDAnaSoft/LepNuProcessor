@@ -10,6 +10,10 @@ void LepNuPairPlotter::define_plots(){
 	add_new_TH2D("lep_nu_E",
 		new TH2D(	"lep_nu_E", "lep-#nu-pair energies; E_{l} [GeV]; E_{#nu} [GeV]; Pairs", 20, 0, 100, 20, 0, 100 )
 	);
+
+	add_new_TH2D("lep_nu_E_CandBparents",
+		new TH2D(	"lep_nu_E_CandBparents", "lep-#nu-pair energies, C and B parents; E_{l} [GeV]; E_{#nu} [GeV]; Pairs", 20, 0, 100, 20, 0, 100 )
+	);
 	//
 	// add_new_TH2D("lep_nu_theta",
 	// 	new TH2D(	"lep_nu_theta", "lep-#nu-pair thetas; #theta_{l} [GeV]; #theta_{#nu} [GeV]; Pairs",
@@ -138,6 +142,22 @@ TLorentzVector LepNuPairPlotter::get_nu_daughters_tlv( LepNuVertex *vertex ){
 	return nu_tlv;
 }
 
+bool  LepNuPairPlotter::is_Bmeson_ID( int pdgID ) {
+  if ( fabs(pdgID) == 511 || fabs(pdgID) == 521 || fabs(pdgID) == 531 ){
+      return true;
+  } else {
+    return false;
+  }
+}
+
+bool  LepNuPairPlotter::is_Cmeson_ID( int pdgID ) {
+  if ( fabs(pdgID) == 411 || fabs(pdgID) == 421 || fabs(pdgID) == 431 ){
+      return true;
+  } else {
+    return false;
+  }
+}
+
 void LepNuPairPlotter::fill_plots(){
 	float weight = get_current_weight();
 
@@ -151,16 +171,20 @@ void LepNuPairPlotter::fill_plots(){
 			TLorentzVector parents_tlv = get_parents_tlv( vertex );
 			TLorentzVector deboosted_charged_leps_tlv = get_charged_lepton_daughters_tlv( vertex );
 			TLorentzVector deboosted_nus_tlv = get_nu_daughters_tlv( vertex );
-			get_TH2D("lep_nu_E")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), weight);
+			get_TH2D("lep_nu_E")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), 1);
+			int first_parent_pdg = ((Particle*)((vertex->vertex_parents)[0]))->MC.pdg_ID;
+			if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
+				get_TH2D("lep_nu_E_CandBparents")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), 1);
+			}
 			deboosted_charged_leps_tlv.Boost(-1.0*parents_tlv.BoostVector());
 			deboosted_nus_tlv.Boost(-1.0*parents_tlv.BoostVector());
 
-			get_TH2D("deboosted_lep_nu_E")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), weight);
-			get_TH2D("deboosted_lep_nu_theta")->Fill(deboosted_charged_leps_tlv.Theta(), deboosted_nus_tlv.Theta(), weight);
-			get_TH2D("deboosted_lep_nu_phi")->Fill(deboosted_charged_leps_tlv.Phi(), deboosted_nus_tlv.Phi(), weight);
+			get_TH2D("deboosted_lep_nu_E")->Fill(deboosted_charged_leps_tlv.E(), deboosted_nus_tlv.E(), 1);
+			get_TH2D("deboosted_lep_nu_theta")->Fill(deboosted_charged_leps_tlv.Theta(), deboosted_nus_tlv.Theta(), 1);
+			get_TH2D("deboosted_lep_nu_phi")->Fill(deboosted_charged_leps_tlv.Phi(), deboosted_nus_tlv.Phi(), 1);
 
-			get_TH1D("deboosted_lep_nu_DeltaR")->Fill(deboosted_nus_tlv.DeltaR(deboosted_charged_leps_tlv), weight);
-			get_TH1D("deboosted_lep_nu_Angle")->Fill(deboosted_nus_tlv.Angle(deboosted_charged_leps_tlv.Vect()), weight);
+			get_TH1D("deboosted_lep_nu_DeltaR")->Fill(deboosted_nus_tlv.DeltaR(deboosted_charged_leps_tlv), 1);
+			get_TH1D("deboosted_lep_nu_Angle")->Fill(deboosted_nus_tlv.Angle(deboosted_charged_leps_tlv.Vect()), 1);
 
 
 
@@ -171,8 +195,8 @@ void LepNuPairPlotter::fill_plots(){
 			TLorentzVector with_vis_deboosted_nus_tlv = get_nu_daughters_tlv( vertex );
 			with_vis_deboosted_nus_tlv.Boost(-1.0*vis_tlv.BoostVector());
 
-			get_TH1D("with_vis_deboosted_lep_nu_DeltaR")->Fill(with_vis_deboosted_nus_tlv.DeltaR(with_vis_deboosted_charged_leps_tlv), weight);
-			get_TH1D("with_vis_deboosted_lep_nu_Angle")->Fill(with_vis_deboosted_nus_tlv.Angle(with_vis_deboosted_charged_leps_tlv.Vect()), weight);
+			get_TH1D("with_vis_deboosted_lep_nu_DeltaR")->Fill(with_vis_deboosted_nus_tlv.DeltaR(with_vis_deboosted_charged_leps_tlv), 1);
+			get_TH1D("with_vis_deboosted_lep_nu_Angle")->Fill(with_vis_deboosted_nus_tlv.Angle(with_vis_deboosted_charged_leps_tlv.Vect()), 1);
 
 			// get_TH1D("deboosted_lep_nu_DeltaR")->Fill(deboosted_nus_tlv.DeltaR(deboosted_charged_leps_tlv), weight);
 

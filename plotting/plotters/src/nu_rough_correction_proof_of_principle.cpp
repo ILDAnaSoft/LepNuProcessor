@@ -12,9 +12,14 @@ void RoughNuCorrectionPOPPlotter::define_plots(){
 	add_new_TH2D("nu_E_CandBparents_only_0vertex_visEgr5", new TH2D("nu_E_CandBparents_only_0vertex_visEgr5", "E_{#nu}^{calc from MC lep} : E_{#nu}^{lep}, C and B parents starting at 0, E_{vis}>5; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 	add_new_TH2D("nu_E_CandBparents_only_0vertex_lepEgr5", new TH2D("nu_E_CandBparents_only_0vertex_lepEgr5", "E_{#nu}^{calc from MC lep} : E_{#nu}^{lep}, C and B parents starting at 0, E_{lep}>5; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 
-	add_new_TProfile("nu_E_profile_CandBparents_only", new TProfile("nu_E_profile_CandBparents_only", "<E_{#nu}^{calc from MC lep}> : E_{#nu}^{lep}, C and B parents; E_{#nu}^{MC} [GeV], C and B parents; E_{#nu}^{calc} [GeV]; #nu's", 7, 0, 140) );
+	const int N_profile_bins = 12;
+	double profile_binning[N_profile_bins+1] = {0, 1, 2, 3, 5, 7, 10, 15, 20, 30, 50, 70, 100};
 
-	add_new_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only", new TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only", "<E_{#nu}^{calc from MC lep} - E_{#nu}^{MC}> : E_{lep}, C and B parents; E_{lep}; <E_{#nu}^{calc from MC lep} - E_{#nu}^{MC}>", 7, 0, 140));
+	add_new_TProfile("nu_E_profile_CandBparents_only", new TProfile("nu_E_profile_CandBparents_only", "<E_{#nu}^{calc from MC lep}> : E_{#nu}^{lep}, C and B parents; E_{#nu}^{MC} [GeV], C and B parents; E_{#nu}^{calc} [GeV]; #nu's", N_profile_bins, profile_binning) );
+	add_new_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only", new TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only", "<E_{#nu}^{calc from MC lep} - E_{#nu}^{MC}> : E_{lep}, C and B parents; E_{lep}; <E_{#nu}^{calc from MC lep} - E_{#nu}^{MC}>", N_profile_bins, profile_binning));
+
+	get_TProfile("nu_E_profile_CandBparents_only")->SetErrorOption("s");
+	get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->SetErrorOption("s");
 }
 
 bool RoughNuCorrectionPOPPlotter::isNeutrinoID( int pdgID ) {
@@ -75,14 +80,14 @@ bool  RoughNuCorrectionPOPPlotter::is_Cmeson_ID( int pdgID ) {
 }
 
 double RoughNuCorrectionPOPPlotter::fitted_mean_x( double E_lep ){
-	double a = 0.88;
-	double b = 10.6;
+	double a = 0.72;
+	double b = 1.96;
 	return a*E_lep / ( b + E_lep );
 }
 
 double RoughNuCorrectionPOPPlotter::fitted_delta_mean_x( double E_lep ){
-	double a = 0.017;
-	double b = 0.00057;
+	double a = 0.243;
+	double b = -0.00105;
 	return a + b*E_lep;
 }
 
@@ -120,21 +125,21 @@ void RoughNuCorrectionPOPPlotter::fill_plots(){
 			float E_lep = (get_charged_leptons_tlv(vertex)).E();
 			double nu_E = nu_energy_correction( E_lep );
 
-			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_E, weight);
+			get_TH2D("nu_E")->Fill(nu_tlv_true.E(), nu_E, 1);
 
 			if ( is_Cmeson_ID(first_parent_pdg) || is_Bmeson_ID(first_parent_pdg) ) {
-				get_TH2D("nu_E_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, weight);
-				get_TProfile("nu_E_profile_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, weight);
-				get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->Fill(E_lep, (nu_E - nu_tlv_true.E()), weight);
+				get_TH2D("nu_E_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, 1);
+				get_TProfile("nu_E_profile_CandBparents_only")->Fill(nu_tlv_true.E(), nu_E, 1);
+				get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->Fill(E_lep, (nu_E - nu_tlv_true.E()), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos == 0.0 ) {
-					get_TH2D("nu_E_CandBparents_only_0vertex")->Fill(nu_tlv_true.E(), nu_E, weight);
+					get_TH2D("nu_E_CandBparents_only_0vertex")->Fill(nu_tlv_true.E(), nu_E, 1);
 					if ( vis_E > 5.0) {
-						get_TH2D("nu_E_CandBparents_only_0vertex_visEgr5")->Fill(nu_tlv_true.E(), nu_E, weight);
+						get_TH2D("nu_E_CandBparents_only_0vertex_visEgr5")->Fill(nu_tlv_true.E(), nu_E, 1);
 					}
 
 					if ( E_lep > 5.0) {
-						get_TH2D("nu_E_CandBparents_only_0vertex_lepEgr5")->Fill(nu_tlv_true.E(), nu_E, weight);
+						get_TH2D("nu_E_CandBparents_only_0vertex_lepEgr5")->Fill(nu_tlv_true.E(), nu_E, 1);
 					}
 				}
 			}
@@ -145,9 +150,11 @@ void RoughNuCorrectionPOPPlotter::fill_plots(){
 void RoughNuCorrectionPOPPlotter::draw_plots(){
 	std::string output_dir = get_output_directory();
 
+	const int N_profile_bins = 12;
+
 	TGraph* pull_error_estimate = new TGraph(14);
 	//double E_lep_array[5], pull_plus_delta_array[5], pull_minus_delta_array[5];
-	for (int i=0; i<7; i++) {
+	for (int i=0; i<N_profile_bins; i++) {
 		double E_lep = get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->GetBinCenter(i+1);
 		double pull = get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->GetBinContent(i+1);
 		double delta_estimation = nu_energy_error_estimate(E_lep);
@@ -167,7 +174,9 @@ void RoughNuCorrectionPOPPlotter::draw_plots(){
 	get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->Draw();
 	pull_error_estimate->Draw("same *");
 	leg_pull_profile->AddEntry(pull_error_estimate, "error estimate", "p");
-	leg_pull_profile->Draw();
+	leg_pull_profile->Draw("same");
+	TLine* pull_profile_line = new TLine(0, 0, 100, 0);
+	pull_profile_line->Draw("same");
 	c_pull_profile->SetTopMargin(0.1);
 	c_pull_profile->Print((output_dir + "/pull_profile.pdf").c_str());
 

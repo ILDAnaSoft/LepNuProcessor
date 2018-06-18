@@ -286,198 +286,198 @@ void NuCalculationPOPPlotter::fill_plots(){
 
 			TLorentzVector nu_tlv_calculated_plus = calculate_nus_from_MC( vertex, "plus" );
 			//std::cout << "nu: true: " << nu_tlv_true.E() << " calc: " << nu_tlv_calculated_plus.E() << " Init_vertex position:" << ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag() << " \n\n";
-			get_TH2D("nu_E_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
-			get_TH2D("nu_p_plus")->Fill(nu_tlv_true.P(), nu_tlv_calculated_plus.P(), weight);
-			get_TH2D("nu_theta_plus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_plus.Theta(), weight);
-			get_TH2D("nu_phi_plus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_plus.Phi(), weight);
+			get_TH2D("nu_E_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
+			get_TH2D("nu_p_plus")->Fill(nu_tlv_true.P(), nu_tlv_calculated_plus.P(), 1);
+			get_TH2D("nu_theta_plus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_plus.Theta(), 1);
+			get_TH2D("nu_phi_plus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_plus.Phi(), 1);
 
 			if ( nu_tlv_calculated_plus.E() == 0 ) {
-				get_TH1D("non-reconstructed_nu_parent_init_vertex_plus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), weight);
-				get_TH1D("non-reconstructed_nu_E_plus")->Fill(nu_tlv_true.E(), weight);
-				get_TH1D("non-reconstructed_nu_theta_plus")->Fill(nu_tlv_true.Theta(), weight);
-				get_TH1D("non-reconstructed_nu_phi_plus")->Fill(nu_tlv_true.Phi(), weight);
+				get_TH1D("non-reconstructed_nu_parent_init_vertex_plus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), 1);
+				get_TH1D("non-reconstructed_nu_E_plus")->Fill(nu_tlv_true.E(), 1);
+				get_TH1D("non-reconstructed_nu_theta_plus")->Fill(nu_tlv_true.Theta(), 1);
+				get_TH1D("non-reconstructed_nu_phi_plus")->Fill(nu_tlv_true.Phi(), 1);
 			} else {
-				get_TH1D("reconstructed_nu_parent_init_vertex_plus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), weight);
-				get_TH2D("reconstructed_nu_E_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
-				get_TH2D("reconstructed_nu_theta_plus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_plus.Theta(), weight);
-				get_TH2D("reconstructed_nu_phi_plus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_plus.Phi(), weight);
+				get_TH1D("reconstructed_nu_parent_init_vertex_plus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), 1);
+				get_TH2D("reconstructed_nu_E_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
+				get_TH2D("reconstructed_nu_theta_plus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_plus.Theta(), 1);
+				get_TH2D("reconstructed_nu_phi_plus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_plus.Phi(), 1);
 			}
 
 
 			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
-				get_TH2D("nu_E_Bparents_only_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+				get_TH2D("nu_E_Bparents_only_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos < 1.0 ) {
-					get_TH2D("nu_E_Bparents_only_0vertex_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+					get_TH2D("nu_E_Bparents_only_0vertex_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					if ( vis_vertex_E > 5.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr5_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr5_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( vis_vertex_E > 10.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr10_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr10_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( vis_vertex_E > 15.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr15_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr15_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( vis_vertex_E > 20.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr20_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr20_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( vis_vertex_E > 30.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr30_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr30_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( vis_vertex_E > 50.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr50_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr50_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 
 					float charged_leps_vertex_E = (get_charged_leptons_tlv(vertex)).E();
 					if ( charged_leps_vertex_E > 5.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr5_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
-						get_TH2D("E_deviations_lepE5cut_plus")->Fill((nu_tlv_calculated_plus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr5_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
+						get_TH2D("E_deviations_lepE5cut_plus")->Fill((nu_tlv_calculated_plus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 10.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr10_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr10_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 15.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr15_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr15_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 20.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr20_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr20_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 30.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr30_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr30_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 50.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr50_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr50_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 					}
-					get_TH2D("E_deviations_plus")->Fill((nu_tlv_calculated_plus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_visE_plus")->Fill(vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_lepE_plus")->Fill(charged_leps_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_lepEpercentage_plus")->Fill(charged_leps_vertex_E/vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_nuTheta_plus")->Fill(nu_tlv_calculated_plus.Theta(), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_correctedE_plus")->Fill( nu_tlv_calculated_plus.E()+vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_plus")->Fill((nu_tlv_calculated_plus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_visE_plus")->Fill(vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_lepE_plus")->Fill(charged_leps_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_lepEpercentage_plus")->Fill(charged_leps_vertex_E/vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_nuTheta_plus")->Fill(nu_tlv_calculated_plus.Theta(), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_correctedE_plus")->Fill( nu_tlv_calculated_plus.E()+vis_vertex_E, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
 
 					int first_lep_pdg = get_first_charged_lepton_pdg(vertex);
-					get_TH2D("E_deviations_lepPDG_plus")->Fill(fabs(first_lep_pdg), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_lepPDG_plus")->Fill(fabs(first_lep_pdg), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
 
 					int N_daughters = (vertex->vertex_daughters).GetEntries();
-					get_TH2D("E_deviations_Ndaughters_plus")->Fill( N_daughters, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_Ndaughters_plus")->Fill( N_daughters, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
 
-					get_TH2D("E_deviations_Bboost_plus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("p_nu_parallel_vs_Bboost_plus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), (nu_tlv_calculated_plus.Vect()).Dot(((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit()), weight);
+					get_TH2D("E_deviations_Bboost_plus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("p_nu_parallel_vs_Bboost_plus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), (nu_tlv_calculated_plus.Vect()).Dot(((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit()), 1);
 
-					get_TH1D("B_magnitude_plus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), weight );
-					get_TH2D("B_E_vs_B_magnitude_plus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.E(), weight );
+					get_TH1D("B_magnitude_plus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), 1 );
+					get_TH2D("B_E_vs_B_magnitude_plus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.E(), 1 );
 
-					get_TH2D("E_deviations_Bmagnitude_plus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_Bmagnitude_plus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1);
 
 					{
 						TVector3 init_direction = ((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit();
 						float vis_p_parallel = vis_tlv.Vect().Dot(init_direction);
 						TVector3 perp_to_init = ( vis_tlv.Vect() - vis_p_parallel*init_direction ).Unit();
 						long double vis_p_perp = vis_tlv.Vect().Dot( perp_to_init );
-						get_TH2D("E_deviations_visPperp_plus")->Fill( vis_p_perp, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight );
-						get_TH2D("E_deviations_visPratio_plus")->Fill( vis_p_perp/vis_p_parallel, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), weight );
-						get_TH2D("Bboost_visPratio_plus")->Fill( vis_p_perp/vis_p_parallel, ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), weight );
+						get_TH2D("E_deviations_visPperp_plus")->Fill( vis_p_perp, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1 );
+						get_TH2D("E_deviations_visPratio_plus")->Fill( vis_p_perp/vis_p_parallel, nu_tlv_calculated_plus.E()-nu_tlv_true.E(), 1 );
+						get_TH2D("Bboost_visPratio_plus")->Fill( vis_p_perp/vis_p_parallel, ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), 1 );
 
-						get_TH2D("Bbeta_visPparOVERvisE_plus")->Fill(1.0-vis_p_parallel/vis_vertex_E, 1.0-((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Beta(), weight);
+						get_TH2D("Bbeta_visPparOVERvisE_plus")->Fill(1.0-vis_p_parallel/vis_vertex_E, 1.0-((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Beta(), 1);
 					}
 				}
 			}
 
 			TLorentzVector nu_tlv_calculated_minus = calculate_nus_from_MC( vertex, "minus" );
 			//std::cout << "nu: true: " << nu_tlv_true.E() << " calc: " << nu_tlv_calculated_minus.E() << " Init_vertex position:" << ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag() << " \n\n";
-			get_TH2D("nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
-			get_TH2D("nu_p_minus")->Fill(nu_tlv_true.P(), nu_tlv_calculated_minus.P(), weight);
-			get_TH2D("nu_theta_minus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_minus.Theta(), weight);
-			get_TH2D("nu_phi_minus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_minus.Phi(), weight);
+			get_TH2D("nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
+			get_TH2D("nu_p_minus")->Fill(nu_tlv_true.P(), nu_tlv_calculated_minus.P(), 1);
+			get_TH2D("nu_theta_minus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_minus.Theta(), 1);
+			get_TH2D("nu_phi_minus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_minus.Phi(), 1);
 
 			if ( nu_tlv_calculated_minus.E() == 0 ) {
-				get_TH1D("non-reconstructed_nu_parent_init_vertex_minus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), weight);
-				get_TH1D("non-reconstructed_nu_E_minus")->Fill(nu_tlv_true.E(), weight);
-				get_TH1D("non-reconstructed_nu_theta_minus")->Fill(nu_tlv_true.Theta(), weight);
-				get_TH1D("non-reconstructed_nu_phi_minus")->Fill(nu_tlv_true.Phi(), weight);
+				get_TH1D("non-reconstructed_nu_parent_init_vertex_minus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), 1);
+				get_TH1D("non-reconstructed_nu_E_minus")->Fill(nu_tlv_true.E(), 1);
+				get_TH1D("non-reconstructed_nu_theta_minus")->Fill(nu_tlv_true.Theta(), 1);
+				get_TH1D("non-reconstructed_nu_phi_minus")->Fill(nu_tlv_true.Phi(), 1);
 			} else {
-				get_TH1D("reconstructed_nu_parent_init_vertex_minus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), weight);
-				get_TH2D("reconstructed_nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
-				get_TH2D("reconstructed_nu_theta_minus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_minus.Theta(), weight);
-				get_TH2D("reconstructed_nu_phi_minus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_minus.Phi(), weight);
+				get_TH1D("reconstructed_nu_parent_init_vertex_minus")->Fill(((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(), 1);
+				get_TH2D("reconstructed_nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
+				get_TH2D("reconstructed_nu_theta_minus")->Fill(nu_tlv_true.Theta(), nu_tlv_calculated_minus.Theta(), 1);
+				get_TH2D("reconstructed_nu_phi_minus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_minus.Phi(), 1);
 			}
 
 
 			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
-				get_TH2D("nu_E_Bparents_only_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+				get_TH2D("nu_E_Bparents_only_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos < 1.0 ) {
-					get_TH2D("nu_E_Bparents_only_0vertex_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+					get_TH2D("nu_E_Bparents_only_0vertex_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					if ( vis_vertex_E > 5.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr5_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr5_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( vis_vertex_E > 10.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr10_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr10_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( vis_vertex_E > 15.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr15_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr15_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( vis_vertex_E > 20.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr20_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr20_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( vis_vertex_E > 30.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr30_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr30_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( vis_vertex_E > 50.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_visEgr50_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_visEgr50_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 
 					float charged_leps_vertex_E = (get_charged_leptons_tlv(vertex)).E();
 					if ( charged_leps_vertex_E > 5.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr5_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
-						get_TH2D("E_deviations_lepE5cut_minus")->Fill((nu_tlv_calculated_minus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr5_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
+						get_TH2D("E_deviations_lepE5cut_minus")->Fill((nu_tlv_calculated_minus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 10.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr10_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr10_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 15.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr15_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr15_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 20.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr20_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr20_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 30.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr30_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr30_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
 					if ( charged_leps_vertex_E > 50.0) {
-						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr50_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), weight);
+						get_TH2D("nu_E_Bparents_only_0vertex_lepEgr50_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 					}
-					get_TH2D("E_deviations_minus")->Fill((nu_tlv_calculated_minus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_visE_minus")->Fill(vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_lepE_minus")->Fill(charged_leps_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_lepEpercentage_minus")->Fill(charged_leps_vertex_E/vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_nuTheta_minus")->Fill(nu_tlv_calculated_minus.Theta(), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("E_deviations_correctedE_minus")->Fill( nu_tlv_calculated_minus.E()+vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_minus")->Fill((nu_tlv_calculated_minus.E()-vis_vertex_E)/vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_visE_minus")->Fill(vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_lepE_minus")->Fill(charged_leps_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_lepEpercentage_minus")->Fill(charged_leps_vertex_E/vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_nuTheta_minus")->Fill(nu_tlv_calculated_minus.Theta(), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("E_deviations_correctedE_minus")->Fill( nu_tlv_calculated_minus.E()+vis_vertex_E, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
 
 					int first_lep_pdg = get_first_charged_lepton_pdg(vertex);
-					get_TH2D("E_deviations_lepPDG_minus")->Fill(fabs(first_lep_pdg), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_lepPDG_minus")->Fill(fabs(first_lep_pdg), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
 
 					int N_daughters = (vertex->vertex_daughters).GetEntries();
-					get_TH2D("E_deviations_Ndaughters_minus")->Fill( N_daughters, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_Ndaughters_minus")->Fill( N_daughters, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
 
-					get_TH2D("E_deviations_Bboost_minus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
-					get_TH2D("p_nu_parallel_vs_Bboost_minus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), (nu_tlv_calculated_minus.Vect()).Dot(((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit()), weight);
+					get_TH2D("E_deviations_Bboost_minus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
+					get_TH2D("p_nu_parallel_vs_Bboost_minus")->Fill( ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), (nu_tlv_calculated_minus.Vect()).Dot(((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit()), 1);
 
-					get_TH1D("B_magnitude_minus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), weight );
-					get_TH2D("B_E_vs_B_magnitude_minus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.E(), weight );
+					get_TH1D("B_magnitude_minus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), 1 );
+					get_TH2D("B_E_vs_B_magnitude_minus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.E(), 1 );
 
-					get_TH2D("E_deviations_Bmagnitude_minus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight);
+					get_TH2D("E_deviations_Bmagnitude_minus")->Fill( ((Particle*)((vertex->vertex_daughters)[0]))->MC.vertex.Mag(), nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1);
 
 					{
 						TVector3 init_direction = ((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit();
 						float vis_p_parallel = vis_tlv.Vect().Dot(init_direction);
 						TVector3 perp_to_init = ( vis_tlv.Vect() - vis_p_parallel*init_direction ).Unit();
 						long double vis_p_perp = vis_tlv.Vect().Dot( perp_to_init );
-						get_TH2D("E_deviations_visPperp_minus")->Fill( vis_p_perp, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight );
-						get_TH2D("E_deviations_visPratio_minus")->Fill( vis_p_perp/vis_p_parallel, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), weight );
-						get_TH2D("Bboost_visPratio_minus")->Fill( vis_p_perp/vis_p_parallel, ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), weight );
+						get_TH2D("E_deviations_visPperp_minus")->Fill( vis_p_perp, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1 );
+						get_TH2D("E_deviations_visPratio_minus")->Fill( vis_p_perp/vis_p_parallel, nu_tlv_calculated_minus.E()-nu_tlv_true.E(), 1 );
+						get_TH2D("Bboost_visPratio_minus")->Fill( vis_p_perp/vis_p_parallel, ((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Gamma(), 1 );
 
-						get_TH2D("Bbeta_visPparOVERvisE_minus")->Fill(1.0-vis_p_parallel/vis_vertex_E, 1.0-((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Beta(), weight);
+						get_TH2D("Bbeta_visPparOVERvisE_minus")->Fill(1.0-vis_p_parallel/vis_vertex_E, 1.0-((Particle*)((vertex->vertex_parents)[0]))->MC.tlv.Beta(), 1);
 					}
 				}
 			}
