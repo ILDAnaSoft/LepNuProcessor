@@ -8,30 +8,33 @@ void RoughNuCorrectionFitPlotter::set_plotter_settings() {
 
 void RoughNuCorrectionFitPlotter::define_plots(){
 
+	const int N_profile_bins = 12;
+	double profile_binning[N_profile_bins+1] = {0, 1, 2, 3, 5, 7, 10, 15, 20, 30, 50, 70, 100};
+
 	add_new_TH1D("x_parameter_all", new TH1D("x_parameter_all", "x parameter distribution, all parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Cparents", new TH1D("x_parameter_Cparents", "x parameter distribution, C parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Bparents", new TH1D("x_parameter_Bparents", "x parameter distribution, B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_CandBparents", new TH1D("x_parameter_CandBparents", "x parameter distribution, C and B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
-	add_new_TProfile("x_parameter_VS_Elep_CandBparents", new TProfile("x_parameter_VS_Elep_CandBparents", "x parameter : E_{lep} (Profile), C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", 7, 0, 140));
+	add_new_TProfile("x_parameter_VS_Elep_CandBparents", new TProfile("x_parameter_VS_Elep_CandBparents", "x parameter : E_{lep} (Profile), C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", N_profile_bins, profile_binning));
 
 
 	add_new_TH1D("x_parameter_all_Elepmin1", new TH1D("x_parameter_all_Elepmin1", "x parameter distribution, E_{lep} > 1GeV, all parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Cparents_Elepmin1", new TH1D("x_parameter_Cparents_Elepmin1", "x parameter distribution, E_{lep} > 1GeV, C parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Bparents_Elepmin1", new TH1D("x_parameter_Bparents_Elepmin1", "x parameter distribution, E_{lep} > 1GeV, B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_CandBparents_Elepmin1", new TH1D("x_parameter_CandBparents_Elepmin1", "x parameter distribution, E_{lep} > 1GeV, C and B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
-	add_new_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin1", new TProfile("x_parameter_VS_Elep_CandBparents_Elepmin1", "x parameter : E_{lep} (Profile), E_{lep} > 1GeV, C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", 25, 0, 100));
+	add_new_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin1", new TProfile("x_parameter_VS_Elep_CandBparents_Elepmin1", "x parameter : E_{lep} (Profile), E_{lep} > 1GeV, C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", N_profile_bins, profile_binning));
 
 	add_new_TH1D("x_parameter_all_Elepmin3", new TH1D("x_parameter_all_Elepmin3", "x parameter distribution, E_{lep} > 3GeV, all parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Cparents_Elepmin3", new TH1D("x_parameter_Cparents_Elepmin3", "x parameter distribution, E_{lep} > 3GeV, C parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Bparents_Elepmin3", new TH1D("x_parameter_Bparents_Elepmin3", "x parameter distribution, E_{lep} > 3GeV, B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_CandBparents_Elepmin3", new TH1D("x_parameter_CandBparents_Elepmin3", "x parameter distribution, E_{lep} > 3GeV, C and B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
-	add_new_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin3", new TProfile("x_parameter_VS_Elep_CandBparents_Elepmin3", "x parameter : E_{lep} (Profile), E_{lep} > 3GeV, C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", 25, 0, 100));
+	add_new_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin3", new TProfile("x_parameter_VS_Elep_CandBparents_Elepmin3", "x parameter : E_{lep} (Profile), E_{lep} > 3GeV, C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", N_profile_bins, profile_binning));
 
 	add_new_TH1D("x_parameter_all_Elepmin5", new TH1D("x_parameter_all_Elepmin5", "x parameter distribution, E_{lep} > 5GeV, all parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Cparents_Elepmin5", new TH1D("x_parameter_Cparents_Elepmin5", "x parameter distribution, E_{lep} > 5GeV, C parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_Bparents_Elepmin5", new TH1D("x_parameter_Bparents_Elepmin5", "x parameter distribution, E_{lep} > 5GeV, B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
 	add_new_TH1D("x_parameter_CandBparents_Elepmin5", new TH1D("x_parameter_CandBparents_Elepmin5", "x parameter distribution, E_{lep} > 5GeV, C and B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 20, 0, 1.001));
-	add_new_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin5", new TProfile("x_parameter_VS_Elep_CandBparents_Elepmin5", "x parameter : E_{lep} (Profile), E_{lep} > 5GeV, C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", 25, 0, 100));
+	add_new_TProfile("x_parameter_VS_Elep_CandBparents_Elepmin5", new TProfile("x_parameter_VS_Elep_CandBparents_Elepmin5", "x parameter : E_{lep} (Profile), E_{lep} > 5GeV, C and B parents; E_{lep}; < ( E_{lep}/(E_{lep} + E_{#nu}) ) >", N_profile_bins, profile_binning));
 
 
 	add_new_TH1D("x_parameter_CandBparents_Elep0to20", new TH1D("x_parameter_CandBparents_Elepmin0to20", "x parameter distribution, E_{lep} #in (0,20)GeV, C and B parents; E_{lep}/(E_{lep} + E_{#nu}); vertices", 5, 0, 1.001));
@@ -209,6 +212,7 @@ void RoughNuCorrectionFitPlotter::fill_plots(){
 }
 
 void RoughNuCorrectionFitPlotter::get_resolution_projection ( TProfile* plot, TH1D* error_clone ){
+	plot->SetErrorOption("s");
 	for (int i=1; i<plot->GetNbinsX()+2; i++) {
 		if (plot->GetBinContent(i) != 0){
 			error_clone->SetBinContent( i, plot->GetBinError(i) );
@@ -225,7 +229,7 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 
 	TH1D *x_resolution_VS_Elep_CandBparents = (TH1D*)(get_TProfile("x_parameter_VS_Elep_CandBparents"))->ProjectionX("x_resolution_projection_VS_Elep_CandBparents");
 	get_resolution_projection(get_TProfile("x_parameter_VS_Elep_CandBparents"), x_resolution_VS_Elep_CandBparents);
-	x_resolution_VS_Elep_CandBparents->SetTitle("x resolution : E_{lep} (Profile), C and B parents; E_{lep}; #Delta <x>");
+	x_resolution_VS_Elep_CandBparents->SetTitle("x resolution : E_{lep} (Profile), C and B parents; E_{lep}; #Delta x");
 	add_new_TH1D("x_resolution_VS_Elep_CandBparents", x_resolution_VS_Elep_CandBparents);
 
 
@@ -234,6 +238,7 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 	get_TH1D("x_parameter_CandBparents")->SetLineColor(9101);
 	get_TH1D("x_parameter_CandBparents")->SetMarkerColor(9101);
 	get_TH1D("x_parameter_CandBparents")->SetMarkerSize(2);
+	get_TH1D("x_parameter_CandBparents")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents")->Draw();
 	leg_x->AddEntry(get_TH1D("x_parameter_CandBparents"), "E_{lep,min} = 0");
 	get_TH1D("x_parameter_CandBparents_Elepmin1")->SetLineColor(9102);
@@ -255,26 +260,31 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 	c_x->Print((output_dir + "/x_distributions.pdf").c_str());
 
 	TCanvas* c_x_0to20 = new TCanvas("c_x_0to20", "", 0, 0, 800, 800);
+	get_TH1D("x_parameter_CandBparents_Elep0to20")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep0to20")->Draw();
 	c_x_0to20->SetTopMargin(0.1);
 	c_x_0to20->Print((output_dir + "/x_distribution_Elep0to20.pdf").c_str());
 
 	TCanvas* c_x_20to40 = new TCanvas("c_x_20to40", "", 0, 0, 800, 800);
+	get_TH1D("x_parameter_CandBparents_Elep20to40")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep20to40")->Draw();
 	c_x_20to40->SetTopMargin(0.1);
 	c_x_20to40->Print((output_dir + "/x_distribution_Elep20to40.pdf").c_str());
 
 	TCanvas* c_x_40to60 = new TCanvas("c_x_40to60", "", 0, 0, 800, 800);
+	get_TH1D("x_parameter_CandBparents_Elep40to60")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep40to60")->Draw();
 	c_x_40to60->SetTopMargin(0.1);
 	c_x_40to60->Print((output_dir + "/x_distribution_Elep40to60.pdf").c_str());
 
 	TCanvas* c_x_60to80 = new TCanvas("c_x_60to80", "", 0, 0, 800, 800);
+	get_TH1D("x_parameter_CandBparents_Elep60to80")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep60to80")->Draw();
 	c_x_60to80->SetTopMargin(0.1);
 	c_x_60to80->Print((output_dir + "/x_distribution_Elep60to80.pdf").c_str());
 
 	TCanvas* c_x_80to100 = new TCanvas("c_x_80to100", "", 0, 0, 800, 800);
+	get_TH1D("x_parameter_CandBparents_Elep80to100")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep80to100")->Draw();
 	c_x_80to100->SetTopMargin(0.1);
 	c_x_80to100->Print((output_dir + "/x_distribution_Elep80to100.pdf").c_str());
@@ -294,11 +304,13 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 
 	TF1 *fit_dx = new TF1("fit_dx", " [0]+[1]*x ", 0, 100 );
 	TCanvas* c_dx = new TCanvas("c_dx_profile", "", 0, 0, 800, 800);
-	TLegend* leg_dx = new TLegend(0.5, 0.3, 0.87, 0.5);
+	TLegend* leg_dx = new TLegend(0.5, 0.65, 0.87, 0.85);
 	x_resolution_VS_Elep_CandBparents->Draw();
 	x_resolution_VS_Elep_CandBparents->Fit("fit_dx");
 	leg_dx->AddEntry(fit_x, "a + b E_{lep}", "l");
 	leg_dx->Draw();
+	c_dx->SetLeftMargin(0.18);
+	x_resolution_VS_Elep_CandBparents->GetYaxis()->SetTitleOffset(1.3);
 	c_dx->SetTopMargin(0.1);
 	c_dx->Print((output_dir + "/dx_distribution.pdf").c_str());
 

@@ -93,14 +93,14 @@ bool  RoughNuCorrectionOnTJjetsPlotter::is_Cmeson_ID( int pdgID ) {
 }
 
 double RoughNuCorrectionOnTJjetsPlotter::fitted_mean_x( double E_lep ){
-	double a = 0.88;
-	double b = 10.6;
+	double a = 0.72;
+	double b = 1.9;
 	return a*E_lep / ( b + E_lep );
 }
 
 double RoughNuCorrectionOnTJjetsPlotter::fitted_delta_mean_x( double E_lep ){
-	double a = 0.017;
-	double b = 0.00057;
+	double a = 0.243;
+	double b = -0.00105;
 	return a + b*E_lep;
 }
 
@@ -190,66 +190,6 @@ void RoughNuCorrectionOnTJjetsPlotter::fill_plots(){
 void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	std::string output_dir = get_output_directory();
 
-	TCanvas* c_jetE = new TCanvas("c_jetE", "", 0, 0, 800, 800);
-	TLegend* leg_jetE = new TLegend(0.25, 0.7, 0.55, 0.85);
-	get_TProfile("TJjet_meanEseencorrected_vs_Etrue")->SetLineColor(9101);
-	get_TProfile("TJjet_meanEseen_vs_Etrue")->SetLineColor(9102);
-	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue")->SetLineColor(9103);
-	get_TProfile("TJjet_meanEseencorrected_vs_Etrue")->Draw();
-	get_TProfile("TJjet_meanEseen_vs_Etrue")->Draw("same");
-	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue")->Draw("same");
-	leg_jetE->AddEntry(get_TProfile("TJjet_meanEseen_vs_Etrue"), "uncorrected", "l");
-	leg_jetE->AddEntry(get_TProfile("TJjet_meanEseencorrected_vs_Etrue"), "corrected", "l");
-	leg_jetE->AddEntry(get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue"), "with MC #nu", "l");
-	leg_jetE->Draw();
-	gPad->Update();
-	TLine* profile_line = new TLine(0, 0, gPad->GetFrame()->GetY2(), gPad->GetFrame()->GetY2());
-	profile_line->SetLineWidth(1);
-	profile_line->Draw("same");
-	c_jetE->SetTopMargin(0.1);
-	c_jetE->Print((output_dir + "/jetEreco_comparison.pdf").c_str());
-
-
-	TCanvas* c_jetE_bjets = new TCanvas("c_jetE_bjets", "", 0, 0, 800, 800);
-	TLegend* leg_jetE_bjets = new TLegend(0.25, 0.7, 0.55, 0.85);
-	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets")->SetLineColor(9101);
-	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->SetLineColor(9102);
-	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets")->SetLineColor(9103);
-	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->SetMinimum(0);
-	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->Draw();
-	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets")->Draw("same");
-	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets")->Draw("same");
-	leg_jetE_bjets->AddEntry(get_TProfile("TJjet_meanEseen_vs_Etrue_bjets"), "uncorrected", "l");
-	leg_jetE_bjets->AddEntry(get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets"), "corrected", "l");
-	leg_jetE_bjets->AddEntry(get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets"), "with MC #nu", "l");
-	leg_jetE_bjets->Draw();
-	gPad->Update();
-	TLine* profile_line_bjets = new TLine(0, 0, gPad->GetFrame()->GetY2(), gPad->GetFrame()->GetY2());
-	profile_line_bjets->SetLineWidth(1);
-	profile_line_bjets->Draw("same");
-	c_jetE_bjets->SetTopMargin(0.1);
-	c_jetE_bjets->Print((output_dir + "/jetEreco_comparison_bjets.pdf").c_str());
-
-
-	TCanvas* c_jetEpull_bjets = new TCanvas("c_jetEpull_bjets", "", 0, 0, 800, 800);
-	TLegend* leg_jetEpull_bjets = new TLegend(0.25, 0.3, 0.5, 0.45);
-	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets")->SetLineColor(9101);
-	get_TProfile("TJjet_pullEseen_vs_Etrue_bjets")->SetLineColor(9102);
-	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets")->SetLineColor(9103);
-	get_TProfile("TJjet_pullEseen_vs_Etrue_bjets")->Draw();
-	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets")->Draw("same");
-	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets")->Draw("same");
-	leg_jetEpull_bjets->AddEntry(get_TProfile("TJjet_pullEseen_vs_Etrue_bjets"), "uncorrected", "l");
-	leg_jetEpull_bjets->AddEntry(get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets"), "corrected", "l");
-	leg_jetEpull_bjets->AddEntry(get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets"), "with MC #nu", "l");
-	leg_jetEpull_bjets->Draw();
-	gPad->Update();
-	TLine* pull_line_bjets = new TLine(0, 0, gPad->GetFrame()->GetX2(), 0);
-	pull_line_bjets->SetLineWidth(1);
-	pull_line_bjets->Draw("same");
-	c_jetEpull_bjets->SetTopMargin(0.1);
-	c_jetEpull_bjets->Print((output_dir + "/jetEpull_comparison_bjets.pdf").c_str());
-
 	TCanvas* c_jetE_bjets_distr = new TCanvas("c_jetE_bjets_distr", "", 0, 0, 800, 800);
 	TLegend* leg_jetE_bjets_distr = new TLegend(0.55, 0.65, 0.8, 0.85);
 	get_TH1D("TJjet_Etrue_bjets")->SetLineColor(9101);
@@ -270,18 +210,105 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 
 
 
+
+	TCanvas* c_jetE = new TCanvas("c_jetE", "", 0, 0, 800, 800);
+	TLegend* leg_jetE = new TLegend(0.2, 0.62, 0.55, 0.85);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue")->SetLineColor(9101);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue")->SetMarkerColor(9101);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue")->SetMarkerSize(2);
+	get_TProfile("TJjet_meanEseen_vs_Etrue")->SetLineColor(9102);
+	get_TProfile("TJjet_meanEseen_vs_Etrue")->SetMarkerColor(9102);
+	get_TProfile("TJjet_meanEseen_vs_Etrue")->SetMarkerSize(2);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue")->SetLineColor(9103);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue")->SetMarkerColor(9103);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue")->SetMarkerSize(2);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue")->Draw();
+	get_TProfile("TJjet_meanEseen_vs_Etrue")->Draw("same");
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue")->Draw("same");
+	leg_jetE->AddEntry(get_TProfile("TJjet_meanEseen_vs_Etrue"), "uncorrected");
+	leg_jetE->AddEntry(get_TProfile("TJjet_meanEseencorrected_vs_Etrue"), "corrected");
+	leg_jetE->AddEntry(get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue"), "with MC #nu");
+	leg_jetE->Draw();
+	gPad->Update();
+	TLine* profile_line = new TLine(0, 0, gPad->GetFrame()->GetY2(), gPad->GetFrame()->GetY2());
+	profile_line->SetLineWidth(1);
+	profile_line->Draw("same");
+	c_jetE->SetTopMargin(0.1);
+	c_jetE->Print((output_dir + "/jetEreco_comparison.pdf").c_str());
+
+
+	TCanvas* c_jetE_bjets = new TCanvas("c_jetE_bjets", "", 0, 0, 800, 800);
+	TLegend* leg_jetE_bjets = new TLegend(0.2, 0.62, 0.55, 0.85);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets")->SetLineColor(9101);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets")->SetMarkerColor(9101);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets")->SetMarkerSize(2);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->SetLineColor(9102);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->SetMarkerColor(9102);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->SetMarkerSize(2);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets")->SetLineColor(9103);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets")->SetMarkerColor(9103);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets")->SetMarkerSize(2);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->SetMinimum(0);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_bjets")->Draw();
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets")->Draw("same");
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets")->Draw("same");
+	leg_jetE_bjets->AddEntry(get_TProfile("TJjet_meanEseen_vs_Etrue_bjets"), "uncorrected");
+	leg_jetE_bjets->AddEntry(get_TProfile("TJjet_meanEseencorrected_vs_Etrue_bjets"), "corrected");
+	leg_jetE_bjets->AddEntry(get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_bjets"), "with MC #nu");
+	leg_jetE_bjets->Draw();
+	gPad->Update();
+	TLine* profile_line_bjets = new TLine(0, 0, gPad->GetFrame()->GetY2(), gPad->GetFrame()->GetY2());
+	profile_line_bjets->SetLineWidth(1);
+	profile_line_bjets->Draw("same");
+	c_jetE_bjets->SetTopMargin(0.1);
+	c_jetE_bjets->Print((output_dir + "/jetEreco_comparison_bjets.pdf").c_str());
+
+
+	TCanvas* c_jetEpull_bjets = new TCanvas("c_jetEpull_bjets", "", 0, 0, 800, 800);
+	TLegend* leg_jetEpull_bjets = new TLegend(0.2, 0.2, 0.5, 0.45);
+	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets")->SetLineColor(9101);
+	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets")->SetMarkerColor(9101);
+	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets")->SetMarkerSize(2);
+	get_TProfile("TJjet_pullEseen_vs_Etrue_bjets")->SetLineColor(9102);
+	get_TProfile("TJjet_pullEseen_vs_Etrue_bjets")->SetMarkerColor(9102);
+	get_TProfile("TJjet_pullEseen_vs_Etrue_bjets")->SetMarkerSize(2);
+	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets")->SetLineColor(9103);
+	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets")->SetMarkerColor(9103);
+	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets")->SetMarkerSize(2);
+	get_TProfile("TJjet_pullEseen_vs_Etrue_bjets")->Draw();
+	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets")->Draw("same");
+	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets")->Draw("same");
+	leg_jetEpull_bjets->AddEntry(get_TProfile("TJjet_pullEseen_vs_Etrue_bjets"), "uncorrected");
+	leg_jetEpull_bjets->AddEntry(get_TProfile("TJjet_pullEseencorrected_vs_Etrue_bjets"), "corrected");
+	leg_jetEpull_bjets->AddEntry(get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_bjets"), "with MC #nu");
+	leg_jetEpull_bjets->Draw();
+	gPad->Update();
+	TLine* pull_line_bjets = new TLine(0, 0, gPad->GetFrame()->GetX2(), 0);
+	pull_line_bjets->SetLineWidth(1);
+	pull_line_bjets->Draw("same");
+	c_jetEpull_bjets->SetTopMargin(0.1);
+	c_jetEpull_bjets->Print((output_dir + "/jetEpull_comparison_bjets.pdf").c_str());
+
+
+
 	TCanvas* c_jetE_semilepbjets = new TCanvas("c_jetE_semilepbjets", "", 0, 0, 800, 800);
-	TLegend* leg_jetE_semilepbjets = new TLegend(0.25, 0.7, 0.55, 0.85);
+	TLegend* leg_jetE_semilepbjets = new TLegend(0.2, 0.62, 0.55, 0.85);
 	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_semilepbjets")->SetLineColor(9101);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_semilepbjets")->SetMarkerColor(9101);
+	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_semilepbjets")->SetMarkerSize(2);
 	get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets")->SetLineColor(9102);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets")->SetMarkerColor(9102);
+	get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets")->SetMarkerSize(2);
 	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_semilepbjets")->SetLineColor(9103);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_semilepbjets")->SetMarkerColor(9103);
+	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_semilepbjets")->SetMarkerSize(2);
 	get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets")->SetMinimum(0);
 	get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets")->Draw();
 	get_TProfile("TJjet_meanEseencorrected_vs_Etrue_semilepbjets")->Draw("same");
 	get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_semilepbjets")->Draw("same");
-	leg_jetE_semilepbjets->AddEntry(get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets"), "uncorrected", "l");
-	leg_jetE_semilepbjets->AddEntry(get_TProfile("TJjet_meanEseencorrected_vs_Etrue_semilepbjets"), "corrected", "l");
-	leg_jetE_semilepbjets->AddEntry(get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_semilepbjets"), "with MC #nu", "l");
+	leg_jetE_semilepbjets->AddEntry(get_TProfile("TJjet_meanEseen_vs_Etrue_semilepbjets"), "uncorrected");
+	leg_jetE_semilepbjets->AddEntry(get_TProfile("TJjet_meanEseencorrected_vs_Etrue_semilepbjets"), "corrected");
+	leg_jetE_semilepbjets->AddEntry(get_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue_semilepbjets"), "with MC #nu");
 	leg_jetE_semilepbjets->Draw();
 	gPad->Update();
 	TLine* profile_line_semilepbjets = new TLine(0, 0, gPad->GetFrame()->GetY2(), gPad->GetFrame()->GetY2());
@@ -292,18 +319,24 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 
 
 	TCanvas* c_jetEpull_semilepbjets = new TCanvas("c_jetEpull_semilepbjets", "", 0, 0, 800, 800);
-	TLegend* leg_jetEpull_semilepbjets = new TLegend(0.25, 0.3, 0.5, 0.45);
+	TLegend* leg_jetEpull_semilepbjets = new TLegend(0.2, 0.2, 0.5, 0.45);
 	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_semilepbjets")->SetLineColor(9101);
+	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_semilepbjets")->SetMarkerColor(9101);
+	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_semilepbjets")->SetMarkerSize(2);
 	get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets")->SetLineColor(9102);
+	get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets")->SetMarkerColor(9102);
+	get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets")->SetMarkerSize(2);
 	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_semilepbjets")->SetLineColor(9103);
+	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_semilepbjets")->SetMarkerColor(9103);
+	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_semilepbjets")->SetMarkerSize(2);
 	// get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets")->SetMinimum(-44);
 	// get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets")->SetMaximum(16);
 	get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets")->Draw();
 	get_TProfile("TJjet_pullEseencorrected_vs_Etrue_semilepbjets")->Draw("same");
 	get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_semilepbjets")->Draw("same");
-	leg_jetEpull_semilepbjets->AddEntry(get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets"), "uncorrected", "l");
-	leg_jetEpull_semilepbjets->AddEntry(get_TProfile("TJjet_pullEseencorrected_vs_Etrue_semilepbjets"), "corrected", "l");
-	leg_jetEpull_semilepbjets->AddEntry(get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_semilepbjets"), "with MC #nu", "l");
+	leg_jetEpull_semilepbjets->AddEntry(get_TProfile("TJjet_pullEseen_vs_Etrue_semilepbjets"), "uncorrected");
+	leg_jetEpull_semilepbjets->AddEntry(get_TProfile("TJjet_pullEseencorrected_vs_Etrue_semilepbjets"), "corrected");
+	leg_jetEpull_semilepbjets->AddEntry(get_TProfile("TJjet_pullEseencorrectedwithMC_vs_Etrue_semilepbjets"), "with MC #nu");
 	leg_jetEpull_semilepbjets->Draw();
 	gPad->Update();
 	TLine* pull_line_semilepbjets = new TLine(0, 0, gPad->GetFrame()->GetX2(), 0);
