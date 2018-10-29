@@ -5,6 +5,9 @@ void RoughNuCorrectionOnTJjetsPlotter::set_plotter_settings() {
 }
 
 void RoughNuCorrectionOnTJjetsPlotter::define_plots(){
+
+	add_new_TH1D("N_TJjets", new TH1D("N_TJjets", "Number TJjets; N_{jets}; Events", 15, -0.5, 14.5));
+
 	add_new_TProfile("TJjet_meanEseen_vs_Etrue", new TProfile("TJjet_meanEseen_vs_Etrue", "< E_{jet}^{reco} > : E_{jet}^{MC}; E_{jet}^{MC} [GeV]; <E_{jet}^{reco}> [GeV]", 20, 0, 200) );
 	add_new_TProfile("TJjet_meanEseencorrected_vs_Etrue", new TProfile("TJjet_meanEseencorrected_vs_Etrue", "< E_{jet}^{reco, corrected} > : E_{jet}^{MC}, only MC B and C corrected; E_{jet}^{MC} [GeV]; <E_{jet}^{reco, corrected}> [GeV]", 20, 0, 200) );
 	add_new_TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue", new TProfile("TJjet_meanEseencorrectedwithMC_vs_Etrue", "< E_{jet}^{reco, corrected w/ MC #nu} > : E_{jet}^{MC}, only MC B and C corrected; <E_{jet}^{MC} [GeV]; E_{jet}^{reco, corrected w/ MC #nu}> [GeV]", 20, 0, 200) );
@@ -66,7 +69,7 @@ TLorentzVector RoughNuCorrectionOnTJjetsPlotter::get_vis_tlv( LepNuVertex* verte
 	return vis_tlv;
 }
 
-TLorentzVector RoughNuCorrectionOnTJjetsPlotter::get_charged_leptons_tlv( LepNuVertex* vertex ){
+TLorentzVector RoughNuCorrectionOnTJjetsPlotter::get_charged_leptons_mc_tlv( LepNuVertex* vertex ){
 	TLorentzVector charged_lep_tlv {};
 	int N_daughters = (vertex->vertex_daughters).GetEntries();
 	for (int i_daughter = 0; i_daughter<N_daughters; i_daughter++) {
@@ -76,8 +79,22 @@ TLorentzVector RoughNuCorrectionOnTJjetsPlotter::get_charged_leptons_tlv( LepNuV
 	return charged_lep_tlv;
 }
 
+TLorentzVector RoughNuCorrectionOnTJjetsPlotter::get_charged_leptons_reco_tlv( LepNuVertex* vertex ){
+	TLorentzVector charged_lep_tlv {};
+	int N_daughters = (vertex->vertex_daughters).GetEntries();
+	for (int i_daughter = 0; i_daughter<N_daughters; i_daughter++) {
+		Particle* daughter = (Particle*)(vertex->vertex_daughters)[i_daughter];
+		if ( daughter->was_reconstructed ) {
+			if ( fabs(daughter->MC.pdg_ID) > 10 && fabs(daughter->MC.pdg_ID) < 18 && ! isNeutrinoID(daughter->MC.pdg_ID) ) { 
+				charged_lep_tlv += daughter->Reco.tlv;
+			}
+		}
+	}
+	return charged_lep_tlv;
+}
+
 bool  RoughNuCorrectionOnTJjetsPlotter::is_Bmeson_ID( int pdgID ) {
-  if ( fabs(pdgID) == 511 || fabs(pdgID) == 521 || fabs(pdgID) == 531 ){
+  if ( ( fabs(pdgID) >= 500 && fabs(pdgID) < 600 ) || ( fabs(pdgID) >= 5000 && fabs(pdgID) < 6000 ) ) { 
       return true;
   } else {
     return false;
@@ -85,7 +102,7 @@ bool  RoughNuCorrectionOnTJjetsPlotter::is_Bmeson_ID( int pdgID ) {
 }
 
 bool  RoughNuCorrectionOnTJjetsPlotter::is_Cmeson_ID( int pdgID ) {
-  if ( fabs(pdgID) == 411 || fabs(pdgID) == 421 || fabs(pdgID) == 431 ){
+  if ( ( fabs(pdgID) >= 400 && fabs(pdgID) < 500 ) || ( fabs(pdgID) >= 4000 && fabs(pdgID) < 5000 ) ) {
       return true;
   } else {
     return false;
@@ -93,14 +110,14 @@ bool  RoughNuCorrectionOnTJjetsPlotter::is_Cmeson_ID( int pdgID ) {
 }
 
 double RoughNuCorrectionOnTJjetsPlotter::fitted_mean_x( double E_lep ){
-	double a = 0.72;
-	double b = 1.9;
+	double a = 0.77;
+	double b = 2.5;
 	return a*E_lep / ( b + E_lep );
 }
 
 double RoughNuCorrectionOnTJjetsPlotter::fitted_delta_mean_x( double E_lep ){
-	double a = 0.243;
-	double b = -0.00105;
+	double a = 0.238;
+	double b = -0.00124;
 	return a + b*E_lep;
 }
 
@@ -126,6 +143,7 @@ void RoughNuCorrectionOnTJjetsPlotter::fill_plots(){
 	// This is the loop over all events
 	while ( get_next_event() ) {
 		int N_jets = (evt_info->tj_jets).GetEntries();
+		get_TH1D("N_TJjets")->Fill(N_jets, weight);
 		for (int i_jet = 0; i_jet<N_jets; i_jet++) {
 			TJJet* jet = (TJJet*)evt_info->tj_jets[i_jet];
 			int N_vertices = (jet->lep_nu_vertices).GetEntries();
@@ -142,7 +160,7 @@ void RoughNuCorrectionOnTJjetsPlotter::fill_plots(){
 
 				int first_parent_pdg = ((Particle*)((vertex->vertex_parents)[0]))->MC.pdg_ID;
 
-				float E_lep = (get_charged_leptons_tlv(vertex)).E();
+				float E_lep = (get_charged_leptons_mc_tlv(vertex)).E();
 				double nu_E = nu_energy_correction( E_lep );
 				TLorentzVector nu_tlv_true = get_nu_daughters_tlv( vertex );
 

@@ -14,25 +14,27 @@ void LepNuProcessor::analyseTJJets(
 		jet_info->tlv_true = TLorentzVector( p4true(i)[1], p4true(i)[2], p4true(i)[3], p4true(i)[0]);
 		jet_info->tlv_seen = TLorentzVector( p4seen(i)[1], p4seen(i)[2], p4seen(i)[3], p4seen(i)[0]);
 
-		RecoSet jet_recos_set;
+		// RecoSet jet_recos_set;
+    // 
+		// // Search for all (lowest level) reco-particles in the jet
+		// if (  seen_partics(i).size() > 0 ) {
+		// 	// seen_partics(...) is function of TrueJet_Parser, see header
+		// 	ReconstructedParticleVec ijet_PFOs = seen_partics(i);
+    // 
+		// 	for ( int ijetPFO = 0; ijetPFO<ijet_PFOs.size(); ijetPFO++ ) {
+		// 		ReconstructedParticle* jetPFO_i = ijet_PFOs[ijetPFO];
+    // 
+		// 		findLowestLevelRecoParticles(jetPFO_i, jet_recos_set);
+		// 	}
+		// }
+    // 
+		// // Find leptons
+		// RecoSet jet_leptons_set;
+		// findChargedLeptons( jet_recos_set, jet_leptons_set );
 
-		// Search for all (lowest level) reco-particles in the jet
-		if (  seen_partics(i).size() > 0 ) {
-			// seen_partics(...) is function of TrueJet_Parser, see header
-			ReconstructedParticleVec ijet_PFOs = seen_partics(i);
+    MCParticleVec jet_mc_particles = this->findMCsInTJjet( this->getJets()->at(i) );
 
-			for ( int ijetPFO = 0; ijetPFO<ijet_PFOs.size(); ijetPFO++ ) {
-				ReconstructedParticle* jetPFO_i = ijet_PFOs[ijetPFO];
-
-				findLowestLevelRecoParticles(jetPFO_i, jet_recos_set);
-			}
-		}
-
-		// Find leptons
-		RecoSet jet_leptons_set;
-		findChargedLeptons( jet_recos_set, jet_leptons_set );
-
-		findLeptonNeutrinoVertices( jet_leptons_set, relation_recoMCtruth, jet_info );
+		this->findLeptonNeutrinoVertices( jet_mc_particles, relation_recoMCtruth, jet_info );
 
 	}
 }

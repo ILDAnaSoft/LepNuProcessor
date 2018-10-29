@@ -64,7 +64,7 @@ TLorentzVector RoughNuCorrectionPOPPlotter::get_charged_leptons_tlv( LepNuVertex
 }
 
 bool  RoughNuCorrectionPOPPlotter::is_Bmeson_ID( int pdgID ) {
-  if ( fabs(pdgID) == 511 || fabs(pdgID) == 521 || fabs(pdgID) == 531 ){
+  if ( ( fabs(pdgID) >= 500 && fabs(pdgID) < 600 ) || ( fabs(pdgID) >= 5000 && fabs(pdgID) < 6000 ) ) { 
       return true;
   } else {
     return false;
@@ -72,7 +72,7 @@ bool  RoughNuCorrectionPOPPlotter::is_Bmeson_ID( int pdgID ) {
 }
 
 bool  RoughNuCorrectionPOPPlotter::is_Cmeson_ID( int pdgID ) {
-  if ( fabs(pdgID) == 411 || fabs(pdgID) == 421 || fabs(pdgID) == 431 ){
+  if ( ( fabs(pdgID) >= 400 && fabs(pdgID) < 500 ) || ( fabs(pdgID) >= 4000 && fabs(pdgID) < 5000 ) ) {
       return true;
   } else {
     return false;
@@ -80,14 +80,14 @@ bool  RoughNuCorrectionPOPPlotter::is_Cmeson_ID( int pdgID ) {
 }
 
 double RoughNuCorrectionPOPPlotter::fitted_mean_x( double E_lep ){
-	double a = 0.72;
-	double b = 1.96;
+	double a = 0.77;
+	double b = 2.5;
 	return a*E_lep / ( b + E_lep );
 }
 
 double RoughNuCorrectionPOPPlotter::fitted_delta_mean_x( double E_lep ){
-	double a = 0.243;
-	double b = -0.00105;
+	double a = 0.238;
+	double b = -0.00124;
 	return a + b*E_lep;
 }
 

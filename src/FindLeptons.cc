@@ -44,3 +44,14 @@ void LepNuProcessor::findChargedLeptons( RecoSet &recos_set, RecoSet &leptons_se
         }
     }
 }
+
+LepNuProcessor::MCSet LepNuProcessor::findMCLepsInMCVector( MCParticleVec &mc_particles ) {
+  MCSet mc_leps_set {};
+  
+  for ( auto & mc: mc_particles ) {
+    if ( ! this->isChargedLeptonID(mc->getPDG()) ) { continue; }
+    mc_leps_set.insert(mc);
+  } 
+  
+  return mc_leps_set;
+}

@@ -39,33 +39,38 @@ class LepNuProcessor : public Processor , public Adjusted_TrueJet_Parser {
 
     /** Subroutines
      */
-    virtual void analyseEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
-    virtual void analyseTJJets(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
-    virtual void analyseCompleteEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
+    void analyseEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
+    void analyseTJJets(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
+    void analyseCompleteEvent(LCCollection* colMC, LCCollection* colPFOs, LCRelationNavigator* relation_recoMCtruth, EventInfo &info);
 
-    virtual MCParticleVec readMCColToVector(LCCollection* mcs);
-    virtual ReconstructedParticleVec readRecoColToVector(LCCollection* recos);
-    virtual bool hasNonTrivialPartner( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth );
+    MCParticleVec readMCColToVector(LCCollection* mcs);
+    ReconstructedParticleVec readRecoColToVector(LCCollection* recos);
+    bool hasNonTrivialPartner( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth );
 
-    virtual void findLowestLevelRecoParticles( ReconstructedParticle* reco, RecoSet &jet_recos_set );
+    void findLowestLevelRecoParticles( ReconstructedParticle* reco, RecoSet &jet_recos_set );
 
-    virtual bool isNeutrinoID( int pdgID );
-    virtual bool isChargedLeptonID( int pdgID );
-    virtual bool identifiedAsChargedLepton( ReconstructedParticle* PFO );
-    virtual void findChargedLeptons( RecoSet &jet_recos_set, RecoSet &jet_leptons_set );
+    bool isNeutrinoID( int pdgID );
+    bool isChargedLeptonID( int pdgID );
+    bool identifiedAsChargedLepton( ReconstructedParticle* PFO );
+    void findChargedLeptons( RecoSet &jet_recos_set, RecoSet &jet_leptons_set );
 
-    virtual int findHighestLikelihoodPIDOfReco( ReconstructedParticle* reco );
-    virtual bool findRecoOfMCDaughters( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth);
-    virtual void fillRecoToMCParticle( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth );
-    virtual void fillLepNuVertex( MCParticleVec vertex_parents, MCSet vertex_daughters, LepNuVertex* vertex, LCRelationNavigator* relation_recoMCtruth );
+    int findHighestLikelihoodPIDOfReco( ReconstructedParticle* reco );
+    bool findRecoOfMCDaughters( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth);
+    void fillRecoToMCParticle( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth );
+    void fillLepNuVertex( MCParticleVec vertex_parents, MCSet vertex_daughters, LepNuVertex* vertex, LCRelationNavigator* relation_recoMCtruth );
 
-    virtual void splitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
-    virtual ReconstructedParticle* findHighestWeightRecoToMCParticle( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth );
+    void splitWeight( FloatVec &combined_weights, FloatVec &single_weights, std::string weight_name );
+    ReconstructedParticle* findHighestWeightRecoToMCParticle( MCParticle* mc, LCRelationNavigator* relation_recoMCtruth );
 
-    virtual void findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_leps_set, LCRelationNavigator* relation_recoMCtruth );
-    virtual void findLeptonNeutrinoVertices( RecoSet &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info );
+    MCParticleVec findMCsInTJjet( ReconstructedParticle* jet );
 
-    virtual int findLeptonGeneration( int pdgID );
+    void findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_leps_set, LCRelationNavigator* relation_recoMCtruth );
+    MCSet findMCLepsInMCVector( MCParticleVec &mc_particles );
+    // void findLeptonNeutrinoVertices( RecoSet &jet_leptons_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info );
+    void findLeptonNeutrinoVertices( MCParticleVec &mc_particles, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info );
+
+
+    int findLeptonGeneration( int pdgID );
 
   /** For TrueJet_Parser -> see its documentation
   */

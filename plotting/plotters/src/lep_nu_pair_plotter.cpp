@@ -143,7 +143,7 @@ TLorentzVector LepNuPairPlotter::get_nu_daughters_tlv( LepNuVertex *vertex ){
 }
 
 bool  LepNuPairPlotter::is_Bmeson_ID( int pdgID ) {
-  if ( fabs(pdgID) == 511 || fabs(pdgID) == 521 || fabs(pdgID) == 531 ){
+  if ( ( fabs(pdgID) >= 500 && fabs(pdgID) < 600 ) || ( fabs(pdgID) >= 5000 && fabs(pdgID) < 6000 ) ) { 
       return true;
   } else {
     return false;
@@ -151,7 +151,7 @@ bool  LepNuPairPlotter::is_Bmeson_ID( int pdgID ) {
 }
 
 bool  LepNuPairPlotter::is_Cmeson_ID( int pdgID ) {
-  if ( fabs(pdgID) == 411 || fabs(pdgID) == 421 || fabs(pdgID) == 431 ){
+  if ( ( fabs(pdgID) >= 400 && fabs(pdgID) < 500 ) || ( fabs(pdgID) >= 4000 && fabs(pdgID) < 5000 ) ) {
       return true;
   } else {
     return false;
