@@ -248,7 +248,9 @@ void NuCalculationPOPGuessedGammaPlotter::fill_plots(){
 			float vis_vertex_E = vis_tlv.E();
 
 			int first_parent_pdg = ((Particle*)((vertex->vertex_parents)[0]))->MC.pdg_ID;
-			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+			// if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+      if ( ( fabs(first_parent_pdg) >= 500 && fabs(first_parent_pdg) < 600 ) || ( fabs(first_parent_pdg) >= 5000 && fabs(first_parent_pdg) < 6000 ) ) { 
+
 				get_TH2D("nu_E_Bparents_only")->Fill(nu_tlv_true.E(), nu_tlv_calculated.E(), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos < 1.0 ) {

@@ -22,10 +22,12 @@ void LepNuProcessor::findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_lep
   }
 }
 
-void LepNuProcessor::findLeptonNeutrinoVertices( RecoSet &reco_leps_set, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info ) {
 
-  MCSet mc_leps_set;
-  findMCLepsToRecoLeps( reco_leps_set, mc_leps_set, relation_recoMCtruth );
+void LepNuProcessor::findLeptonNeutrinoVertices( MCParticleVec &mc_particles, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info ) {
+
+  // MCSet mc_leps_set;
+  // findMCLepsToRecoLeps( reco_leps_set, mc_leps_set, relation_recoMCtruth );
+  MCSet mc_leps_set = this->findMCLepsInMCVector(mc_particles);
 
   MCSet treated_MC_daughters; // Set to keep track of MC particles already contained in a vertex as daughter
 

@@ -1,0 +1,9 @@
+*.root
+*.swp
+*.svn
+/build
+/lib
+/backup
+/scripts/BIRD_output
+*tags
+/xml/template.xml

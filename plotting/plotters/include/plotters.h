@@ -124,7 +124,8 @@ class RoughNuCorrectionOnTJjetsPlotter : public Plotter {
 	virtual bool isNeutrinoID( int pdgID );
 	virtual TLorentzVector get_nu_daughters_tlv( LepNuVertex* vertex );
 	virtual TLorentzVector get_vis_tlv( LepNuVertex* vertex );
-	virtual TLorentzVector get_charged_leptons_tlv( LepNuVertex* vertex );
+	virtual TLorentzVector get_charged_leptons_mc_tlv( LepNuVertex* vertex );
+	virtual TLorentzVector get_charged_leptons_reco_tlv( LepNuVertex* vertex );
 	virtual bool is_Bmeson_ID( int pdgID );
 	virtual bool is_Cmeson_ID( int pdgID );
 	virtual double fitted_mean_x( double E_lep );

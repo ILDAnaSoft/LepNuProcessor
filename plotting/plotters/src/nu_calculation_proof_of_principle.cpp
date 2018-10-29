@@ -304,7 +304,8 @@ void NuCalculationPOPPlotter::fill_plots(){
 			}
 
 
-			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+			// if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+      if ( ( fabs(first_parent_pdg) >= 500 && fabs(first_parent_pdg) < 600 ) || ( fabs(first_parent_pdg) >= 5000 && fabs(first_parent_pdg) < 6000 ) ) { 
 				get_TH2D("nu_E_Bparents_only_plus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_plus.E(), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos < 1.0 ) {
@@ -402,8 +403,8 @@ void NuCalculationPOPPlotter::fill_plots(){
 				get_TH2D("reconstructed_nu_phi_minus")->Fill(nu_tlv_true.Phi(), nu_tlv_calculated_minus.Phi(), 1);
 			}
 
-
-			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+    if ( ( fabs(first_parent_pdg) >= 500 && fabs(first_parent_pdg) < 600 ) || ( fabs(first_parent_pdg) >= 5000 && fabs(first_parent_pdg) < 6000 ) ) { 
+			// if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
 				get_TH2D("nu_E_Bparents_only_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 				float parent_init_pos = ((Particle*)(vertex->vertex_parents[0]))->MC.vertex.Mag(); // TODO Adjust to non-zero init vertex
 				if ( parent_init_pos < 1.0 ) {

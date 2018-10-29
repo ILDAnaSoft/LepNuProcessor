@@ -16,18 +16,21 @@ int LepNuProcessor::findHighestLikelihoodPIDOfReco( ReconstructedParticle* reco 
 }
 
 void LepNuProcessor::fillRecoToMCParticle( MCParticle* mc, Particle* particle_info, LCRelationNavigator* relation_recoMCtruth ) {
-  LCObjectVec recos_to_mc = relation_recoMCtruth->getRelatedFromObjects( mc );
-  if ( recos_to_mc.size() > 0 ) {
+  // First check if MC itself was reconstructed
+  ReconstructedParticle* reco = this->findHighestWeightRecoToMCParticle( mc, relation_recoMCtruth );
+  if ( reco ) {
     particle_info->was_reconstructed = true;
-    ReconstructedParticle* reco = findHighestWeightRecoToMCParticle( mc, relation_recoMCtruth );
-
+    
     (particle_info->Reco).tlv = TLorentzVector( reco->getMomentum(), reco->getEnergy() );
     if ( reco->getStartVertex() != 0 ){
       (particle_info->Reco).vertex = TVector3( reco->getStartVertex()->getPosition() );
     }
-    (particle_info->Reco).pdg_ID = findHighestLikelihoodPIDOfReco( reco );
-  } else {
-    if ( findRecoOfMCDaughters(mc, particle_info, relation_recoMCtruth) ) {
+    (particle_info->Reco).pdg_ID = this->findHighestLikelihoodPIDOfReco( reco );
+  }
+  
+  // If MC itself not reconstructed check daughters
+  if ( ! particle_info->was_reconstructed ) {
+    if ( this->findRecoOfMCDaughters(mc, particle_info, relation_recoMCtruth) ) {
       particle_info->was_reconstructed = true;
     } else {
       particle_info->was_reconstructed = false;

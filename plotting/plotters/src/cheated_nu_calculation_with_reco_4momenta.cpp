@@ -257,7 +257,8 @@ void CheatedNuCalculationReco4MomentaPlotter::fill_plots(){
 			get_TH2D("nu_E_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 			get_TH2D("nu_E_sign_cheated")->Fill(nu_tlv_true.E(), nu_tlv_calculated_cheated.E(), 1);
 
-			if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+			// if ( fabs(first_parent_pdg) == 511 || fabs(first_parent_pdg) == 521 || fabs(first_parent_pdg) == 531 ) {
+      if ( ( fabs(first_parent_pdg) >= 500 && fabs(first_parent_pdg) < 600 ) || ( fabs(first_parent_pdg) >= 5000 && fabs(first_parent_pdg) < 6000 ) ) { 
 				get_TH2D("nu_E_Bparents_only_minus")->Fill(nu_tlv_true.E(), nu_tlv_calculated_minus.E(), 1);
 				get_TH2D("nu_E_Bparents_only_sign_cheated")->Fill(nu_tlv_true.E(), nu_tlv_calculated_cheated.E(), 1);
 

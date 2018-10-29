@@ -5,7 +5,7 @@
 	LCIO format */
 
 MCParticleVec LepNuProcessor::readMCColToVector(LCCollection* mcs) {
-	MCParticleVec mc_vec;
+	MCParticleVec mc_vec {};
 	int N_mc = mcs->getNumberOfElements();
 	for( int i = 0; i < N_mc; i++ ){
 		MCParticle* mc = dynamic_cast< MCParticle* >( mcs->getElementAt(i) );
@@ -16,7 +16,7 @@ MCParticleVec LepNuProcessor::readMCColToVector(LCCollection* mcs) {
 
 
 ReconstructedParticleVec LepNuProcessor::readRecoColToVector(LCCollection* recos) {
-	ReconstructedParticleVec revo_vec;
+	ReconstructedParticleVec revo_vec {};
 	int N_reco;
 	try{
 		N_reco = recos->getNumberOfElements();

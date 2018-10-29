@@ -5,19 +5,21 @@ void LepNuProcessor::analyseCompleteEvent(
 		LCRelationNavigator* relation_recoMCtruth,
 		EventInfo &info) {
 
-	// Search for all (lowest level) reco-particles
-	ReconstructedParticleVec PFOs = readRecoColToVector( colPFOs );
-	RecoSet recos_set;
+	// // Search for all (lowest level) reco-particles
+	// ReconstructedParticleVec PFOs = readRecoColToVector( colPFOs );
+	// RecoSet recos_set;
+  // 
+	// for ( int iPFO = 0; iPFO<PFOs.size(); iPFO++ ) {
+	// 	ReconstructedParticle* PFO_i = PFOs[iPFO];
+	// 	findLowestLevelRecoParticles(PFO_i, recos_set);
+	// }
+  // 
+	// // Find leptons
+	// RecoSet reco_leptons_set;
+	// findChargedLeptons( recos_set, reco_leptons_set );
 
-	for ( int iPFO = 0; iPFO<PFOs.size(); iPFO++ ) {
-		ReconstructedParticle* PFO_i = PFOs[iPFO];
-		findLowestLevelRecoParticles(PFO_i, recos_set);
-	}
+  MCParticleVec mc_particles = this->readMCColToVector( colMC );
 
-	// Find leptons
-	RecoSet reco_leptons_set;
-	findChargedLeptons( recos_set, reco_leptons_set );
-
-	findLeptonNeutrinoVertices( reco_leptons_set, relation_recoMCtruth, &(info.total_event) );
+	findLeptonNeutrinoVertices( mc_particles, relation_recoMCtruth, &(info.total_event) );
 
 }
