@@ -5,10 +5,10 @@ void NuCalculationCheatedSignPOPPlotter::set_plotter_settings() {
 }
 
 void NuCalculationCheatedSignPOPPlotter::define_plots(){
-	add_new_TH2D("nu_E", new TH2D("nu_E", "#nu calculation from MC info, sign cheated; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex", new TH2D("nu_E_Bparents_only_0vertex", "#nu calculation from MC info, cheated sign, only B parents starting at 0; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E", new TH2D("nu_E", "#splitline{#nu calculation from MC info,}{sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex", new TH2D("nu_E_Bparents_only_0vertex", "#splitline{#nu calculation from MC info,}{cheated sign, only B parents starting at 0}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 
-	add_new_TH2D("p_nu_parallel_vs_Bboost", new TH2D("p_nu_parallel_vs_Bboost", "#nu mom. parallel B VS B boost, cheated sign, (B only, 0 vertex); #gamma_{B}; p_{#nu}^{parallel} [GeV]; #nu's", 30, 1, 60, 150,-50, 100) );
+	add_new_TH2D("p_nu_parallel_vs_Bboost", new TH2D("p_nu_parallel_vs_Bboost", "#splitline{#nu mom. parallel B VS B boost,}{cheated sign, (B only, 0 vertex)}; #gamma_{B}; p_{#nu}^{parallel} [GeV]; #nu's", 30, 1, 60, 150,-50, 100) );
 
 
 	add_new_TH1D("deboosted_lep_rightsign_nu_DeltaR",
@@ -286,6 +286,7 @@ void NuCalculationCheatedSignPOPPlotter::draw_plots(){
 		TH2D* current_h2 = get_TH2D_i(i);
 		TCanvas* current_canvas = new TCanvas(( std::string() + current_h2->GetName() + "_can").c_str(), "", 0, 0, 800, 800);
 		current_h2->Draw("colz");
+		current_canvas->SetTopMargin(0.13);
 		current_canvas->SetRightMargin(0.2);
 		current_canvas->Print(( output_dir + "/h2_" + current_h2->GetName() + ".pdf").c_str());
 		// delete current_canvas;

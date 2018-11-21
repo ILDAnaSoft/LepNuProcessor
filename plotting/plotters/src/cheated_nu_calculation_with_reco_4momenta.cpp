@@ -5,11 +5,11 @@ void CheatedNuCalculationReco4MomentaPlotter::set_plotter_settings() {
 }
 
 void CheatedNuCalculationReco4MomentaPlotter::define_plots(){
-	add_new_TH2D("nu_E_minus", new TH2D("nu_E_minus", "#nu calculation from MC info + reco 4momenta, minus sign; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_minus", new TH2D("nu_E_Bparents_only_minus", "#nu calculation from MC info + reco 4momenta, only B parents, minus sign; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_minus", new TH2D("nu_E_minus", "#splitline{#nu calculation from MC info + reco 4momenta,}{minus sign}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_Bparents_only_minus", new TH2D("nu_E_Bparents_only_minus", "#splitline{#nu calculation from MC info + reco 4momenta,}{only B parents, minus sign}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 
-	add_new_TH2D("nu_E_sign_cheated", new TH2D("nu_E", "#nu calculation from MC info + reco 4momenta, sign cheated; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_sign_cheated", new TH2D("nu_E_Bparents_only", "#nu calculation from MC info + reco 4momenta, only B parents, sign cheated; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_sign_cheated", new TH2D("nu_E", "#splitline{#nu calculation from MC info + reco 4momenta,}{sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_Bparents_only_sign_cheated", new TH2D("nu_E_Bparents_only", "#splitline{#nu calculation from MC info + reco 4momenta,}{only B parents, sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 	//add_new_TH2D("nu_E_only_bjets", new TH2D("nu_E_only_bjets", "#nu calculation from MC info + reco 4momenta, b jets only; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
 
 	add_new_TH1D("N_parents", new TH1D("N_parents", "Number of parents; N_{parents}; #nu's", 4, -0.5, 3.5));
@@ -291,6 +291,7 @@ void CheatedNuCalculationReco4MomentaPlotter::draw_plots(){
 		TCanvas* current_canvas = new TCanvas(( std::string() + current_h2->GetName() + "_can").c_str(), "", 0, 0, 800, 800);
 		current_h2->Draw("colz");
 		current_canvas->SetRightMargin(0.2);
+		current_canvas->SetTopMargin(0.13);
 		current_canvas->Print(( output_dir + "/h2_" + current_h2->GetName() + ".pdf").c_str());
 		// delete current_canvas;
 	}

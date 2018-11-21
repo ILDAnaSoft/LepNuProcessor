@@ -234,7 +234,7 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 
 
 	TCanvas* c_x = new TCanvas("c_x", "", 0, 0, 800, 800);
-	TLegend* leg_x = new TLegend(0.6, 0.7, 0.9, 0.9);
+	TLegend* leg_x = new TLegend(0.55, 0.2, 0.9, 0.45);
 	get_TH1D("x_parameter_CandBparents")->SetLineColor(9101);
 	get_TH1D("x_parameter_CandBparents")->SetMarkerColor(9101);
 	get_TH1D("x_parameter_CandBparents")->SetMarkerSize(2);
