@@ -185,11 +185,18 @@ TLorentzVector CheatedNuCalculationReco4MomentaPlotter::calculate_nus( LepNuVert
 	//std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
 	//std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
 	//std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
-	if ( _D < 0.000001 )  { std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; }
-	else if ( _F < 0 ) {
-		//std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
+	if ( _D < 0.000001 )  { 
+    std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; 
+  // TODO AT THIS POINT ONE MAY EMPLOY THE ROUGHER CORRECTION!
+  //	} else if ( _F < 0 ) {
+	//std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
 	}	else {
 		long double nu_p_perp = - vis_p_perp;
+
+    if ( _F < 0 ) {
+      std::cout << "WARNING: Value under square root negative: " << _F << " -> Setting F to zero!\n";
+      _F = 0;
+    }
 
 		// Quadratic equation has two solutions:
 		long double nu_p_parallel_plus = 1./( 2. * _D ) * ( - _A + sqrt( _F ) );

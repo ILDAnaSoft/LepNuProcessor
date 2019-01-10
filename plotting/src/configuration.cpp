@@ -12,10 +12,10 @@ void set_plotters(std::vector<Plotter*> &plotters) {
 	// plotters.push_back( new NuCalculationPOPPlotter );
 	// plotters.push_back( new NuCalculationCheatedSignPOPPlotter );
 	// plotters.push_back( new NuCalculationPOPGuessedGammaPlotter );
-	// plotters.push_back( new CheatedNuCalculationReco4MomentaPlotter );
-	plotters.push_back( new RoughNuCorrectionFitPlotter );
+    // plotters.push_back( new CheatedNuCalculationReco4MomentaPlotter );
+	//plotters.push_back( new RoughNuCorrectionFitPlotter );
 	// plotters.push_back( new RoughNuCorrectionPOPPlotter );
-	// plotters.push_back( new RoughNuCorrectionOnTJjetsPlotter );
+	plotters.push_back( new RoughNuCorrectionOnTJjetsPlotter );
 
 	/* ---------------------------------------------------------------------*/
 }

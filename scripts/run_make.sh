@@ -14,6 +14,8 @@ if [[ $version == "01-19-05" ]]; then
 	cmakelist_path=${home_folder}/CMakeLists/19_05_CMakeLists.txt
 elif [[ $version == "02-00" ]]; then
 	cmakelist_path=${home_folder}/CMakeLists/02_00_CMakeLists.txt
+elif [[ $version == "02-00-02" ]]; then
+	cmakelist_path=${home_folder}/CMakeLists/02_00_CMakeLists.txt
 else
 	echo "ERROR: no CMakeLists found for this ilcsoft version! Exiting now..."
 	exit
@@ -32,6 +34,8 @@ templates_dir=${home_folder}/xml/steering_files/template_files
 if [[ $version == "01-19-05" ]]; then
 	template=${templates_dir}/01_19_05_template.xml
 elif [[ $version == "02-00" ]]; then
+	template=${templates_dir}/02_00_template.xml
+elif [[ $version == "02-00-02" ]]; then
 	template=${templates_dir}/02_00_template.xml
 else
 	echo "ERROR: not valid ilcsoft version! Exiting now..."
