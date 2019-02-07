@@ -7,5 +7,7 @@
 /scripts/BIRD_output
 *tags
 /xml/template.xml
+/xml/tmp*
 /plotting/output
 /plotting/bin
+/scripts/old_*

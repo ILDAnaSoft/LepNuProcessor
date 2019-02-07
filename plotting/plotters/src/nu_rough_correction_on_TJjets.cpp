@@ -110,14 +110,14 @@ bool  RoughNuCorrectionOnTJjetsPlotter::is_Cmeson_ID( int pdgID ) {
 }
 
 double RoughNuCorrectionOnTJjetsPlotter::fitted_mean_x( double E_lep ){
-	double a = 0.77;
-	double b = 2.5;
+	double a = 0.76;
+	double b = 2.4;
 	return a*E_lep / ( b + E_lep );
 }
 
 double RoughNuCorrectionOnTJjetsPlotter::fitted_delta_mean_x( double E_lep ){
-	double a = 0.238;
-	double b = -0.00124;
+	double a = 0.24;
+	double b = -0.0012;
 	return a + b*E_lep;
 }
 
@@ -224,6 +224,8 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	leg_jetE_bjets_distr->AddEntry(get_TH1D("TJjet_Eseencorrected_bjets"), "corrected", "l");
 	leg_jetE_bjets_distr->AddEntry(get_TH1D("TJjet_EseencorrectedwithMC_bjets"), "with MC #nu", "l");
 	leg_jetE_bjets_distr->Draw("same");
+  c_jetE_bjets_distr->Modified();
+  c_jetE_bjets_distr->Update();
 	c_jetE_bjets_distr->Print((output_dir + "/jetE_Distributions.pdf").c_str());
 
 
@@ -252,6 +254,8 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	profile_line->SetLineWidth(1);
 	profile_line->Draw("same");
 	c_jetE->SetTopMargin(0.1);
+  c_jetE->Modified();
+  c_jetE->Update();
 	c_jetE->Print((output_dir + "/jetEreco_comparison.pdf").c_str());
 
 
@@ -279,6 +283,8 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	profile_line_bjets->SetLineWidth(1);
 	profile_line_bjets->Draw("same");
 	c_jetE_bjets->SetTopMargin(0.1);
+  c_jetE_bjets->Modified();
+  c_jetE_bjets->Update();
 	c_jetE_bjets->Print((output_dir + "/jetEreco_comparison_bjets.pdf").c_str());
 
 
@@ -305,6 +311,8 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	pull_line_bjets->SetLineWidth(1);
 	pull_line_bjets->Draw("same");
 	c_jetEpull_bjets->SetTopMargin(0.1);
+  c_jetEpull_bjets->Modified();
+  c_jetEpull_bjets->Update();
 	c_jetEpull_bjets->Print((output_dir + "/jetEpull_comparison_bjets.pdf").c_str());
 
 
@@ -333,6 +341,8 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	profile_line_semilepbjets->SetLineWidth(1);
 	profile_line_semilepbjets->Draw("same");
 	c_jetE_semilepbjets->SetTopMargin(0.1);
+  c_jetE_semilepbjets->Modified();
+  c_jetE_semilepbjets->Update();
 	c_jetE_semilepbjets->Print((output_dir + "/jetEreco_comparison_semilepbjets.pdf").c_str());
 
 
@@ -361,6 +371,8 @@ void RoughNuCorrectionOnTJjetsPlotter::draw_plots(){
 	pull_line_semilepbjets->SetLineWidth(1);
 	pull_line_semilepbjets->Draw("same");
 	c_jetEpull_semilepbjets->SetTopMargin(0.1);
+  c_jetEpull_semilepbjets->Modified();
+  c_jetEpull_semilepbjets->Update();
 	c_jetEpull_semilepbjets->Print((output_dir + "/jetEpull_comparison_semilepbjets.pdf").c_str());
 
 	// for (int i=0; i<get_number_TH2Ds(); i++) {

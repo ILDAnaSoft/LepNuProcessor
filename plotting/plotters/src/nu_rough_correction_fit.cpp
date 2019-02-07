@@ -257,36 +257,48 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 	get_TH1D("x_parameter_CandBparents_Elepmin5")->Draw("same");
 	leg_x->AddEntry(get_TH1D("x_parameter_CandBparents_Elepmin5"), "E_{lep,min} = 5");
 	leg_x->Draw();
+  c_x->Modified();
+  c_x->Update();
 	c_x->Print((output_dir + "/x_distributions.pdf").c_str());
 
 	TCanvas* c_x_0to20 = new TCanvas("c_x_0to20", "", 0, 0, 800, 800);
 	get_TH1D("x_parameter_CandBparents_Elep0to20")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep0to20")->Draw();
 	c_x_0to20->SetTopMargin(0.1);
+  c_x_0to20->Modified();
+  c_x_0to20->Update();
 	c_x_0to20->Print((output_dir + "/x_distribution_Elep0to20.pdf").c_str());
 
 	TCanvas* c_x_20to40 = new TCanvas("c_x_20to40", "", 0, 0, 800, 800);
 	get_TH1D("x_parameter_CandBparents_Elep20to40")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep20to40")->Draw();
 	c_x_20to40->SetTopMargin(0.1);
+  c_x_20to40->Modified();
+  c_x_20to40->Update();
 	c_x_20to40->Print((output_dir + "/x_distribution_Elep20to40.pdf").c_str());
 
 	TCanvas* c_x_40to60 = new TCanvas("c_x_40to60", "", 0, 0, 800, 800);
 	get_TH1D("x_parameter_CandBparents_Elep40to60")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep40to60")->Draw();
 	c_x_40to60->SetTopMargin(0.1);
+  c_x_40to60->Modified();
+  c_x_40to60->Update();
 	c_x_40to60->Print((output_dir + "/x_distribution_Elep40to60.pdf").c_str());
 
 	TCanvas* c_x_60to80 = new TCanvas("c_x_60to80", "", 0, 0, 800, 800);
 	get_TH1D("x_parameter_CandBparents_Elep60to80")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep60to80")->Draw();
 	c_x_60to80->SetTopMargin(0.1);
+  c_x_60to80->Modified();
+  c_x_60to80->Update();
 	c_x_60to80->Print((output_dir + "/x_distribution_Elep60to80.pdf").c_str());
 
 	TCanvas* c_x_80to100 = new TCanvas("c_x_80to100", "", 0, 0, 800, 800);
 	get_TH1D("x_parameter_CandBparents_Elep80to100")->SetMinimum(0);
 	get_TH1D("x_parameter_CandBparents_Elep80to100")->Draw();
 	c_x_80to100->SetTopMargin(0.1);
+  c_x_80to100->Modified();
+  c_x_80to100->Update();
 	c_x_80to100->Print((output_dir + "/x_distribution_Elep80to100.pdf").c_str());
 
 
@@ -299,6 +311,8 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 	leg_x_profile->AddEntry(fit_x, "a E_{lep} / (b + E_{lep})", "l");
 	leg_x_profile->Draw();
 	c_x_profile->SetTopMargin(0.1);
+  c_x_profile->Modified();
+  c_x_profile->Update();
 	c_x_profile->Print((output_dir + "/x_profile.pdf").c_str());
 
 
@@ -312,6 +326,8 @@ void RoughNuCorrectionFitPlotter::draw_plots(){
 	c_dx->SetLeftMargin(0.18);
 	x_resolution_VS_Elep_CandBparents->GetYaxis()->SetTitleOffset(1.3);
 	c_dx->SetTopMargin(0.1);
+  c_dx->Modified();
+  c_dx->Update();
 	c_dx->Print((output_dir + "/dx_distribution.pdf").c_str());
 
 

@@ -80,14 +80,14 @@ bool  RoughNuCorrectionPOPPlotter::is_Cmeson_ID( int pdgID ) {
 }
 
 double RoughNuCorrectionPOPPlotter::fitted_mean_x( double E_lep ){
-	double a = 0.77;
-	double b = 2.5;
+	double a = 0.76;
+	double b = 2.4;
 	return a*E_lep / ( b + E_lep );
 }
 
 double RoughNuCorrectionPOPPlotter::fitted_delta_mean_x( double E_lep ){
-	double a = 0.238;
-	double b = -0.00124;
+	double a = 0.24;
+	double b = -0.0012;
 	return a + b*E_lep;
 }
 
@@ -158,7 +158,7 @@ void RoughNuCorrectionPOPPlotter::draw_plots(){
 		double E_lep = get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->GetBinCenter(i+1);
 		double pull = get_TProfile("nu_E_correction_pull_VS_Elep_CandBparents_only")->GetBinContent(i+1);
 		double delta_estimation = nu_energy_error_estimate(E_lep);
-		std::cout << "\n" << delta_estimation;
+		// std::cout << "\n" << delta_estimation;
 		// E_lep_array[i] = E_lep;
 		// pull_plus_delta_array[i] = pull + delta_estimation;
 		// pull_minus_delta_array[i] = pull - delta_estimation;
@@ -178,6 +178,8 @@ void RoughNuCorrectionPOPPlotter::draw_plots(){
 	TLine* pull_profile_line = new TLine(0, 0, 100, 0);
 	pull_profile_line->Draw("same");
 	c_pull_profile->SetTopMargin(0.1);
+	c_pull_profile->Modified();
+	c_pull_profile->Update();
 	c_pull_profile->Print((output_dir + "/pull_profile.pdf").c_str());
 
 
