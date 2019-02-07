@@ -25,17 +25,17 @@ void LepNuProcessor::findMCLepsToRecoLeps( RecoSet &reco_leps_set, MCSet &mc_lep
 
 void LepNuProcessor::findLeptonNeutrinoVertices( MCParticleVec &mc_particles, LCRelationNavigator* relation_recoMCtruth, VerticesContainer* vertices_info ) {
 
-  // MCSet mc_leps_set;
-  // findMCLepsToRecoLeps( reco_leps_set, mc_leps_set, relation_recoMCtruth );
   MCSet mc_leps_set = this->findMCLepsInMCVector(mc_particles);
 
   MCSet treated_MC_daughters; // Set to keep track of MC particles already contained in a vertex as daughter
 
   // Go through all parents and see if a neutrino is contained in their daughters
   for ( MCSet::iterator mc_lep=mc_leps_set.begin(); mc_lep!=mc_leps_set.end(); ++mc_lep) {
+    if ( (*mc_lep)->isOverlay() ) { continue; } // Ignore all overlay -> will not be corrected
+    
     bool already_treated_as_daughter = ( treated_MC_daughters.find(*mc_lep) != treated_MC_daughters.end() );
     if (already_treated_as_daughter) { continue; }
-
+    
     MCParticleVec vertex_parents = (*mc_lep)->getParents();
     MCSet vertex_daughters;
     bool has_nu_sibling = false;
@@ -63,5 +63,6 @@ void LepNuProcessor::findLeptonNeutrinoVertices( MCParticleVec &mc_particles, LC
       LepNuVertex* new_vertex = vertices_info->add_lep_nu_vertex();
       fillLepNuVertex( vertex_parents, vertex_daughters, new_vertex, relation_recoMCtruth );
     }
+    treated_MC_daughters.insert( vertex_daughters.begin(), vertex_daughters.end() );
   }
 }

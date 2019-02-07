@@ -5,16 +5,16 @@ void CheatedNuCalculationReco4MomentaPlotter::set_plotter_settings() {
 }
 
 void CheatedNuCalculationReco4MomentaPlotter::define_plots(){
-	add_new_TH2D("nu_E_minus", new TH2D("nu_E_minus", "#splitline{#nu calculation from MC info + reco 4momenta,}{minus sign}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_minus", new TH2D("nu_E_Bparents_only_minus", "#splitline{#nu calculation from MC info + reco 4momenta,}{only B parents, minus sign}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_minus", new TH2D("nu_E_minus", "#splitline{#nu calculation from MC info + reco 4momenta,}{minus sign}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_minus", new TH2D("nu_E_Bparents_only_minus", "#splitline{#nu calculation from MC info + reco 4momenta,}{only B parents, minus sign}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 
-	add_new_TH2D("nu_E_sign_cheated", new TH2D("nu_E", "#splitline{#nu calculation from MC info + reco 4momenta,}{sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_sign_cheated", new TH2D("nu_E_Bparents_only", "#splitline{#nu calculation from MC info + reco 4momenta,}{only B parents, sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	//add_new_TH2D("nu_E_only_bjets", new TH2D("nu_E_only_bjets", "#nu calculation from MC info + reco 4momenta, b jets only; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_sign_cheated", new TH2D("nu_E", "#splitline{#nu calculation from MC info + reco 4momenta,}{sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_sign_cheated", new TH2D("nu_E_Bparents_only", "#splitline{#nu calculation from MC info + reco 4momenta,}{only B parents, sign cheated}; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	//add_new_TH2D("nu_E_only_bjets", new TH2D("nu_E_only_bjets", "#nu calculation from MC info + reco 4momenta, b jets only; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 
 	add_new_TH1D("N_parents", new TH1D("N_parents", "Number of parents; N_{parents}; #nu's", 4, -0.5, 3.5));
 	add_new_TH1D("first_parent_pdg", new TH1D("first_parent_pdg", "PDG of first parent; pdgID; #nu's", 601, -0.5, 600.5));
-	// add_new_TH2D("nu_p", new TH2D("nu_p", "#nu calculation from MC info; p_{#nu}^{MC} [GeV]; p_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	// add_new_TH2D("nu_p", new TH2D("nu_p", "#nu calculation from MC info; p_{#nu}^{MC} [GeV]; p_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 	// add_new_TH2D("nu_theta", new TH2D("nu_theta", "#nu calculation from MC info; #theta_{#nu}^{MC}; #theta_{#nu}^{calc from MC vertex}; #nu's", 32, 0, 3.2, 32, 0, 3.2) );
 	// add_new_TH2D("nu_phi", new TH2D("nu_phi", "#nu calculation from MC info; #phi_{#nu}^{MC}; #phi_{#nu}^{calc from MC vertex}; #nu's", 32, -3.2, 3.2, 32, -3.2, 3.2) );
 	//
@@ -24,7 +24,7 @@ void CheatedNuCalculationReco4MomentaPlotter::define_plots(){
 	// add_new_TH1D("non-reconstructed_nu_phi", new TH1D("non-reconstructed_nu_phi", "#phi of non-reconstructed #nu's; #phi_{#nu}^{MC}; #nu's", 32, -3.2, 3.2) );
 	//
 	// add_new_TH1D("reconstructed_nu_parent_init_vertex", new TH1D("reconstructed_nu_parent_init_vertex", "Init. vertex radius of first parent of reconstructed #nu's; r_{parent}^{MC} [mm]; #nu's", 100, 0, 3000));
-	// add_new_TH2D("reconstructed_nu_E", new TH2D("reconstructed_nu_E", "#nu calculation from MC info, only reconstructed #nu's; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	// add_new_TH2D("reconstructed_nu_E", new TH2D("reconstructed_nu_E", "#nu calculation from MC info, only reconstructed #nu's; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 	// add_new_TH2D("reconstructed_nu_theta", new TH2D("reconstructed_nu_theta", "#nu calculation from MC info, only reconstructed #nu's; #theta_{#nu}^{MC}; #theta_{#nu}^{calc from MC vertex}; #nu's", 32, 0, 3.2, 32, 0, 3.2) );
 	// add_new_TH2D("reconstructed_nu_phi", new TH2D("reconstructed_nu_phi", "#nu calculation from MC info, only reconstructed #nu's; #phi_{#nu}^{MC}; #phi_{#nu}^{calc from MC vertex}; #nu's", 32, -3.2, 3.2, 32, -3.2, 3.2) );
 }
@@ -68,7 +68,7 @@ int CheatedNuCalculationReco4MomentaPlotter::get_nu_solution_sign_from_MC( LepNu
 	long double parents_m = parents_tlv.M();
 
 	// Get (unit) direction of initial particles using difference of starting vertex form 0 position:
-	TVector3 init_direction = ((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit();
+  TVector3 init_direction = (((Particle*)(vertex->vertex_daughters[0]))->MC.vertex - (((Particle*)(vertex->vertex_parents[0]))->MC.vertex)).Unit();
 
 	// Get non-nu daughter tlvs ( = "visible part of vertex")
 	TLorentzVector vis_tlv {};
@@ -94,12 +94,18 @@ int CheatedNuCalculationReco4MomentaPlotter::get_nu_solution_sign_from_MC( LepNu
 	long double _C = std::pow( 2.*std::pow(vis_p_perp, 2) + std::pow(vis_m, 2) - std::pow(parents_m, 2), 2);
 	long double _F = ( std::pow( vis_p_parallel, 2 ) * _C - 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) + _D * _C;
 
-	if ( _D < 0.000001 )  { std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; }
-	else if ( _F < 0 ) {
-		std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
-		std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
-		std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
-		std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
+  if ( _F < 0 ) {
+    std::cout << "WARNING: Value under square root negative: " << _F << " -> Setting F to zero!\n";
+    _F = 0;
+  }
+
+	if ( _D < 0.000001 )  { 
+    std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; 
+	// } else if ( _F < 0 ) {
+	// 	std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
+	// 	std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
+	// 	std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
+	// 	std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
 	}	else {
 		long double nu_p_perp = - vis_p_perp;
 
@@ -147,7 +153,7 @@ TLorentzVector CheatedNuCalculationReco4MomentaPlotter::calculate_nus( LepNuVert
 	long double parents_m = parents_tlv.M();
 
 	// Get (unit) direction of initial particles using difference of starting vertex form 0 position:
-	TVector3 init_direction = ((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit();
+  TVector3 init_direction = (((Particle*)(vertex->vertex_daughters[0]))->MC.vertex - (((Particle*)(vertex->vertex_parents[0]))->MC.vertex)).Unit();
 
 	// Get non-nu daughter tlvs ( = "visible part of vertex")
 	TLorentzVector vis_tlv {};
@@ -182,21 +188,19 @@ TLorentzVector CheatedNuCalculationReco4MomentaPlotter::calculate_nus( LepNuVert
 	long double _C = std::pow( 2.*std::pow(vis_p_perp, 2) + std::pow(vis_m, 2) - std::pow(parents_m, 2), 2);
 	long double _F = ( std::pow( vis_p_parallel, 2 ) * _C - 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) + _D * _C;
 
-	//std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
-	//std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
-	//std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
+  if ( _F < 0 ) {
+    std::cout << "WARNING: Value under square root negative: " << _F << " -> Setting F to zero!\n";
+    _F = 0;
+  }
+
 	if ( _D < 0.000001 )  { 
     std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; 
+    //std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
+    //std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
+    //std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
   // TODO AT THIS POINT ONE MAY EMPLOY THE ROUGHER CORRECTION!
-  //	} else if ( _F < 0 ) {
-	//std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
 	}	else {
 		long double nu_p_perp = - vis_p_perp;
-
-    if ( _F < 0 ) {
-      std::cout << "WARNING: Value under square root negative: " << _F << " -> Setting F to zero!\n";
-      _F = 0;
-    }
 
 		// Quadratic equation has two solutions:
 		long double nu_p_parallel_plus = 1./( 2. * _D ) * ( - _A + sqrt( _F ) );
@@ -216,7 +220,7 @@ TLorentzVector CheatedNuCalculationReco4MomentaPlotter::calculate_nus( LepNuVert
 		TLorentzVector tlv_total_minus = nu_tlv_minus + vis_tlv;
 		long double m_total_minus = tlv_total_minus.M();
 
-		std::cout << "\n Plus solution E: " << nu_E_plus << " Minus solution E: " << nu_E_minus << "\n";
+		// std::cout << "\n Plus solution E: " << nu_E_plus << " Minus solution E: " << nu_E_minus << "\n";
 
 
 		if (solution_mode == "cheat" ) {
@@ -299,6 +303,8 @@ void CheatedNuCalculationReco4MomentaPlotter::draw_plots(){
 		current_h2->Draw("colz");
 		current_canvas->SetRightMargin(0.2);
 		current_canvas->SetTopMargin(0.13);
+    current_canvas->Modified();
+    current_canvas->Update();
 		current_canvas->Print(( output_dir + "/h2_" + current_h2->GetName() + ".pdf").c_str());
 		// delete current_canvas;
 	}

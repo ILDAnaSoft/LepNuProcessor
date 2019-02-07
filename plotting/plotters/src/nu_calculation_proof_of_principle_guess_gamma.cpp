@@ -7,8 +7,8 @@ void NuCalculationPOPGuessedGammaPlotter::set_plotter_settings() {
 void NuCalculationPOPGuessedGammaPlotter::define_plots(){
 	add_new_TH1D("N_vertices", new TH1D("N_vertices", "Number of ch. lep. + #nu vertices in event; N_{l-#nu vertices}; Event", 7, -0.5, 6.5));
 
-	add_new_TH2D("nu_E", new TH2D("nu_E", "#nu calculation from MC info; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_p", new TH2D("nu_p", "#nu calculation from MC info; p_{#nu}^{MC} [GeV]; p_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E", new TH2D("nu_E", "#nu calculation from MC info; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_p", new TH2D("nu_p", "#nu calculation from MC info; p_{#nu}^{MC} [GeV]; p_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 	add_new_TH2D("nu_theta", new TH2D("nu_theta", "#nu calculation from MC info; #theta_{#nu}^{MC}; #theta_{#nu}^{calc from MC vertex}; #nu's", 32, 0, 3.2, 32, 0, 3.2) );
 	add_new_TH2D("nu_phi", new TH2D("nu_phi", "#nu calculation from MC info; #phi_{#nu}^{MC}; #phi_{#nu}^{calc from MC vertex}; #nu's", 32, -3.2, 3.2, 32, -3.2, 3.2) );
 
@@ -18,32 +18,32 @@ void NuCalculationPOPGuessedGammaPlotter::define_plots(){
 	add_new_TH1D("non-reconstructed_nu_phi", new TH1D("non-reconstructed_nu_phi", "#phi of non-reconstructed #nu's; #phi_{#nu}^{MC}; #nu's", 32, -3.2, 3.2) );
 
 	add_new_TH1D("reconstructed_nu_parent_init_vertex", new TH1D("reconstructed_nu_parent_init_vertex", "Init. vertex radius of first parent of reconstructed #nu's; r_{parent}^{MC} [mm]; #nu's", 100, 0, 3000));
-	add_new_TH2D("reconstructed_nu_E", new TH2D("reconstructed_nu_E", "#nu calculation from MC info, only reconstructed #nu's; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("reconstructed_nu_E", new TH2D("reconstructed_nu_E", "#nu calculation from MC info, only reconstructed #nu's; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 	add_new_TH2D("reconstructed_nu_theta", new TH2D("reconstructed_nu_theta", "#nu calculation from MC info, only reconstructed #nu's; #theta_{#nu}^{MC}; #theta_{#nu}^{calc from MC vertex}; #nu's", 32, 0, 3.2, 32, 0, 3.2) );
 	add_new_TH2D("reconstructed_nu_phi", new TH2D("reconstructed_nu_phi", "#nu calculation from MC info, only reconstructed #nu's; #phi_{#nu}^{MC}; #phi_{#nu}^{calc from MC vertex}; #nu's", 32, -3.2, 3.2, 32, -3.2, 3.2) );
 
 
-	add_new_TH2D("nu_E_Bparents_only", new TH2D("nu_E_Bparents_only", "#nu calculation from MC info, only B parents; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex", new TH2D("nu_E_Bparents_only_0vertex", "#nu calculation from MC info, only B parents starting at 0; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr5", new TH2D("nu_E_Bparents_only_0vertex_visEgr5", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>5; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr10", new TH2D("nu_E_Bparents_only_0vertex_visEgr10", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>10; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr15", new TH2D("nu_E_Bparents_only_0vertex_visEgr15", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>15; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr20", new TH2D("nu_E_Bparents_only_0vertex_visEgr20", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>20; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr30", new TH2D("nu_E_Bparents_only_0vertex_visEgr30", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>30; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr50", new TH2D("nu_E_Bparents_only_0vertex_visEgr50", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>50; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_Bparents_only", new TH2D("nu_E_Bparents_only", "#nu calculation from MC info, only B parents; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex", new TH2D("nu_E_Bparents_only_0vertex", "#nu calculation from MC info, only B parents starting at 0; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr5", new TH2D("nu_E_Bparents_only_0vertex_visEgr5", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>5; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr10", new TH2D("nu_E_Bparents_only_0vertex_visEgr10", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>10; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr15", new TH2D("nu_E_Bparents_only_0vertex_visEgr15", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>15; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr20", new TH2D("nu_E_Bparents_only_0vertex_visEgr20", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>20; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr30", new TH2D("nu_E_Bparents_only_0vertex_visEgr30", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>30; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_visEgr50", new TH2D("nu_E_Bparents_only_0vertex_visEgr50", "#nu calculation from MC info, only B parents starting at 0, E_{vis}>50; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 
-	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr5", new TH2D("nu_E_Bparents_only_0vertex_lepEgr5", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>5; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr10", new TH2D("nu_E_Bparents_only_0vertex_lepEgr10", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>10; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr15", new TH2D("nu_E_Bparents_only_0vertex_lepEgr15", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>15; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr20", new TH2D("nu_E_Bparents_only_0vertex_lepEgr20", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>20; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr30", new TH2D("nu_E_Bparents_only_0vertex_lepEgr30", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>30; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
-	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr50", new TH2D("nu_E_Bparents_only_0vertex_lepEgr50", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>50; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 110, 0, 110, 110, 0, 110) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr5", new TH2D("nu_E_Bparents_only_0vertex_lepEgr5", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>5; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr10", new TH2D("nu_E_Bparents_only_0vertex_lepEgr10", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>10; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr15", new TH2D("nu_E_Bparents_only_0vertex_lepEgr15", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>15; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr20", new TH2D("nu_E_Bparents_only_0vertex_lepEgr20", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>20; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr30", new TH2D("nu_E_Bparents_only_0vertex_lepEgr30", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>30; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
+	add_new_TH2D("nu_E_Bparents_only_0vertex_lepEgr50", new TH2D("nu_E_Bparents_only_0vertex_lepEgr50", "#nu calculation from MC info, only B parents starting at 0, E_{lep}>50; E_{#nu}^{MC} [GeV]; E_{#nu}^{calc from MC vertex} [GeV]; #nu's", 20, 0, 20, 20, 0, 20) );
 
 
 	add_new_TH2D("E_deviations", new TH2D("E_deviations", "Mis-calculation VS difference of calc. E from vis. E (B only, 0 vertex); (E_{#nu}^{calc} - E_{vis})/E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 150, -1.50, 1.50, 200, -150, 50) );
 	add_new_TH2D("E_deviations_lepE5cut", new TH2D("E_deviations_lepE5cut", "Mis-calculation VS difference of calc. E from vis. E (B only, 0 vertex, E_{lep}>5); (E_{#nu}^{calc} - E_{vis})/E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 150, -1.50, 1.50, 200, -150, 50) );
-	add_new_TH2D("E_deviations_visE", new TH2D("E_deviations_visE", "Mis-calculation VS vis. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 110, 0, 110, 200, -150, 50) );
-	add_new_TH2D("E_deviations_lepE", new TH2D("E_deviations_lepE", "Mis-calculation VS ch. lep. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 110, 0, 110, 200, -150, 50) );
+	add_new_TH2D("E_deviations_visE", new TH2D("E_deviations_visE", "Mis-calculation VS vis. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 20, 0, 20, 200, -150, 50) );
+	add_new_TH2D("E_deviations_lepE", new TH2D("E_deviations_lepE", "Mis-calculation VS ch. lep. E (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 20, 0, 20, 200, -150, 50) );
 	add_new_TH2D("E_deviations_lepEpercentage", new TH2D("E_deviations_lepEpercentage", "Mis-calculation VS ch. lep. E percentage (B only, 0 vertex); E_{lep} / E_{vis} ; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 100, 0, 1.0, 200, -150, 50) );
 	add_new_TH2D("E_deviations_lepPDG", new TH2D("E_deviations_lepPDG", "Mis-calculation VS ch. lep. PDG (abs) (B only, 0 vertex); E_{vis} [GeV]; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 8, 10.5, 18.5, 200, -150, 50) );
 	add_new_TH2D("E_deviations_nuTheta", new TH2D("E_deviations_nuTheta", "Mis-calculation VS #theta_{#nu}^{calc} (B only, 0 vertex); #theta_{#nu}; E_{#nu}^{calc} - E_{#nu}^{MC} [GeV]; #nu's", 32, 0, 3.2, 200, -150, 50) );
@@ -130,7 +130,7 @@ TLorentzVector NuCalculationPOPGuessedGammaPlotter::calculate_nus_from_MC( LepNu
 	long double parents_m = parents_tlv.M();
 
 	// Get (unit) direction of initial particles using difference of starting vertex form 0 position:
-	TVector3 init_direction = ((Particle*)(vertex->vertex_daughters[0]))->MC.vertex.Unit();
+  TVector3 init_direction = (((Particle*)(vertex->vertex_daughters[0]))->MC.vertex - (((Particle*)(vertex->vertex_parents[0]))->MC.vertex)).Unit();
 
 	// Get non-nu daughter tlvs ( = "visible part of vertex")
 	TLorentzVector vis_tlv = get_vis_tlv(vertex);
@@ -151,12 +151,18 @@ TLorentzVector NuCalculationPOPGuessedGammaPlotter::calculate_nus_from_MC( LepNu
 	long double _C = std::pow( 2.*std::pow(vis_p_perp, 2) + std::pow(vis_m, 2) - std::pow(parents_m, 2), 2);
 	long double _F = ( std::pow( vis_p_parallel, 2 ) * _C - 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D ) + _D * _C;
 
-	if ( _D < 0.000001 )  { std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; }
-	else if ( _F < 0 ) {
-		std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
-		// std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
-		// std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
-		// std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
+  if ( _F < 0 ) {
+  	std::cout << "WARNING: Value under square root negative: " << _F << " -> Setting sqrt to zero.\n";
+    _F = 0;
+  }
+
+	if ( _D < 0.000001 )  { 
+    std::cout << "WARNING: _D too small: " << _D << " -> neutrino not reconstructed.\n"; 
+	// } else if ( _F < 0 ) {
+	// 	std::cout << "WARNING: Value under square root negative: " << _F << " -> neutrino not reconstructed.\n";
+	// 	std::cout << "\n\n _A " << _A<< " _D " << _D<< " _C " << _C<< " _F " << _F <<"\n";
+	// 	std::cout << " 1 " <<std::pow( vis_p_parallel, 2 ) * _C << " 2 " << 4.* std::pow(vis_E, 2) * std::pow(vis_p_perp, 2) * _D<< " 3 " << _D * _C<<"\n";
+	// 	std::cout << "vis_E " << vis_E<< " vis_p_parallel " << vis_p_parallel<< " vis_p_perp " << vis_p_perp<< " vis_m " << vis_m<< " parents_m " << parents_m <<"\n";
 	}	else {
 		long double nu_p_perp = - vis_p_perp;
 
@@ -347,6 +353,8 @@ void NuCalculationPOPGuessedGammaPlotter::draw_plots(){
 	non_reco_nu_parent_vertices->Draw("hist same");
 	c_parent_init_vertices->SetLeftMargin(0.2);
 	vertices_leg->Draw();
+  c_parent_init_vertices->Modified();
+  c_parent_init_vertices->Update();
 	c_parent_init_vertices->Print((output_dir + "/parent_vertices.pdf").c_str());
 	// delete c_parent_init_vertices;
 
@@ -355,6 +363,8 @@ void NuCalculationPOPGuessedGammaPlotter::draw_plots(){
 		TCanvas* current_canvas = new TCanvas(( std::string() + current_h2->GetName() + "_can").c_str(), "", 0, 0, 800, 800);
 		current_h2->Draw("colz");
 		current_canvas->SetRightMargin(0.2);
+    current_canvas->Modified();
+    current_canvas->Update();
 		current_canvas->Print(( output_dir + "/h2_" + current_h2->GetName() + ".pdf").c_str());
 		// delete current_canvas;
 	}
@@ -366,18 +376,24 @@ void NuCalculationPOPGuessedGammaPlotter::draw_plots(){
 	nonreco_nu_E->Draw("hist");
 	nonreco_nu_E->GetYaxis()->SetTitleOffset(1.4);
 	c_nonreco_nu_E->SetLeftMargin(0.2);
+  c_nonreco_nu_E->Modified();
+  c_nonreco_nu_E->Update();
 	c_nonreco_nu_E->Print((output_dir + "/h1_nonreco_nu_E.pdf").c_str());
 	// delete c_nonreco_nu_E;
 
 	TCanvas* c_nonreco_nu_theta = new TCanvas("can_nonreco_nu_theta", "", 0, 0, 800, 900);
 	TH1D* nonreco_nu_theta = get_TH1D("non-reconstructed_nu_theta");
 	nonreco_nu_theta->Draw("hist");
+  c_nonreco_nu_theta->Modified();
+  c_nonreco_nu_theta->Update();
 	c_nonreco_nu_theta->Print((output_dir + "/h1_nonreco_nu_theta.pdf").c_str());
 	// delete c_nonreco_nu_theta;
 
 	TCanvas* c_nonreco_nu_phi = new TCanvas("can_nonreco_nu_phi", "", 0, 0, 800, 900);
 	TH1D* nonreco_nu_phi = get_TH1D("non-reconstructed_nu_phi");
 	nonreco_nu_phi->Draw("hist");
+  c_nonreco_nu_phi->Modified();
+  c_nonreco_nu_phi->Update();
 	c_nonreco_nu_phi->Print((output_dir + "/h1_nonreco_nu_phi.pdf").c_str());
 	// delete c_nonreco_nu_phi;
 

@@ -98,6 +98,8 @@ void CheatedCorrectionPlotter::draw_plots(){
 	profile_line->Draw("same");
 	legend_profile_s_t->Draw();
 	std::string plot_name_profile_s_t = get_output_directory() + "/profile_detected_w_cheated_nu_correction_vs_true_E.pdf";
+  canvas_profile_s_t->Modified();
+  canvas_profile_s_t->Update();
 	canvas_profile_s_t->Print(plot_name_profile_s_t.c_str());
 	canvas_profile_s_t->Close();
 
@@ -130,6 +132,8 @@ void CheatedCorrectionPlotter::draw_plots(){
 
 	legend_profile_s_t_JER->Draw();
 	std::string plot_name_profile_s_t_JER = get_output_directory() + "/JER_detected_w_cheated_nu_correction_vs_true_E.pdf";
+  canvas_profile_s_t_JER->Modified();
+  canvas_profile_s_t_JER->Update();
 	canvas_profile_s_t_JER->Print(plot_name_profile_s_t_JER.c_str());
 	canvas_profile_s_t_JER->Close();
 
